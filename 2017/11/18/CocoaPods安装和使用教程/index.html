@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | Stanford</title>
+  <title>CocoaPods安装和使用教程 | Stanford</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一蓑烟雨任平生">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Stanford">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+  <meta name="description" content="CocoaPods是什么？
+通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CocoaPods安装和使用教程">
+<meta property="og:url" content="http://yoursite.com/2017/11/18/CocoaPods安装和使用教程/index.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="一蓑烟雨任平生">
+<meta property="og:description" content="CocoaPods是什么？
+通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到">
+<meta property="og:updated_time" content="2017-11-18T14:21:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Stanford">
-<meta name="twitter:description" content="一蓑烟雨任平生">
+<meta name="twitter:title" content="CocoaPods安装和使用教程">
+<meta name="twitter:description" content="CocoaPods是什么？
+通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到">
   
     <link rel="alternative" href="/atom.xml" title="Stanford" type="application/atom+xml">
   
@@ -156,103 +160,200 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-CocoaPods安装和使用教程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/" class="archive-article-date">
-  	<time datetime="2017-11-18T14:17:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/">Mac OS X 快速复制（拷贝）文件（夹）路径</a>
+    <h1 class="article-title" itemprop="name">
+      CocoaPods安装和使用教程
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/18/CocoaPods安装和使用教程/" class="archive-article-date">
+        
+        <a href="/2017/11/18/CocoaPods安装和使用教程/" class="archive-article-date">
   	<time datetime="2017-11-18T14:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/18/CocoaPods安装和使用教程/">CocoaPods安装和使用教程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CocoaPods是什么？"><a href="#CocoaPods是什么？" class="headerlink" title="CocoaPods是什么？"></a>CocoaPods是什么？</h2><blockquote>
+<p>通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到的包管理工具CocoaPods。</p>
+<p>官方网址：<a href="https://cocoapods.org/" target="_blank" rel="external">https://cocoapods.org/</a></p>
+</blockquote>
+<h2 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods"></a>安装CocoaPods</h2><p>安装CocoaPods，需要使用Ruby环境，通常Mac OS X已经自带Ruby。在终端下运行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<p>安装失败？是的，因为默认安装源被GFW了。这里需要更改成淘宝的源：</p>
+<p>1<br>2<br>gem sources –remove <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a> // 删除原来的<br>gem sources -a <a href="https://ruby.taobao.org/" target="_blank" rel="external">https://ruby.taobao.org/</a>    // 增加淘宝的源，这里注意淘宝已经废弃http的源，统一成了https<br>查看源：</p>
+<p>1<br>2<br>3<br>4<br>5<br>gem sources -l</p>
+<p><strong><em> CURRENT SOURCES </em></strong></p>
+<p><a href="https://ruby.taobao.org/" target="_blank" rel="external">https://ruby.taobao.org/</a><br>现在执行：</p>
+<p>1<br>sudo gem install cocoapods<br>等一会，是不是安装成功了~</p>
+<p>使用CocoaPods</p>
+<p>首先搜索需要使用的库是否支持CocoaPods（这里以AFNetworking为例）：</p>
+<p>pod search AFNetworking</p>
+<p>这里可以看到很多个带有AFNetworking关键字的库，第一个是我们要找的。</p>
+<p>接下来创建一个示例工程pod_demo，同时在工程文件pod_demo.xcodeproj同一目录下创建Podfile文本文件：</p>
+<p>podfile</p>
+<p>并输入如下内容：</p>
+<p>1<br>2<br>platform :osx, ‘10.9’<br>pod ‘AFNetworking’, ‘~&gt; 2.6.3’<br>第一行解释：</p>
+<p>因为示例工程是OSX平台的，所有platform是osx版本。如果是用于iOS，Platform是可以写成：</p>
+<p>1<br>platform :ios, ‘8.0’<br>在安装过程中会检测当前库版本是否适用于指定的系统版本，如果不适用，会报如下异常：</p>
+<p>pod检测依赖失败</p>
+<p>不同的AFNetworking对应不同的系统版本【2】：</p>
+<p>AFNETWORKING VERSION    MINIMUM IOS TARGET    MINIMUM OS X TARGET    MINIMUM WATCHOS TARGET    MINIMUM TVOS TARGET    NOTES<br>3.x    iOS 7    OS X 10.9    watchOS 2.0    tvOS 9.0    Xcode 7+ is required.NSURLConnectionOperation support has been removed.<br>2.6 -&gt; 2.6.3    iOS 7    OS X 10.9    watchOS 2.0    n/a    Xcode 7+ is required.<br>2.0 -&gt; 2.5.4    iOS 6    OS X 10.8    n/a    n/a    Xcode 5+ is required. NSURLSessionsubspec requires iOS 7 or OS X 10.9.<br>1.x    iOS 5    Mac OS X 10.7    n/a    n/a<br>0.10.x    iOS 4    Mac OS X 10.6    n/a    n/a<br>第二行解释：</p>
+<p>‘&gt; 0.1’  大于0.1的版本<br>‘&gt;= 0.1’ 大于等于0.1的版本<br>‘&lt; 0.1’  小于0.1的版本<br>‘&lt;= 0.1’  小于等于0.1的版本<br>‘~&gt; 0.1.2’ 0.1.2到0.2之间的版本，不包括0.2及更高版本<br>‘~&gt; 0.1’ 0.1到1.0之间的版本，不包括1.0及更高版本<br>‘~&gt; 0’ 0及更高版本，相当于所有版本<br>接下来终端切换到Podfile所在目录，安装库：</p>
+<p>1<br>pod install<br>这时你会发现目录下多了几个文件（夹）：pod_demo.xcworkspace、Podfile.lock、Pods，这些都是CocoaPods生成的。目录结构如下：</p>
+<p>安装后的目录结构</p>
+<p>pod安装成功</p>
+<p>上图是安装成功界面，请注意最后绿字那一行：关闭XCode，并打开pod_demo.xcworkspace。</p>
+<p>这时用XCode打开pod_demo.xcworkspace，在代码中就能正常使用AFNetworing库了。</p>
+<p>注：使用CocoaPods安装库后，要打开xcworkspace而不是xcodeproj了。</p>
+<p>补充内容</p>
+<p>如果已经有Podfile，需要更新新版本，使用：</p>
+<p>1<br>pod update<br>Reference:</p>
+<p><a href="https://cocoapods.org/" target="_blank" rel="external">https://cocoapods.org/</a><br><a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="external">https://github.com/AFNetworking/AFNetworking</a></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/11/18/CocoaPods安装和使用教程/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/" class="archive-article-date">
-  	<time datetime="2017-11-18T13:48:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Mac OS X 快速复制（拷贝）文件（夹）路径
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mac OS X上开发和使用动态链接库/dylib/共享库</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/">Mac OS X上开发和使用动态链接库/dylib/共享库</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -275,8 +376,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

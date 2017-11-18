@@ -158,6 +158,166 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Mac-OS-X-快速复制（拷贝）文件（夹）路径" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/">Mac OS X 快速复制（拷贝）文件（夹）路径</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/" class="archive-article-date">
+  	<time datetime="2017-11-18T14:17:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CocoaPods安装和使用教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/18/CocoaPods安装和使用教程/">CocoaPods安装和使用教程</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/18/CocoaPods安装和使用教程/" class="archive-article-date">
+  	<time datetime="2017-11-18T14:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CocoaPods是什么？"><a href="#CocoaPods是什么？" class="headerlink" title="CocoaPods是什么？"></a>CocoaPods是什么？</h2><blockquote>
+<p>通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到的包管理工具CocoaPods。</p>
+<p>官方网址：<a href="https://cocoapods.org/" target="_blank" rel="external">https://cocoapods.org/</a></p>
+</blockquote>
+<h2 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods"></a>安装CocoaPods</h2><p>安装CocoaPods，需要使用Ruby环境，通常Mac OS X已经自带Ruby。在终端下运行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<p>安装失败？是的，因为默认安装源被GFW了。这里需要更改成淘宝的源：</p>
+<p>1<br>2<br>gem sources –remove <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a> // 删除原来的<br>gem sources -a <a href="https://ruby.taobao.org/" target="_blank" rel="external">https://ruby.taobao.org/</a>    // 增加淘宝的源，这里注意淘宝已经废弃http的源，统一成了https<br>查看源：</p>
+<p>1<br>2<br>3<br>4<br>5<br>gem sources -l</p>
+<p><strong><em> CURRENT SOURCES </em></strong></p>
+<p><a href="https://ruby.taobao.org/" target="_blank" rel="external">https://ruby.taobao.org/</a><br>现在执行：</p>
+<p>1<br>sudo gem install cocoapods<br>等一会，是不是安装成功了~</p>
+<p>使用CocoaPods</p>
+<p>首先搜索需要使用的库是否支持CocoaPods（这里以AFNetworking为例）：</p>
+<p>pod search AFNetworking</p>
+<p>这里可以看到很多个带有AFNetworking关键字的库，第一个是我们要找的。</p>
+<p>接下来创建一个示例工程pod_demo，同时在工程文件pod_demo.xcodeproj同一目录下创建Podfile文本文件：</p>
+<p>podfile</p>
+<p>并输入如下内容：</p>
+<p>1<br>2<br>platform :osx, ‘10.9’<br>pod ‘AFNetworking’, ‘~&gt; 2.6.3’<br>第一行解释：</p>
+<p>因为示例工程是OSX平台的，所有platform是osx版本。如果是用于iOS，Platform是可以写成：</p>
+<p>1<br>platform :ios, ‘8.0’<br>在安装过程中会检测当前库版本是否适用于指定的系统版本，如果不适用，会报如下异常：</p>
+<p>pod检测依赖失败</p>
+<p>不同的AFNetworking对应不同的系统版本【2】：</p>
+<p>AFNETWORKING VERSION    MINIMUM IOS TARGET    MINIMUM OS X TARGET    MINIMUM WATCHOS TARGET    MINIMUM TVOS TARGET    NOTES<br>3.x    iOS 7    OS X 10.9    watchOS 2.0    tvOS 9.0    Xcode 7+ is required.NSURLConnectionOperation support has been removed.<br>2.6 -&gt; 2.6.3    iOS 7    OS X 10.9    watchOS 2.0    n/a    Xcode 7+ is required.<br>2.0 -&gt; 2.5.4    iOS 6    OS X 10.8    n/a    n/a    Xcode 5+ is required. NSURLSessionsubspec requires iOS 7 or OS X 10.9.<br>1.x    iOS 5    Mac OS X 10.7    n/a    n/a<br>0.10.x    iOS 4    Mac OS X 10.6    n/a    n/a<br>第二行解释：</p>
+<p>‘&gt; 0.1’  大于0.1的版本<br>‘&gt;= 0.1’ 大于等于0.1的版本<br>‘&lt; 0.1’  小于0.1的版本<br>‘&lt;= 0.1’  小于等于0.1的版本<br>‘~&gt; 0.1.2’ 0.1.2到0.2之间的版本，不包括0.2及更高版本<br>‘~&gt; 0.1’ 0.1到1.0之间的版本，不包括1.0及更高版本<br>‘~&gt; 0’ 0及更高版本，相当于所有版本<br>接下来终端切换到Podfile所在目录，安装库：</p>
+<p>1<br>pod install<br>这时你会发现目录下多了几个文件（夹）：pod_demo.xcworkspace、Podfile.lock、Pods，这些都是CocoaPods生成的。目录结构如下：</p>
+<p>安装后的目录结构</p>
+<p>pod安装成功</p>
+<p>上图是安装成功界面，请注意最后绿字那一行：关闭XCode，并打开pod_demo.xcworkspace。</p>
+<p>这时用XCode打开pod_demo.xcworkspace，在代码中就能正常使用AFNetworing库了。</p>
+<p>注：使用CocoaPods安装库后，要打开xcworkspace而不是xcodeproj了。</p>
+<p>补充内容</p>
+<p>如果已经有Podfile，需要更新新版本，使用：</p>
+<p>1<br>pod update<br>Reference:</p>
+<p><a href="https://cocoapods.org/" target="_blank" rel="external">https://cocoapods.org/</a><br><a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="external">https://github.com/AFNetworking/AFNetworking</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/18/CocoaPods安装和使用教程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Mac-OS-X上开发和使用动态链接库-dylib-共享库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
