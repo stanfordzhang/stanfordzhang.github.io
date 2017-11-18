@@ -8,14 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Mac OS X上开发和使用动态链接库/dylib/共享库 | Stanford</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。
+本文">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Mac OS X上开发和使用动态链接库/dylib/共享库">
 <meta property="og:url" content="http://yoursite.com/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/index.html">
 <meta property="og:site_name" content="Stanford">
+<meta property="og:description" content="在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。
+本文">
 <meta property="og:image" content="http://yoursite.com/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/1.png">
-<meta property="og:updated_time" content="2017-11-18T13:50:52.284Z">
+<meta property="og:updated_time" content="2017-11-18T14:01:11.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac OS X上开发和使用动态链接库/dylib/共享库">
+<meta name="twitter:description" content="在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。
+本文">
 <meta name="twitter:image" content="http://yoursite.com/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Stanford" type="application/atom+xml">
@@ -176,7 +182,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/1.png" alt="This is an example image" title="This is an example image">
+        <p>在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。</p>
+<p>本文介绍一种更加方便的方法，通过设置几个编译选项，运行时系统自动加载dylib，使用时只需要调用即可。以下是示例步骤。</p>
+<h2 id="一、创建dylib工程"><a href="#一、创建dylib工程" class="headerlink" title="一、创建dylib工程"></a>一、创建dylib工程</h2><p>创建dylib工程dylib_demo。</p>
+<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/1.png" alt="创建dylib" title="创建dylib">
+<p>二、参数选择</p>
+<p>这里以导出C++类接口为例。</p>
+<p>参数设置</p>
+<p>三、配置编译选项</p>
+<p>可以在dylib的Build Phases里看到Installataion Diectory（INSTALL_PATH）这个选项，默认是/usr/local/lib。这个意思是指可执行程序在自动加载时去哪里找这个dylib。可以使用otool进行查看（如下图）。</p>
+<p>第一行显示的就是dylib所在的路径：/usr/local/lib/libdylib_demo.dylib。这是系统目录，调用程序会去这个目录找。如果不把dylib拷贝到这个目录，程序将无法运行。发布一个程序时，还要将自用库拷贝到系统目录？这是不合理的。</p>
+<p>默认INSTALL_PATH</p>
+<p>otool查看</p>
+<p>这里将Installation Directory改成@loader_path/../Frameworks，以相对目录查找dylib。下图是otool显示。@loader_path的意思相对load这个dylib的模块所在的路径找dylib所在的目录。</p>
+<p>修改成@loader_path</p>
+<p>otool查看</p>
+<p>Installation Directory (INSTALL_PATH) 详解：</p>
+<p>@executable_path 表示可执行程序所在的目录. 比如 /path/foo.app/Contents/MacOS/。<br>@loader_path 表示每一个被加载的 binary（包括App, dylib, framework等）所在的目录。<br>@rpath 和前面两个不同, 它只是一个保存着一个或多个路径的变量。在 app中设置 Runpath Search Paths（对应了@rpath）。<br>四、创建调用app</p>
+<p>创建名为caller_demo的app。</p>
+<p>创建app</p>
+<p>参数设置<br>参数设置</p>
+<p>五、设置链接到dylib</p>
+<p>在app的Build Phases的Link Binary With Libraries里增加刚刚创建的dylib。</p>
+<p>设置链接</p>
+<p>如果列表里没有点击右下角的Add Other在目录里找。</p>
+<p>也可以在Finder里拖拽dylib到Link Binary With Libraries里。</p>
+<p>设置链接</p>
+<p>六、拷贝dylib至目标目录</p>
+<p>这里app包结构包结构里还没有这个dylib，运行时还是找不着。在Build Phases里点加号，新增Copy Files Phase，将dylib拷贝到Frameworks目录下，以便loader可以找到。</p>
+<p>这里为什么是Frameworks目录，是因为设置INSTALL_PATH为@loader_path/../Frameworks。</p>
+<p>也可以设置为其他目录，比如INSTALL_PATH为@loader_path/../dll，那Copy Files时，就要放到dll目录，如果下拉列表没有相应目录，可以下拉选Frameworks，然后在Subpath里填../dll这个相对路径，XCode会自动创建一个Frameworks同级目录dll。</p>
+<p>拷贝dylib</p>
+<p>拷贝文件</p>
+<p>包结构</p>
+<p>七、调用</p>
+<p>比如在AppDelegate.m文件里调用，因为是使用C++类，所以要将文件扩展名改为.mm，如果是使用标准C、ObjC接口，则不用改。</p>
+<p>修改扩展名</p>
+<p>调用代码</p>
+<p>八、结语</p>
+<p>可以看到，以上方法使用比较方便，在开发过程中配置好XCode，一键编译。</p>
+<p>调用时可以像静态库一样使用，省时省力。</p>
+<p>Reference:</p>
+<p><a href="http://www.tanhao.me/pieces/1361.html/" target="_blank" rel="external">http://www.tanhao.me/pieces/1361.html/</a><br><a href="https://wincent.com/wiki/@executable_path,_@load_path_and_@rpath" target="_blank" rel="external">https://wincent.com/wiki/@executable_path,_@load_path_and_@rpath</a></p>
 
       
 
