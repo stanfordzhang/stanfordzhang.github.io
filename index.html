@@ -264,7 +264,12 @@
 <p>因为示例工程是OSX平台的，所有platform是osx版本。如果是用于iOS，Platform是可以写成：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">platform :ios, <span class="string">'8.0'</span></div></pre></td></tr></table></figure>
 <p>在安装过程中会检测当前库版本是否适用于指定的系统版本，如果不适用，会报如下异常：</p>
-<img src="/2017/11/18/CocoaPods安装和使用教程/3.png" alt="pod检测依赖失败" title="pod检测依赖失败"><br><br>不同的AFNetworking对应不同的系统版本【2】：<br><br><img src="/2017/11/18/CocoaPods安装和使用教程/6.png" alt="6.png" title=""><br><br>第二行解释：<br>&gt; ‘&gt; 0.1’  大于0.1的版本<br>&gt; ‘&gt;= 0.1’ 大于等于0.1的版本<br>&gt; ‘&lt; 0.1’  小于0.1的版本<br>&gt; ‘&lt;= 0.1’  小于等于0.1的版本<br>&gt; ‘~&gt; 0.1.2’ 0.1.2到0.2之间的版本，不包括0.2及更高版本<br>&gt; ‘~&gt; 0.1’ 0.1到1.0之间的版本，不包括1.0及更高版本<br>&gt; ‘~&gt; 0’ 0及更高版本，相当于所有版本<br><br>接下来终端切换到Podfile所在目录，安装库：<br><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
+<img src="/2017/11/18/CocoaPods安装和使用教程/3.png" alt="pod检测依赖失败" title="pod检测依赖失败"><br><br>不同的AFNetworking对应不同的系统版本【2】：<br><br><img src="/2017/11/18/CocoaPods安装和使用教程/6.png" alt="6.png" title=""><br><br>第二行解释：<br><br><blockquote><blockquote>
+<p>‘&gt; 0.1’  大于0.1的版本<br>‘&gt;= 0.1’ 大于等于0.1的版本<br>‘&lt; 0.1’  小于0.1的版本<br>‘&lt;= 0.1’  小于等于0.1的版本<br>‘~&gt; 0.1.2’ 0.1.2到0.2之间的版本，不包括0.2及更高版本<br>‘~&gt; 0.1’ 0.1到1.0之间的版本，不包括1.0及更高版本<br>‘~&gt; 0’ 0及更高版本，相当于所有版本</p>
+</blockquote>
+</blockquote>
+<p>接下来终端切换到Podfile所在目录，安装库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
 <p>这时你会发现目录下多了几个文件（夹）：pod_demo.xcworkspace、Podfile.lock、Pods，这些都是CocoaPods生成的。目录结构如下：</p>
 <img src="/2017/11/18/CocoaPods安装和使用教程/4.png" alt="安装后的目录结构" title="安装后的目录结构"><br><br><img src="/2017/11/18/CocoaPods安装和使用教程/5.png" alt="pod安装成功" title="pod安装成功"><br><br>上图是安装成功界面，请注意最后绿字那一行：关闭XCode，并打开pod_demo.xcworkspace。<br><br>这时用XCode打开pod_demo.xcworkspace，在代码中就能正常使用AFNetworing库了。<br><br><strong> 注：使用CocoaPods安装库后，要打开xcworkspace而不是xcodeproj了。</strong><br><br><br>## 补充内容<br>如果已经有Podfile，需要更新新版本，使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod update</div></pre></td></tr></table></figure>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><p><a href="https://cocoapods.org/" target="_blank" rel="external">https://cocoapods.org/</a><br><a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="external">https://github.com/AFNetworking/AFNetworking</a></p>
