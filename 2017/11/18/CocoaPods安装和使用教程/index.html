@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/11/18/CocoaPods安装和使用教程/6.png">
 <meta property="og:image" content="http://yoursite.com/2017/11/18/CocoaPods安装和使用教程/4.png">
 <meta property="og:image" content="http://yoursite.com/2017/11/18/CocoaPods安装和使用教程/5.png">
-<meta property="og:updated_time" content="2017-11-18T15:02:37.000Z">
+<meta property="og:updated_time" content="2017-11-18T15:02:55.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods安装和使用教程">
 <meta name="twitter:description" content="CocoaPods是什么？
@@ -211,7 +211,7 @@
 <p>因为示例工程是OSX平台的，所有platform是osx版本。如果是用于iOS，Platform是可以写成：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">platform :ios, <span class="string">'8.0'</span></div></pre></td></tr></table></figure>
 <p>在安装过程中会检测当前库版本是否适用于指定的系统版本，如果不适用，会报如下异常：</p>
-<img src="/2017/11/18/CocoaPods安装和使用教程/3.png" alt="pod检测依赖失败" title="pod检测依赖失败"><br><br>不同的AFNetworking对应不同的系统版本【2】：<br><br><img src="/2017/11/18/CocoaPods安装和使用教程/6.png" alt="6.png" title=""><br><br>第二行解释：<br><br><blockquote><p>‘&gt; 0.1’  大于0.1的版本<br>‘&gt;= 0.1’ 大于等于0.1的版本<br>‘&lt; 0.1’  小于0.1的版本<br>‘&lt;= 0.1’  小于等于0.1的版本<br>‘~&gt; 0.1.2’ 0.1.2到0.2之间的版本，不包括0.2及更高版本<br>‘~&gt; 0.1’ 0.1到1.0之间的版本，不包括1.0及更高版本<br>‘~&gt; 0’ 0及更高版本，相当于所有版本</p>
+<img src="/2017/11/18/CocoaPods安装和使用教程/3.png" alt="pod检测依赖失败" title="pod检测依赖失败"><br><br>不同的AFNetworking对应不同的系统版本【2】：<br><br><img src="/2017/11/18/CocoaPods安装和使用教程/6.png" alt="6.png" title=""><br><br>第二行解释：<br><blockquote><p>‘&gt; 0.1’  大于0.1的版本<br>‘&gt;= 0.1’ 大于等于0.1的版本<br>‘&lt; 0.1’  小于0.1的版本<br>‘&lt;= 0.1’  小于等于0.1的版本<br>‘~&gt; 0.1.2’ 0.1.2到0.2之间的版本，不包括0.2及更高版本<br>‘~&gt; 0.1’ 0.1到1.0之间的版本，不包括1.0及更高版本<br>‘~&gt; 0’ 0及更高版本，相当于所有版本</p>
 </blockquote>
 <p>接下来终端切换到Podfile所在目录，安装库：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
