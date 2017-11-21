@@ -242,36 +242,11 @@
       
         <h2 id="CocoaPods是什么？"><a href="#CocoaPods是什么？" class="headerlink" title="CocoaPods是什么？"></a>CocoaPods是什么？</h2><blockquote>
 <p>通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到的包管理工具CocoaPods。</p>
-<p>官方网址：<a href="https://cocoapods.org/" target="_blank" rel="external">https://cocoapods.org/</a></p>
+<p>官方网址：<a href="https://cocoapods.org/">https://cocoapods.org/</a></p>
 </blockquote>
-<h2 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods"></a>安装CocoaPods</h2><p>安装CocoaPods，需要使用Ruby环境，通常Mac OS X已经自带Ruby。在终端下运行如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gem install cocoapods</div></pre></td></tr></table></figure>
-<p>安装失败？是的，因为默认安装源被GFW了。这里需要更改成淘宝的源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gem sources --remove https://rubygems.org/ // 删除原来的</div><div class="line">gem sources <span class="_">-a</span> https://ruby.taobao.org/    // 增加淘宝的源，这里注意淘宝已经废弃http的源，统一成了https</div></pre></td></tr></table></figure>
-<p>查看源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">gem sources <span class="_">-l</span></div><div class="line"> </div><div class="line">*** CURRENT SOURCES ***</div><div class="line"> </div><div class="line">https://ruby.taobao.org/</div></pre></td></tr></table></figure>
-<p>现在执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install cocoapods</div></pre></td></tr></table></figure>
-<p>等一会，是不是安装成功了~</p>
-<h2 id="使用CocoaPods"><a href="#使用CocoaPods" class="headerlink" title="使用CocoaPods"></a>使用CocoaPods</h2><p>首先搜索需要使用的库是否支持CocoaPods（这里以AFNetworking为例）：</p>
-<img src="/2017/11/18/CocoaPods安装和使用教程/1.png" alt="pod search AFNetworking" title="pod search AFNetworking">
-<p>这里可以看到很多个带有AFNetworking关键字的库，第一个是我们要找的。</p>
-<p>接下来创建一个示例工程pod_demo，同时在工程文件pod_demo.xcodeproj同一目录下创建Podfile文本文件：</p>
-<img src="/2017/11/18/CocoaPods安装和使用教程/2.png" alt="podfile" title="podfile">
-<p>并输入如下内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">platform :osx, <span class="string">'10.9'</span></div><div class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.6.3'</span></div></pre></td></tr></table></figure>
-<p>第一行解释：</p>
-<p>因为示例工程是OSX平台的，所有platform是osx版本。如果是用于iOS，Platform是可以写成：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">platform :ios, <span class="string">'8.0'</span></div></pre></td></tr></table></figure>
-<p>在安装过程中会检测当前库版本是否适用于指定的系统版本，如果不适用，会报如下异常：</p>
-<img src="/2017/11/18/CocoaPods安装和使用教程/3.png" alt="pod检测依赖失败" title="pod检测依赖失败"><br><br>不同的AFNetworking对应不同的系统版本【2】：<br><br><img src="/2017/11/18/CocoaPods安装和使用教程/6.png" alt="6.png" title=""><br><br>第二行解释：<br><blockquote><p>‘&gt; 0.1’  大于0.1的版本<br>‘&gt;= 0.1’ 大于等于0.1的版本<br>‘&lt; 0.1’  小于0.1的版本<br>‘&lt;= 0.1’  小于等于0.1的版本<br>‘~&gt; 0.1.2’ 0.1.2到0.2之间的版本，不包括0.2及更高版本<br>‘~&gt; 0.1’ 0.1到1.0之间的版本，不包括1.0及更高版本<br>‘~&gt; 0’ 0及更高版本，相当于所有版本</p>
-</blockquote>
-<p>接下来终端切换到Podfile所在目录，安装库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
-<p>这时你会发现目录下多了几个文件（夹）：pod_demo.xcworkspace、Podfile.lock、Pods，这些都是CocoaPods生成的。目录结构如下：</p>
-<img src="/2017/11/18/CocoaPods安装和使用教程/4.png" alt="安装后的目录结构" title="安装后的目录结构"><br><br><img src="/2017/11/18/CocoaPods安装和使用教程/5.png" alt="pod安装成功" title="pod安装成功"><br><br>上图是安装成功界面，请注意最后绿字那一行：关闭XCode，并打开pod_demo.xcworkspace。<br><br>这时用XCode打开pod_demo.xcworkspace，在代码中就能正常使用AFNetworing库了。<br><br><strong> 注：使用CocoaPods安装库后，要打开xcworkspace而不是xcodeproj了。</strong><br><br><br>## 补充内容<br>如果已经有Podfile，需要更新新版本，使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod update</div></pre></td></tr></table></figure>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><p><a href="https://cocoapods.org/" target="_blank" rel="external">https://cocoapods.org/</a><br><a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="external">https://github.com/AFNetworking/AFNetworking</a></p>
-
+        
+          <a class="article-more-a" href="/2017/11/18/CocoaPods安装和使用教程/#more">more >></a>
+        
       
 
       
