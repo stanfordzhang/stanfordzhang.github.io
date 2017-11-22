@@ -164,30 +164,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Mac-OS-X快速安装Apache-Thrift" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-macOS设置不在Dock上显示App图标" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/21/Mac-OS-X快速安装Apache-Thrift/">Mac OS X快速安装Apache Thrift</a>
+      <a class="article-title" href="/2016/10/09/macOS设置不在Dock上显示App图标/">macOS设置不在Dock上显示App图标</a>
     </h1>
   
 
         
-        <a href="/2017/11/21/Mac-OS-X快速安装Apache-Thrift/" class="archive-article-date">
-  	<time datetime="2017-11-21T10:55:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
+        <a href="/2016/10/09/macOS设置不在Dock上显示App图标/" class="archive-article-date">
+  	<time datetime="2016-10-09T08:43:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其<a href="https://thrift.apache.org/">官方主页</a>介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, and OCaml等语言的代码。</p>
-        
-          <a class="article-more-a" href="/2017/11/21/Mac-OS-X快速安装Apache-Thrift/#more">more >></a>
-        
+        <p>在Info.Plist里设置：<br>LSUIElement是以Agent的方法启动。不在Dock上显示图标，但会显示窗口。<br>LSBackgroundOnly变成后台进程，不在Dock上显示图标，也不会显示窗口。</p>
+<p>TransformProcessType<br>[NSApp setActivationPolicy: NSApplicationActivationPolicyAccessory];<br>以上两个没有研究。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
+<li><a href="https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/20001431-113253" target="_blank" rel="external">https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/20001431-113253</a></li>
+<li><a href="http://stackoverflow.com/questions/6796028/start-a-gui-process-in-mac-os-x-without-dock-icon/9220840" target="_blank" rel="external">http://stackoverflow.com/questions/6796028/start-a-gui-process-in-mac-os-x-without-dock-icon/9220840</a></li>
+<li><a href="http://stackoverflow.com/questions/620841/how-to-hide-the-dock-icon" target="_blank" rel="external">http://stackoverflow.com/questions/620841/how-to-hide-the-dock-icon</a></li>
+</ol>
+
       
 
       
@@ -200,9 +204,84 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">macOS</a>
         		</li>
-      		 
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/09/macOS设置不在Dock上显示App图标/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Git代理设置（macOS）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/29/Git代理设置（macOS）/">Git代理设置（macOS）</a>
+    </h1>
+  
+
+        
+        <a href="/2016/08/29/Git代理设置（macOS）/" class="archive-article-date">
+  	<time datetime="2016-08-29T08:41:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近要在<a href="https://chromium.googlesource.com/" target="_blank" rel="external">https://chromium.googlesource.com/</a> Checkout点代码，但该网站被GFW墙了。无奈只能走野路子。</p>
+<p>使用socks5通道：</p>
+<p>首先通过如下命令登录一台未被墙的服务器：</p>
+<p>ssh root@IP地址或域名 -D 端口<br>修改Git的配置（~/.gitconfig），新增如下行：</p>
+<p>[http]<br>proxy = socks5://127.0.0.1:端口<br>这样Git将走代理通道。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><p>1：为Git配置代理</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">macOS</a>
         		</li>
@@ -214,7 +293,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/21/Mac-OS-X快速安装Apache-Thrift/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/08/29/Git代理设置（macOS）/">展开全文 >></a>
         </p>
       
 
@@ -244,331 +323,31 @@
 
 
   
-    <article id="post-Linux-OSX-命令输入操作快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS-macOS签名证书类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/21/Linux-OSX-命令输入操作快捷键/">Linux/OSX 命令输入操作快捷键</a>
+      <a class="article-title" href="/2016/08/24/iOS-macOS签名证书类型/">iOS/macOS签名证书类型</a>
     </h1>
   
 
         
-        <a href="/2017/11/21/Linux-OSX-命令输入操作快捷键/" class="archive-article-date">
-  	<time datetime="2017-11-21T10:54:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
+        <a href="/2016/08/24/iOS-macOS签名证书类型/" class="archive-article-date">
+  	<time datetime="2016-08-24T08:38:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ctrl + w —往回删除一个单词，光标放在最末尾<br>ctrl + k —往前删除到末尾，光标放在最前面（可以使用ctrl+a）<br>ctl + u 删除光标以前的字符<br>ctl + k 删除光标以后的字符<br>ctl + a 移动光标至的字符头<br>ctl + e 移动光标至的字符尾<br>ctl + l 清屏</p>
-<p>ctrl + r命令历史，继续按这个快捷键可以向前翻</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/21/Linux-OSX-命令输入操作快捷键/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Linux-OSX-统计文件个数命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/21/Linux-OSX-统计文件个数命令/">Linux/OSX 统计文件个数命令</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/21/Linux-OSX-统计文件个数命令/" class="archive-article-date">
-  	<time datetime="2017-11-21T10:52:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find &lt;目录&gt; -type f | wc <span class="_">-l</span></div></pre></td></tr></table></figure></p>
-<p>根据目录路径，显示文件个数，不包括目录。</p>
-<p>例如：<br>统计全盘文件个数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find / -type f | wc <span class="_">-l</span></div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/21/Linux-OSX-统计文件个数命令/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mac-OS-X-快速复制（拷贝）文件（夹）路径" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/">Mac OS X 快速复制（拷贝）文件（夹）路径</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/" class="archive-article-date">
-  	<time datetime="2017-11-18T14:17:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在使用Mac OS X的过程中，如果有一个文件所在的目录层次很深，想要拷贝文件路径是麻烦事儿。本文介绍一种通过Finder右键菜单项来复制文件路径的方法，如果哪个朋友有更好的方法麻烦告知，在此谢过！</p>
-        
-          <a class="article-more-a" href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/Mac-OS-X-快速复制（拷贝）文件（夹）路径/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CocoaPods安装和使用教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/CocoaPods安装和使用教程/">CocoaPods安装和使用教程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/18/CocoaPods安装和使用教程/" class="archive-article-date">
-  	<time datetime="2017-11-18T14:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="CocoaPods是什么？"><a href="#CocoaPods是什么？" class="headerlink" title="CocoaPods是什么？"></a>CocoaPods是什么？</h2><blockquote>
-<p>通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到的包管理工具CocoaPods。</p>
-<p>官方网址：<a href="https://cocoapods.org/">https://cocoapods.org/</a></p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/11/18/CocoaPods安装和使用教程/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/CocoaPods安装和使用教程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mac-OS-X上开发和使用动态链接库-dylib-共享库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/">Mac OS X上开发和使用动态链接库/dylib/共享库</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/" class="archive-article-date">
-  	<time datetime="2017-11-18T13:48:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。</p>
-<p>本文介绍一种更加方便的方法，通过设置几个编译选项，运行时系统自动加载dylib，使用时只需要调用即可。以下是示例步骤。</p>
-<h2 id="一、创建dylib工程"><a href="#一、创建dylib工程" class="headerlink" title="一、创建dylib工程"></a>一、创建dylib工程</h2><p>创建dylib工程dylib_demo。</p>
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/1.png" alt="创建dylib" title="创建dylib">
-<h2 id="二、参数选择"><a href="#二、参数选择" class="headerlink" title="二、参数选择"></a>二、参数选择</h2><p>这里以导出C++类接口为例。</p>
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/2.png" alt="参数设置" title="参数设置">
-<h2 id="三、配置编译选项"><a href="#三、配置编译选项" class="headerlink" title="三、配置编译选项"></a>三、配置编译选项</h2><p>可以在dylib的Build Phases里看到Installataion Diectory（INSTALL_PATH）这个选项，默认是/usr/local/lib。这个意思是指可执行程序在自动加载时去哪里找这个dylib。可以使用otool进行查看（如下图）。</p>
-<p>第一行显示的就是dylib所在的路径：/usr/local/lib/libdylib_demo.dylib。这是系统目录，调用程序会去这个目录找。如果不把dylib拷贝到这个目录，程序将无法运行。发布一个程序时，还要将自用库拷贝到系统目录？这是不合理的。</p>
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/3.png" alt="默认INSTALL_PATH" title="默认INSTALL_PATH">
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/4.png" alt="otool查看" title="otool查看">
-<p>这里将Installation Directory改成@loader_path/../Frameworks，以相对目录查找dylib。下图是otool显示。@loader_path的意思相对load这个dylib的模块所在的路径找dylib所在的目录。</p>
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/5.png" alt="修改成@loader_path" title="修改成@loader_path">
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/6.png" alt="otool查看" title="otool查看">
-<p>Installation Directory (INSTALL_PATH) 详解：</p>
-<ul>
-<li>@executable_path 表示可执行程序所在的目录. 比如 /path/foo.app/Contents/MacOS/。</li>
-<li>@loader_path 表示每一个被加载的 binary（包括App, dylib, framework等）所在的目录。</li>
-<li>@rpath 和前面两个不同, 它只是一个保存着一个或多个路径的变量。在 app中设置 Runpath Search Paths（对应了@rpath）。</li>
-</ul>
-<h2 id="四、创建调用app"><a href="#四、创建调用app" class="headerlink" title="四、创建调用app"></a>四、创建调用app</h2><p>创建名为caller_demo的app。</p>
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/7.png" alt="创建app" title="创建app">
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/8.png" alt="参数设置" title="参数设置">
-<p>参数设置</p>
-<h2 id="五、设置链接到dylib"><a href="#五、设置链接到dylib" class="headerlink" title="五、设置链接到dylib"></a>五、设置链接到dylib</h2><p>在app的Build Phases的Link Binary With Libraries里增加刚刚创建的dylib。</p>
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/9.png" alt="设置链接" title="设置链接">
-<p>如果列表里没有点击右下角的Add Other在目录里找。</p>
-<p>也可以在Finder里拖拽dylib到Link Binary With Libraries里。</p>
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/10.png" alt="设置链接" title="设置链接">
-<h2 id="六、拷贝dylib至目标目录"><a href="#六、拷贝dylib至目标目录" class="headerlink" title="六、拷贝dylib至目标目录"></a>六、拷贝dylib至目标目录</h2><p>这里app包结构包结构里还没有这个dylib，运行时还是找不着。在Build Phases里点加号，新增Copy Files Phase，将dylib拷贝到Frameworks目录下，以便loader可以找到。</p>
-<p>这里为什么是Frameworks目录，是因为设置INSTALL_PATH为@loader_path/../Frameworks。</p>
-<p>也可以设置为其他目录，比如INSTALL_PATH为@loader_path/../dll，那Copy Files时，就要放到dll目录，如果下拉列表没有相应目录，可以下拉选Frameworks，然后在Subpath里填../dll这个相对路径，XCode会自动创建一个Frameworks同级目录dll。</p>
-<p><img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/11.png" alt="拷贝dylib" title="拷贝dylib"></p>
-<p><img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/12.png" alt="拷贝文件" title="拷贝文件"></p>
-<p><img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/13.png" alt="包结构" title="包结构"></p>
-<h2 id="七、调用"><a href="#七、调用" class="headerlink" title="七、调用"></a>七、调用</h2><p>比如在AppDelegate.m文件里调用，因为是使用C++类，所以要将文件扩展名改为.mm，如果是使用标准C、ObjC接口，则不用改。</p>
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/14.png" alt="修改扩展名" title="修改扩展名">
-<img src="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/15.png" alt="调用代码" title="调用代码">
-<h2 id="八、结语"><a href="#八、结语" class="headerlink" title="八、结语"></a>八、结语</h2><p>可以看到，以上方法使用比较方便，在开发过程中配置好XCode，一键编译。</p>
-<p>调用时可以像静态库一样使用，省时省力。</p>
-<hr>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
-<li><a href="http://www.tanhao.me/pieces/1361.html/" target="_blank" rel="external">http://www.tanhao.me/pieces/1361.html/</a></li>
-<li><a href="https://wincent.com/wiki/@executable_path,_@load_path_and_@rpath" target="_blank" rel="external">https://wincent.com/wiki/@executable_path,_@load_path_and_@rpath</a></li>
+        <a id="more"></a>
+<img src="/2016/08/24/iOS-macOS签名证书类型/1.jpg" alt="Certificate types and names" title="Certificate types and names">
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41" target="_blank" rel="external">https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41</a></li>
+<li><a href="http://stackoverflow.com/questions/13196291/difference-between-mac-developer-and-3rd-party-mac-developer-application" target="_blank" rel="external">http://stackoverflow.com/questions/13196291/difference-between-mac-developer-and-3rd-party-mac-developer-application</a></li>
 </ol>
 
       
@@ -578,11 +357,26 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">macOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/Mac-OS-X上开发和使用动态链接库-dylib-共享库/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/08/24/iOS-macOS签名证书类型/">展开全文 >></a>
         </p>
       
 
@@ -619,13 +413,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/22/Kali-Linux-2016-1-中科大源/">Kali Linux 2016.1 中科大源</a>
+      <a class="article-title" href="/2016/08/22/Kali-Linux-2016-1-中科大源/">Kali Linux 2016.1 中科大源</a>
     </h1>
   
 
         
-        <a href="/2017/08/22/Kali-Linux-2016-1-中科大源/" class="archive-article-date">
-  	<time datetime="2017-08-22T08:35:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-22</time>
+        <a href="/2016/08/22/Kali-Linux-2016-1-中科大源/" class="archive-article-date">
+  	<time datetime="2016-08-22T08:35:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-22</time>
 </a>
         
       </header>
@@ -657,7 +451,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/22/Kali-Linux-2016-1-中科大源/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/08/22/Kali-Linux-2016-1-中科大源/">展开全文 >></a>
         </p>
       
 
@@ -765,45 +559,30 @@
 
 
   
-    <article id="post-基于腾讯云自建Blog-WordPress-CentOS-Nginx" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Mac-OS-X快速安装Apache-Thrift" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/07/基于腾讯云自建Blog-WordPress-CentOS-Nginx/">基于腾讯云自建Blog-WordPress+CentOS+Nginx</a>
+      <a class="article-title" href="/2016/05/26/Mac-OS-X快速安装Apache-Thrift/">Mac OS X快速安装Apache Thrift</a>
     </h1>
   
 
         
-        <a href="/2016/04/07/基于腾讯云自建Blog-WordPress-CentOS-Nginx/" class="archive-article-date">
-  	<time datetime="2016-04-07T13:13:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-07</time>
+        <a href="/2016/05/26/Mac-OS-X快速安装Apache-Thrift/" class="archive-article-date">
+  	<time datetime="2016-05-26T10:55:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><ol>
-<li>申请云服务器</li>
-<li>设置云服务器安装组，打开80端口。如果要访问安装在云服务器的MySQL，还要打开3306端口；</li>
-<li>参考【1】安装Nginx/MySQL/PHP。如果使用香港云数据库CDB，无法在外网登录管理；</li>
-<li>参考【2】安装WordPress；</li>
-<li>因为GWF的原因，基于WordPress的网站加载比较慢，这里推荐两个插件：<ol>
-<li>Google字体相关：Useso take over Google（重定向到360网站卫士的镜像）；</li>
-<li>Gravatar相关：WP-DuoShuo-Gravatar（重写向到多说的镜像）。</li>
-</ol>
-</li>
-<li>固定链接设置【3】。如果是使用默认固定链接，可以不设置。</li>
-<li>接下来就可以愉快的写作了。</li>
-</ol>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
-<li>软件安装：<a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-centos-6" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-centos-6</a></li>
-<li>WordPress安装：<a href="https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-nginx-on-centos-6–2" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-nginx-on-centos-6–2</a></li>
-<li>固定链接设置：<a href="http://nginxlibrary.com/wordpress-permalinks/" target="_blank" rel="external">http://nginxlibrary.com/wordpress-permalinks/</a></li>
-</ol>
-
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其<a href="https://thrift.apache.org/">官方主页</a>介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, and OCaml等语言的代码。</p>
+        
+          <a class="article-more-a" href="/2016/05/26/Mac-OS-X快速安装Apache-Thrift/#more">more >></a>
+        
       
 
       
@@ -811,11 +590,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">macOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/04/07/基于腾讯云自建Blog-WordPress-CentOS-Nginx/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/05/26/Mac-OS-X快速安装Apache-Thrift/">展开全文 >></a>
         </p>
       
 
@@ -845,35 +635,28 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Linux-OSX-命令输入操作快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/07/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016/05/17/Linux-OSX-命令输入操作快捷键/">Linux/OSX 命令输入操作快捷键</a>
     </h1>
   
 
         
-        <a href="/2016/04/07/hello-world/" class="archive-article-date">
-  	<time datetime="2016-04-07T03:13:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-07</time>
+        <a href="/2016/05/17/Linux-OSX-命令输入操作快捷键/" class="archive-article-date">
+  	<time datetime="2016-05-17T10:54:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>ctrl + w —往回删除一个单词，光标放在最末尾<br>ctrl + k —往前删除到末尾，光标放在最前面（可以使用ctrl+a）<br>ctl + u 删除光标以前的字符<br>ctl + k 删除光标以后的字符<br>ctl + a 移动光标至的字符头<br>ctl + e 移动光标至的字符尾<br>ctl + l 清屏</p>
+<p>ctrl + r命令历史，继续按这个快捷键可以向前翻</p>
 
       
 
@@ -886,7 +669,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/04/07/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/05/17/Linux-OSX-命令输入操作快捷键/">展开全文 >></a>
         </p>
       
 
@@ -916,6 +699,219 @@
 
 
   
+    <article id="post-Linux-OSX-统计文件个数命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/17/Linux-OSX-统计文件个数命令/">Linux/OSX 统计文件个数命令</a>
+    </h1>
+  
+
+        
+        <a href="/2016/05/17/Linux-OSX-统计文件个数命令/" class="archive-article-date">
+  	<time datetime="2016-05-17T10:52:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find &lt;目录&gt; -type f | wc <span class="_">-l</span></div></pre></td></tr></table></figure></p>
+<p>根据目录路径，显示文件个数，不包括目录。</p>
+<p>例如：<br>统计全盘文件个数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find / -type f | wc <span class="_">-l</span></div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/05/17/Linux-OSX-统计文件个数命令/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Mac-OS-X-快速复制（拷贝）文件（夹）路径" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/13/Mac-OS-X-快速复制（拷贝）文件（夹）路径/">Mac OS X 快速复制（拷贝）文件（夹）路径</a>
+    </h1>
+  
+
+        
+        <a href="/2016/04/13/Mac-OS-X-快速复制（拷贝）文件（夹）路径/" class="archive-article-date">
+  	<time datetime="2016-04-13T14:17:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用Mac OS X的过程中，如果有一个文件所在的目录层次很深，想要拷贝文件路径是麻烦事儿。本文介绍一种通过Finder右键菜单项来复制文件路径的方法，如果哪个朋友有更好的方法麻烦告知，在此谢过！</p>
+        
+          <a class="article-more-a" href="/2016/04/13/Mac-OS-X-快速复制（拷贝）文件（夹）路径/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">macOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/04/13/Mac-OS-X-快速复制（拷贝）文件（夹）路径/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CocoaPods安装和使用教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/12/CocoaPods安装和使用教程/">CocoaPods安装和使用教程</a>
+    </h1>
+  
+
+        
+        <a href="/2016/04/12/CocoaPods安装和使用教程/" class="archive-article-date">
+  	<time datetime="2016-04-12T14:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CocoaPods是什么？"><a href="#CocoaPods是什么？" class="headerlink" title="CocoaPods是什么？"></a>CocoaPods是什么？</h2><blockquote>
+<p>通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到的包管理工具CocoaPods。</p>
+<p>官方网址：<a href="https://cocoapods.org/">https://cocoapods.org/</a></p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2016/04/12/CocoaPods安装和使用教程/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/04/12/CocoaPods安装和使用教程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1009,11 +1005,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">macOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">macOS</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
             
             <div class="clearfix"></div>
