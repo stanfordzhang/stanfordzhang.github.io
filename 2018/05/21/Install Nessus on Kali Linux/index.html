@@ -16,7 +16,7 @@ Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000
 <meta property="og:site_name" content="Stanford">
 <meta property="og:description" content="Nessus是什么？
 Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000个组织在使用它。该工具提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。Nessus不同于传统的漏洞扫描软件，Nessus可同时在本机或远程操作，进行系统的漏洞分析扫描。">
-<meta property="og:updated_time" content="2018-05-21T11:51:03.032Z">
+<meta property="og:updated_time" content="2018-05-21T11:52:15.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Install Nessus on Kali Linux">
 <meta name="twitter:description" content="Nessus是什么？
@@ -190,20 +190,16 @@ Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000
 <p>Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000个组织在使用它。该工具提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。Nessu<br>s不同于传统的漏洞扫描软件，Nessus可同时在本机或远程操作，进行系统的漏洞分析扫描。<br><a id="more"></a></p>
 </blockquote>
 <h2 id="下载并安装"><a href="#下载并安装" class="headerlink" title="下载并安装"></a>下载并安装</h2><p>根据不同的OS下载不同的版本，Kali Linux下载debian 6版本的Nessus。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://www.tenable.com/downloads/nessus</div></pre></td></tr></table></figure>
-<p>安装命令：</p>
-<blockquote><p>root@kali:~/Documents# dpkg -i Nessus-7.1.0-debian6_amd64.deb<br>Selecting previously unselected package nessus.<br>(Reading database … 335227 files and directories currently installed.)<br>Preparing to unpack Nessus-7.1.0-debian6_amd64.deb …<br>Unpacking nessus (7.1.0) …<br>Setting up nessus (7.1.0) …<br>Unpacking Nessus Core Components…</p>
-<ul>
-<li>You can start Nessus by typing /etc/init.d/nessusd start</li>
-<li>Then go to <a href="https://kali:8834/" target="_blank" rel="external">https://kali:8834/</a> to configure your scanner</li>
-</ul>
-<p>Processing triggers for systemd (238-4) …</p>
+<blockquote><p><a href="https://www.tenable.com/downloads/nessus" target="_blank" rel="external">https://www.tenable.com/downloads/nessus</a></p>
 </blockquote>
+<p>安装命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">root@kali:~/Documents<span class="comment"># dpkg -i Nessus-7.1.0-debian6_amd64.deb</span></div><div class="line">Selecting previously unselected package nessus.</div><div class="line">(Reading database ... 335227 files and directories currently installed.)</div><div class="line">Preparing to unpack Nessus-7.1.0-debian6_amd64.deb ...</div><div class="line">Unpacking nessus (7.1.0) ...</div><div class="line">Setting up nessus (7.1.0) ...</div><div class="line">Unpacking Nessus Core Components...</div><div class="line"></div><div class="line"> - You can start Nessus by typing /etc/init.d/nessusd start</div><div class="line"> - Then go to https://kali:8834/ to configure your scanner</div><div class="line"></div><div class="line">Processing triggers <span class="keyword">for</span> systemd (238-4) ...</div></pre></td></tr></table></figure>
 <p>显示到这里就安装成功了！</p>
 <p>启动Nessus</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/nessusd start</div></pre></td></tr></table></figure>
 <h2 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h2><p>注册领取免费版本的激活码，领取之后会发送到邮件，注意查看邮箱。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://www.tenable.com/products/nessus/activation-code</div></pre></td></tr></table></figure>
+<blockquote><p><a href="https://www.tenable.com/products/nessus/activation-code" target="_blank" rel="external">https://www.tenable.com/products/nessus/activation-code</a></p>
+</blockquote>
 <p>使用激活码激活</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/nessus/sbin/nessuscli fetch --register 0BB7-F54A-60D7-FCE7-976E</div></pre></td></tr></table></figure>
 <p>激活过程中会下载安装Plugins，稍作等待。</p>
@@ -212,7 +208,8 @@ Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000
 <h2 id="访问控制界面"><a href="#访问控制界面" class="headerlink" title="访问控制界面"></a>访问控制界面</h2><p>重启Nessus服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/nessusd restart</div></pre></td></tr></table></figure>
 <p>打开浏览器访问，默认端口是8834。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://10.98.53.137:8834</div></pre></td></tr></table></figure>
+<blockquote><p><a href="https://10.98.53.137:8834" target="_blank" rel="external">https://10.98.53.137:8834</a></p>
+</blockquote>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><blockquote>
 <ol>
 <li>《Kali Linux渗透测试技术详解》</li>
