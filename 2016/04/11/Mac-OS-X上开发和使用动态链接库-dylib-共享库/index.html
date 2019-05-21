@@ -110,30 +110,30 @@
 <meta name="keywords" content="macOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac OS X上开发和使用动态链接库&#x2F;dylib&#x2F;共享库">
-<meta property="og:url" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/index.html">
+<meta property="og:url" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/index.html">
 <meta property="og:site_name" content="Stanford">
 <meta property="og:description" content="在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。 本文">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/1.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/2.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/3.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/4.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/5.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/6.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/7.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/8.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/9.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/10.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/11.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/12.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/13.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/14.png">
-<meta property="og:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/15.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/1.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/2.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/3.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/4.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/5.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/6.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/7.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/8.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/9.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/10.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/11.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/12.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/13.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/14.png">
+<meta property="og:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/15.png">
 <meta property="og:updated_time" content="2017-11-22T08:57:56.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac OS X上开发和使用动态链接库&#x2F;dylib&#x2F;共享库">
 <meta name="twitter:description" content="在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。 本文">
-<meta name="twitter:image" content="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/1.png">
+<meta name="twitter:image" content="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/1.png">
 
 
 
@@ -141,7 +141,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/">
+  <link rel="canonical" href="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/">
 
 
 
@@ -320,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/2016/04/11/Mac-OS-X上开发和使用动态链接库-dylib-共享库/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
