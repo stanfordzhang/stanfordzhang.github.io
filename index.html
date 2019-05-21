@@ -854,9 +854,9 @@
             <p>在Info.Plist里设置：<br>LSUIElement是以Agent的方法启动。不在Dock上显示图标，但会显示窗口。<br>LSBackgroundOnly变成后台进程，不在Dock上显示图标，也不会显示窗口。</p>
 <p>TransformProcessType<br>[NSApp setActivationPolicy: NSApplicationActivationPolicyAccessory];<br>以上两个没有研究。</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
-<li><a href="https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/20001431-113253" target="_blank" rel="external">https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/20001431-113253</a></li>
-<li><a href="http://stackoverflow.com/questions/6796028/start-a-gui-process-in-mac-os-x-without-dock-icon/9220840" target="_blank" rel="external">http://stackoverflow.com/questions/6796028/start-a-gui-process-in-mac-os-x-without-dock-icon/9220840</a></li>
-<li><a href="http://stackoverflow.com/questions/620841/how-to-hide-the-dock-icon" target="_blank" rel="external">http://stackoverflow.com/questions/620841/how-to-hide-the-dock-icon</a></li>
+<li><a href="https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/20001431-113253" target="_blank" rel="noopener">https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/20001431-113253</a></li>
+<li><a href="http://stackoverflow.com/questions/6796028/start-a-gui-process-in-mac-os-x-without-dock-icon/9220840" target="_blank" rel="noopener">http://stackoverflow.com/questions/6796028/start-a-gui-process-in-mac-os-x-without-dock-icon/9220840</a></li>
+<li><a href="http://stackoverflow.com/questions/620841/how-to-hide-the-dock-icon" target="_blank" rel="noopener">http://stackoverflow.com/questions/620841/how-to-hide-the-dock-icon</a></li>
 </ol>
 
           
@@ -1012,7 +1012,7 @@
       
         
           
-            <p>最近要在<a href="https://chromium.googlesource.com/" target="_blank" rel="external">https://chromium.googlesource.com/</a> Checkout点代码，但该网站被GFW墙了。无奈只能走野路子。</p>
+            <p>最近要在<a href="https://chromium.googlesource.com/" target="_blank" rel="noopener">https://chromium.googlesource.com/</a> Checkout点代码，但该网站被GFW墙了。无奈只能走野路子。</p>
 <p>使用socks5通道：</p>
 <p>首先通过如下命令登录一台未被墙的服务器：</p>
 <p>ssh root@IP地址或域名 -D 端口<br>修改Git的配置（~/.gitconfig），新增如下行：</p>
@@ -1173,10 +1173,10 @@
         
           
             <a id="more"></a>
-<img src="/2016/08/24/iOS-macOS签名证书类型/1.jpg" alt="Certificate types and names" title="Certificate types and names">
+<img src="/2016/08/24/iOS-macOS签名证书类型/1.jpg" title="Certificate types and names">
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41" target="_blank" rel="external">https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41</a></li>
-<li><a href="http://stackoverflow.com/questions/13196291/difference-between-mac-developer-and-3rd-party-mac-developer-application" target="_blank" rel="external">http://stackoverflow.com/questions/13196291/difference-between-mac-developer-and-3rd-party-mac-developer-application</a></li>
+<li><a href="https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41" target="_blank" rel="noopener">https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41</a></li>
+<li><a href="http://stackoverflow.com/questions/13196291/difference-between-mac-developer-and-3rd-party-mac-developer-application" target="_blank" rel="noopener">http://stackoverflow.com/questions/13196291/difference-between-mac-developer-and-3rd-party-mac-developer-application</a></li>
 </ol>
 
           
@@ -1332,8 +1332,8 @@
       
         
           
-            <p>修改 /etc/apt/sources.list<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#kali官方源</span></div><div class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</div><div class="line"><span class="comment">#中科大的源</span></div><div class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</div></pre></td></tr></table></figure></p>
-<p>依次执行下面命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get update &amp; apt-get upgrade</div><div class="line">apt-get dist-upgrade</div><div class="line">reboot</div></pre></td></tr></table></figure></p>
+            <p>修改 /etc/apt/sources.list<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#kali官方源</span></span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line"><span class="comment">#中科大的源</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure></p>
+<p>依次执行下面命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get update &amp; apt-get upgrade</span><br><span class="line">apt-get dist-upgrade</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1491,7 +1491,7 @@
             <h2 id="How-To-Set-Up-SSH-Tunneling-on-a-VPS"><a href="#How-To-Set-Up-SSH-Tunneling-on-a-VPS" class="headerlink" title="How To Set Up SSH Tunneling on a VPS"></a>How To Set Up SSH Tunneling on a VPS</h2><p>使用SSH隧道进行翻墙。</p>
 <p>##Reference:</p>
 <ol>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-tunneling-on-a-vps" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-tunneling-on-a-vps</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-tunneling-on-a-vps" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-tunneling-on-a-vps</a></li>
 </ol>
 
           
@@ -1646,7 +1646,7 @@
 
       
         
-          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其<a href="https://thrift.apache.org/">官方主页</a>介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, and OCaml等语言的代码。</p>
+          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其<a href="https://thrift.apache.org/" target="_blank" rel="noopener">官方主页</a>介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, and OCaml等语言的代码。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
