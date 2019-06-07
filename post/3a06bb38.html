@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4953767069924314",
+    enable_page_level_ads: true
+  });
+</script>
+
+  <!-- Google AdSense end -->
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="概述主要内容包括：  Hexo博客，使用hexo-theme-next主题，添加Google AdSense。 添加ads.txt SEO优化之title SEO优化之添加robots.txt SEO优化之添加sitemap SEO优化之配置Google Search Console">
+<meta name="keywords" content="Hexo,hexo theme next,Google AdSense,SEO,Google Search Console">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo博客添加Google AdSense">
+<meta property="og:url" content="http://stanfordzhang.com/post/3a06bb38.html">
+<meta property="og:site_name" content="Stanford">
+<meta property="og:description" content="概述主要内容包括：  Hexo博客，使用hexo-theme-next主题，添加Google AdSense。 添加ads.txt SEO优化之title SEO优化之添加robots.txt SEO优化之添加sitemap SEO优化之配置Google Search Console">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://stanfordzhang.com/post/3a06bb38/201906071.png">
+<meta property="og:image" content="http://stanfordzhang.com/post/3a06bb38/201906072.png">
+<meta property="og:updated_time" content="2019-06-07T09:35:24.389Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo博客添加Google AdSense">
+<meta name="twitter:description" content="概述主要内容包括：  Hexo博客，使用hexo-theme-next主题，添加Google AdSense。 添加ads.txt SEO优化之title SEO优化之添加robots.txt SEO优化之添加sitemap SEO优化之配置Google Search Console">
+<meta name="twitter:image" content="http://stanfordzhang.com/post/3a06bb38/201906071.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://stanfordzhang.com/post/3a06bb38">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Hexo博客添加Google AdSense | Stanford</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Stanford</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stanford's Home</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/3a06bb38.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stanford Zhang">
+      <meta itemprop="description" content="一蓑烟雨任平生">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stanford">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hexo博客添加Google AdSense
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-21 16:13:30" itemprop="dateCreated datePublished" datetime="2019-05-21T16:13:30+08:00">2019-05-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-07 17:35:24" itemprop="dateModified" datetime="2019-06-07T17:35:24+08:00">2019-06-07</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>主要内容包括：</p>
+<ul>
+<li>Hexo博客，使用<a href="https://github.com/theme-next/hexo-theme-next" title="hexo-theme-next" target="_blank" rel="noopener">hexo-theme-next</a>主题，添加Google AdSense。</li>
+<li>添加ads.txt</li>
+<li>SEO优化之title</li>
+<li>SEO优化之添加robots.txt</li>
+<li>SEO优化之添加sitemap</li>
+<li>SEO优化之配置Google Search Console</li>
+</ul>
+<a id="more"></a>
+<h2 id="NEXT主题添加Google-AdSense"><a href="#NEXT主题添加Google-AdSense" class="headerlink" title="NEXT主题添加Google AdSense"></a>NEXT主题添加Google AdSense</h2><blockquote>
+<p><strong>参考[1][2]</strong></p>
+</blockquote>
+<ol>
+<li><p>注册Google AdSense账号，方法请自行搜索</p>
+</li>
+<li><p>注册完账号后，将AdSense里的JavaSrcipt脚本添加至NEXT主题模板里</p>
+</li>
+</ol>
+<ul>
+<li>新建 themes/next/layout/_custom/google_adsense.swig，将 AdSense 上的JavaScript代码粘贴进去</li>
+<li>编辑 themes/hexo-theme-next/layout/_layout.swig 文件，在head元素里增加如下代码：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Google AdSense start --&gt;</span><br><span class="line">&#123;% include <span class="string">'_custom/google_adsense.swig'</span> %&#125;</span><br><span class="line">&lt;!-- Google AdSense end --&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="添加ads-txt"><a href="#添加ads-txt" class="headerlink" title="添加ads.txt"></a>添加ads.txt</h2><blockquote>
+<p><strong>参考[3][4]</strong></p>
+</blockquote>
+<p>授权数字卖方 (ads.txt) 是一项 IAB 计划，可帮助确保您的数字广告资源只通过您认定为已获得授权的卖家（如 AdSense）销售。创建自己的 ads.txt 文件后，您可以更好地掌控允许谁在您的网站上销售广告，并可防止向广告客户展示仿冒广告资源。<br>添加方法参考[3][4]。</p>
+<h2 id="SEO优化之title"><a href="#SEO优化之title" class="headerlink" title="SEO优化之title"></a>SEO优化之title</h2><blockquote>
+<p><strong>参考[5]</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block title %&#125;&#123;&#123; title &#125;&#125; - &#123;&#123; theme.description &#125;&#125;&#123;% <span class="keyword">if</span> theme.index_with_subtitle and subtitle %&#125; – &#123;&#123; subtitle &#125;&#125;&#123;% endif %&#125;&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+<p>在themes/hexo-theme-next/layout/index.swig文件里的title内添加，也可以是其他的关键字，更有利于详细的描述网站，便于搜索引擎推荐。</p>
+<h2 id="SEO优化之添加robots-txt"><a href="#SEO优化之添加robots-txt" class="headerlink" title="SEO优化之添加robots.txt"></a>SEO优化之添加robots.txt</h2><blockquote>
+<p><strong>参考[5]</strong></p>
+</blockquote>
+<h2 id="SEO优化之添加sitemap"><a href="#SEO优化之添加sitemap" class="headerlink" title="SEO优化之添加sitemap"></a>SEO优化之添加sitemap</h2><blockquote>
+<p><strong>参考[5]</strong></p>
+</blockquote>
+<h2 id="SEO优化之配置Google-Search-Console"><a href="#SEO优化之配置Google-Search-Console" class="headerlink" title="SEO优化之配置Google Search Console"></a>SEO优化之配置Google Search Console</h2><blockquote>
+<p><strong>参考[6][7]</strong></p>
+</blockquote>
+<p>参考文章中是老版本Search Console，这里使用新版本。<br>网址：<a href="https://www.google.com/webmasters/" target="_blank" rel="noopener">https://www.google.com/webmasters/</a></p>
+<p>在添加资源过程中有两种方式，如图所示：<br><img src="/post/3a06bb38/201906071.png" alt="Google Search Console验证您的网站所有权"></p>
+<p>图中左侧是新方法，但我没有测试成功，大概原因是Github Pages是使用CNAME来绑定域名的。<br>本例使用右侧的老方法，输入域名之后，会下载一个html文件放在网站根目录，所下图所示：<br><img src="/post/3a06bb38/201906072.png" alt="Google Search Console验证您的网站所有权"><br>这个html是不需要渲染的，所以在_config.xml文件中配置skip_render，添加下载的html文件。<br>验证通过后，进入Search Console，可以添加Sitemap、URL检查等操作，参考[7]。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="http://www.mdslq.cn/archives/3a06bb38.html" title="Hexo博客添加Google AdSense" target="_blank" rel="noopener">Hexo博客添加Google AdSense</a></li>
+<li><a href="https://walesexcitedmei.github.io/2018/09/25/HEXO-hexo-%E4%B8%AD%E5%8A%A0%E5%85%A5-AdSense-%E5%B9%BF%E5%91%8A%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%96%B9%E6%B3%95/" title="hexo 中加入 AdSense 广告服务的方法" target="_blank" rel="noopener">hexo 中加入 AdSense 广告服务的方法</a></li>
+<li><a href="https://support.google.com/adsense/answer/7532444?hl=zh-Hans" target="_blank" rel="noopener">使用 ads.txt 声明授权卖方</a></li>
+<li><a href="https://support.google.com/adsense/answer/105516" target="_blank" rel="noopener">查找发布商 ID</a></li>
+<li><a href="http://www.jeyzhang.com/hexo-website-seo.html" target="_blank" rel="noopener">Hexo网站优化之SEO</a></li>
+<li><a href="https://www.jianshu.com/p/86557c34b671" target="_blank" rel="noopener">Hexo Seo优化让你的博客在google搜索排名第一</a></li>
+<li><a href="https://support.google.com/webmasters/answer/9008080#html_verification" target="_blank" rel="noopener">Google Search Console验证您的网站所有权</a></li>
+<li><a href="https://hoxis.github.io/Hexo+Next%20SEO%E4%BC%98%E5%8C%96.html" target="_blank" rel="noopener">Hexo博客Next主题SEO优化方法</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+            <a href="/tags/hexo-theme-next/" rel="tag"># hexo theme next</a>
+          
+            <a href="/tags/Google-AdSense/" rel="tag"># Google AdSense</a>
+          
+            <a href="/tags/SEO/" rel="tag"># SEO</a>
+          
+            <a href="/tags/Google-Search-Console/" rel="tag"># Google Search Console</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/e8fcbb5.html" rel="next" title="Install Nessus on Kali Linux">
+                <i class="fa fa-chevron-left"></i> Install Nessus on Kali Linux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Stanford Zhang</p>
+              <div class="site-description motion-element" itemprop="description">一蓑烟雨任平生</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NEXT主题添加Google-AdSense"><span class="nav-number">2.</span> <span class="nav-text">NEXT主题添加Google AdSense</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加ads-txt"><span class="nav-number">3.</span> <span class="nav-text">添加ads.txt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SEO优化之title"><span class="nav-number">4.</span> <span class="nav-text">SEO优化之title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SEO优化之添加robots-txt"><span class="nav-number">5.</span> <span class="nav-text">SEO优化之添加robots.txt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SEO优化之添加sitemap"><span class="nav-number">6.</span> <span class="nav-text">SEO优化之添加sitemap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SEO优化之配置Google-Search-Console"><span class="nav-number">7.</span> <span class="nav-text">SEO优化之配置Google Search Console</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stanford Zhang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

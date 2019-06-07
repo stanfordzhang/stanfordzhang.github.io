@@ -106,17 +106,18 @@
 
 
 
-  <meta name="description" content="一蓑烟雨任平生">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://stanfordzhang.com/about/index.html">
+  <meta name="description" content="介绍Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其官方主页介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java,">
+<meta name="keywords" content="macOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac OS X快速安装Apache Thrift">
+<meta property="og:url" content="http://stanfordzhang.com/post/c2cdf3b4.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="一蓑烟雨任平生">
+<meta property="og:description" content="介绍Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其官方主页介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-01-04T09:24:02.000Z">
+<meta property="og:updated_time" content="2019-06-07T09:21:35.495Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="一蓑烟雨任平生">
+<meta name="twitter:title" content="Mac OS X快速安装Apache Thrift">
+<meta name="twitter:description" content="介绍Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其官方主页介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java,">
 
 
 
@@ -124,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/about/">
+  <link rel="canonical" href="http://stanfordzhang.com/post/c2cdf3b4">
 
 
 
@@ -134,7 +135,7 @@
   };
 </script>
 
-  <title>关于 | Stanford</title>
+  <title>Mac OS X快速安装Apache Thrift | Stanford</title>
   
 
 
@@ -263,19 +264,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -302,45 +290,193 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/c2cdf3b4.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stanford Zhang">
+      <meta itemprop="description" content="一蓑烟雨任平生">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stanford">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">关于
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">Mac OS X快速安装Apache Thrift
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-26 18:55:07" itemprop="dateCreated datePublished" datetime="2016-05-26T18:55:07+08:00">2016-05-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-07 17:21:35" itemprop="dateModified" datetime="2019-06-07T17:21:35+08:00">2019-06-07</time>
+              
+            
+          </span>
+
           
-        
-      </div>
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其<a href="https://thrift.apache.org/" target="_blank" rel="noopener">官方主页</a>介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, and OCaml等语言的代码。</p>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Thrift的安装还是有些繁琐的，跟着<a href="https://thrift.apache.org/docs/install/" target="_blank" rel="noopener">官方文档</a>的走就可以。如果你是Mac OS X， 这里有更方便的方法。<br><blockquote><p>brew install boost<br>brew install libevent<br>brew install thrift<br>gem install thrift – –with-cppflags=’-D_FORTIFY_SOURCE=0’</p>
+</blockquote><br>不过注意上述方法默认安装的最新版。</p>
+<h2 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h2><blockquote><p>Error: The <code>brew link</code> step did not complete successfully<br>The formula built, but is not symlinked into /usr/local<br>You can try again using `brew link thrift’</p>
+</blockquote>
+<ul>
+<li>如果报以上错误，再手动运行：brew link thrift 即可。 *</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://wuchong.me/blog/2015/10/07/thrift-induction/" target="_blank" rel="noopener">https://wuchong.me/blog/2015/10/07/thrift-induction/</a></li>
+<li><a href="https://diwakergupta.github.io/thrift-missing-guide/" target="_blank" rel="noopener">https://diwakergupta.github.io/thrift-missing-guide/</a></li>
+<li><a href="http://thrift-tutorial.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">http://thrift-tutorial.readthedocs.io/en/latest/index.html</a></li>
+<li><a href="http://www.jianshu.com/p/0f4113d6ec4b" target="_blank" rel="noopener">http://www.jianshu.com/p/0f4113d6ec4b</a></li>
+</ol>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/macOS/" rel="tag"># macOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/1f6fd35e.html" rel="next" title="Linux/OSX 命令输入操作快捷键">
+                <i class="fa fa-chevron-left"></i> Linux/OSX 命令输入操作快捷键
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/26d5a5c1.html" rel="prev" title="How To Set Up SSH Tunneling on a VPS">
+                How To Set Up SSH Tunneling on a VPS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -369,8 +505,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -451,6 +596,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QA"><span class="nav-number">3.</span> <span class="nav-text">QA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
