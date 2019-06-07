@@ -106,18 +106,18 @@
 
 
 
-  <meta name="description" content="Nessus是什么？ Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000个组织在使用它。该工具提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。Nessus不同于传统的漏洞扫描软件，Nessus可同时在本机或远程操作，进行系统的漏洞分析扫描。">
-<meta name="keywords" content="Kali Linux,Nessus,Security">
+  <meta name="description" content="概述常见的tomcat 内存溢出有下面三种情况：  OutOfMemoryError： Java heap space OutOfMemoryError： PermGen space OutOfMemoryError： unable to create new native thread">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Install Nessus on Kali Linux">
-<meta property="og:url" content="http://stanfordzhang.com/post/e8fcbb5.html">
+<meta property="og:title" content="Tomcat内存溢出解决办法">
+<meta property="og:url" content="http://stanfordzhang.com/post/c5ce665c.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="Nessus是什么？ Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000个组织在使用它。该工具提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。Nessus不同于传统的漏洞扫描软件，Nessus可同时在本机或远程操作，进行系统的漏洞分析扫描。">
+<meta property="og:description" content="概述常见的tomcat 内存溢出有下面三种情况：  OutOfMemoryError： Java heap space OutOfMemoryError： PermGen space OutOfMemoryError： unable to create new native thread">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-07T09:21:35.491Z">
+<meta property="og:updated_time" content="2019-06-07T09:59:03.940Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Install Nessus on Kali Linux">
-<meta name="twitter:description" content="Nessus是什么？ Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000个组织在使用它。该工具提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。Nessus不同于传统的漏洞扫描软件，Nessus可同时在本机或远程操作，进行系统的漏洞分析扫描。">
+<meta name="twitter:title" content="Tomcat内存溢出解决办法">
+<meta name="twitter:description" content="概述常见的tomcat 内存溢出有下面三种情况：  OutOfMemoryError： Java heap space OutOfMemoryError： PermGen space OutOfMemoryError： unable to create new native thread">
 
 
 
@@ -125,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/post/e8fcbb5">
+  <link rel="canonical" href="http://stanfordzhang.com/post/c5ce665c">
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>Install Nessus on Kali Linux | Stanford</title>
+  <title>Tomcat内存溢出解决办法 | Stanford</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/e8fcbb5.html">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/c5ce665c.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Install Nessus on Kali Linux
+          <h1 class="post-title" itemprop="name headline">Tomcat内存溢出解决办法
 
               
             
@@ -347,24 +347,12 @@
                 
               
 
-              <time title="Created: 2018-05-21 19:46:21" itemprop="dateCreated datePublished" datetime="2018-05-21T19:46:21+08:00">2018-05-21</time>
+              <time title="Created: 2019-06-07 17:52:18 / Modified: 17:59:03" itemprop="dateCreated datePublished" datetime="2019-06-07T17:52:18+08:00">2019-06-07</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-07 17:21:35" itemprop="dateModified" datetime="2019-06-07T17:21:35+08:00">2019-06-07</time>
               
             
           </span>
@@ -398,35 +386,32 @@
       
 
       
-        <h2 id="Nessus是什么？"><a href="#Nessus是什么？" class="headerlink" title="Nessus是什么？"></a>Nessus是什么？</h2><blockquote>
-<p>Nessus号称是世界上最流行的漏洞扫描程序，全世界有超过75000个组织在使用它。该工具提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。Nessu<br>s不同于传统的漏洞扫描软件，Nessus可同时在本机或远程操作，进行系统的漏洞分析扫描。<br><a id="more"></a></p>
-</blockquote>
-<h2 id="下载并安装"><a href="#下载并安装" class="headerlink" title="下载并安装"></a>下载并安装</h2><p>根据不同的OS下载不同的版本，Kali Linux下载debian 6版本的Nessus。</p>
-<blockquote><p><a href="https://www.tenable.com/downloads/nessus" target="_blank" rel="noopener">https://www.tenable.com/downloads/nessus</a></p>
-</blockquote>
-<p>安装命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Documents<span class="comment"># dpkg -i Nessus-7.1.0-debian6_amd64.deb</span></span><br><span class="line">Selecting previously unselected package nessus.</span><br><span class="line">(Reading database ... 335227 files and directories currently installed.)</span><br><span class="line">Preparing to unpack Nessus-7.1.0-debian6_amd64.deb ...</span><br><span class="line">Unpacking nessus (7.1.0) ...</span><br><span class="line">Setting up nessus (7.1.0) ...</span><br><span class="line">Unpacking Nessus Core Components...</span><br><span class="line"></span><br><span class="line"> - You can start Nessus by typing /etc/init.d/nessusd start</span><br><span class="line"> - Then go to https://kali:8834/ to configure your scanner</span><br><span class="line"></span><br><span class="line">Processing triggers <span class="keyword">for</span> systemd (238-4) ...</span><br></pre></td></tr></table></figure>
-<p>显示到这里就安装成功了！</p>
-<p>启动Nessus</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nessusd start</span><br></pre></td></tr></table></figure>
-<h2 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h2><p>注册领取免费版本的激活码，领取之后会发送到邮件，注意查看邮箱。</p>
-<blockquote><p><a href="https://www.tenable.com/products/nessus/activation-code" target="_blank" rel="noopener">https://www.tenable.com/products/nessus/activation-code</a></p>
-</blockquote>
-<p>使用激活码激活</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/nessus/sbin/nessuscli fetch --register 0BB7-F54A-60D7-FCE7-976E</span><br></pre></td></tr></table></figure>
-<p>激活过程中会下载安装Plugins，稍作等待。</p>
-<h2 id="添加账号"><a href="#添加账号" class="headerlink" title="添加账号"></a>添加账号</h2><p>这里都使用默认配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Documents<span class="comment"># /opt/nessus/sbin/nessuscli adduser root</span></span><br><span class="line">[Mon May 21 06:42:52 2018][2752.1] _qdb_open:/opt/nessus/var/nessus/plugins-desc.db: Invalid table of contents</span><br><span class="line">Login password:</span><br><span class="line">Login password (again):</span><br><span class="line">Do you want this user to be a Nessus <span class="string">'system administrator'</span> user (can upload plugins, etc.)? (y/n) [n]: y</span><br><span class="line">User rules</span><br><span class="line">----------</span><br><span class="line">nessusd has a rules system <span class="built_in">which</span> allows you to restrict the hosts</span><br><span class="line">that root has the right to test. For instance, you may want</span><br><span class="line">him to be able to scan his own host only.</span><br><span class="line"></span><br><span class="line">Please see the Nessus Command Line Reference <span class="keyword">for</span> the rules syntax</span><br><span class="line"></span><br><span class="line">Enter the rules <span class="keyword">for</span> this user, and enter a BLANK LINE once you are <span class="keyword">done</span> :</span><br><span class="line">(the user can have an empty rules <span class="built_in">set</span>)</span><br><span class="line"></span><br><span class="line">Login    : root</span><br><span class="line">Password : ***********</span><br><span class="line">This user will have <span class="string">'system administrator'</span> privileges within the Nessus server</span><br><span class="line">Is that ok? (y/n) [n]: y</span><br><span class="line">User added</span><br></pre></td></tr></table></figure>
-<h2 id="访问控制界面"><a href="#访问控制界面" class="headerlink" title="访问控制界面"></a>访问控制界面</h2><p>重启Nessus服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nessusd restart</span><br></pre></td></tr></table></figure>
-<p>打开浏览器访问，默认端口是8834。</p>
-<blockquote><p><a href="https://10.98.53.137:8834" target="_blank" rel="noopener">https://10.98.53.137:8834</a></p>
-</blockquote>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><blockquote>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>常见的tomcat 内存溢出有下面三种情况：</p>
 <ol>
-<li>《Kali Linux渗透测试技术详解》</li>
+<li>OutOfMemoryError： Java heap space</li>
+<li>OutOfMemoryError： PermGen space</li>
+<li>OutOfMemoryError： unable to create new native thread</li>
 </ol>
+<a id="more"></a>
+<h2 id="NEXT主题添加Google-AdSense"><a href="#NEXT主题添加Google-AdSense" class="headerlink" title="NEXT主题添加Google AdSense"></a>NEXT主题添加Google AdSense</h2><p>jvm参数知道：<br>-Xms：初始值<br>-Xmn：最小值<br>-Xmx：最大值</p>
+<h2 id="linux-配置"><a href="#linux-配置" class="headerlink" title="linux 配置"></a>linux 配置</h2><p>在catalina.sh 中，找到cygwin=false 行，在它上面 加上下面的一段代码：</p>
+<blockquote>
+<p>JAVA_OPTS=”-Xms1024m -Xmx1024m”<br>JAVA_OPTS=”$JAVA_OPTS -server -XX:PermSize=512m -XX:MaxPermSize=512m”</p>
 </blockquote>
+<h2 id="window-配置"><a href="#window-配置" class="headerlink" title="window 配置"></a>window 配置</h2><p>在catalina.bat中找到 setlocal ，在其上面 加上下面的代码：</p>
+<blockquote>
+<p>set JAVA_OPTS=-server -Xms1024m -Xmx2048m -XX:PermSize=512m -XX:MaxPermSize=2048m</p>
+</blockquote>
+<p>参数说明：<br>-server:一定要作为第一个参数，在多个CPU时性能佳<br>-Xms：初始Heap大小，使用的最小内存,cpu性能高时此值应设的大一些<br>-Xmx：Java heap最大值，使用的最大内存<br>-XX:PermSize:设定内存的永久保存区域<br>-XX:MaxPermSize:设定最大内存的永久保存区域<br>-XX:MaxNewSize:<br>+XX:AggressiveHeap 会使得 Xms没有意义。这个参数让jvm忽略Xmx参数,疯狂地吃完一个G物理内存,再吃尽一个G的swap。<br>-Xss：每个线程的Stack大小<br>-verbose:gc 现实垃圾收集信息<br>-Xloggc:gc.log 指定垃圾收集日志文件<br>-Xmn：young generation的heap大小，一般设置为Xmx的3、4分之一<br>-XX:+UseParNewGC ：缩短minor收集的时间<br>-XX:+UseConcMarkSweepGC ：缩短major收集的时间</p>
+<ul>
+<li>提示：此选项在Heap Size 比较大而且Major收集时间较长的情况下使用更合适 *</li>
+</ul>
+<blockquote>
+<p>注意，linux下有单引号，win下不用，如果加上单引号，tomcat根本起不来。</p>
+</blockquote>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://blog.csdn.net/xiaojin21cen/article/details/49637045" target="_blank" rel="noopener">解决 tomcat 内存溢出解决的办法</a></li>
+</ol>
 
       
     </div>
@@ -450,11 +435,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Kali-Linux/" rel="tag"># Kali Linux</a>
-          
-            <a href="/tags/Nessus/" rel="tag"># Nessus</a>
-          
-            <a href="/tags/Security/" rel="tag"># Security</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -467,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/c7253149.html" rel="next" title="XCode设置Build Number自增">
-                <i class="fa fa-chevron-left"></i> XCode设置Build Number自增
+              <a href="/post/3a06bb38.html" rel="next" title="Hexo博客添加Google AdSense">
+                <i class="fa fa-chevron-left"></i> Hexo博客添加Google AdSense
               </a>
             
           </div>
@@ -476,10 +457,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/3a06bb38.html" rel="prev" title="Hexo博客添加Google AdSense">
-                Hexo博客添加Google AdSense <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -627,7 +604,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nessus是什么？"><span class="nav-number">1.</span> <span class="nav-text">Nessus是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载并安装"><span class="nav-number">2.</span> <span class="nav-text">下载并安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激活"><span class="nav-number">3.</span> <span class="nav-text">激活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加账号"><span class="nav-number">4.</span> <span class="nav-text">添加账号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问控制界面"><span class="nav-number">5.</span> <span class="nav-text">访问控制界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NEXT主题添加Google-AdSense"><span class="nav-number">2.</span> <span class="nav-text">NEXT主题添加Google AdSense</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-配置"><span class="nav-number">3.</span> <span class="nav-text">linux 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window-配置"><span class="nav-number">4.</span> <span class="nav-text">window 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
