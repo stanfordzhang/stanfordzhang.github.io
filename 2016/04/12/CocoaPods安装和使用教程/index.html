@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang>
+<html class="theme-next muse use-motion" lang="">
 <head><meta name="generator" content="Hexo 3.8.0">
   <!-- Google AdSense start -->
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -113,17 +113,17 @@
 <meta property="og:site_name" content="Stanford">
 <meta property="og:description" content="CocoaPods是什么？ 通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://stanfordzhang.com/2016/04/12/CocoaPods安装和使用教程/1.png">
-<meta property="og:image" content="http://stanfordzhang.com/2016/04/12/CocoaPods安装和使用教程/2.png">
-<meta property="og:image" content="http://stanfordzhang.com/2016/04/12/CocoaPods安装和使用教程/3.png">
-<meta property="og:image" content="http://stanfordzhang.com/2016/04/12/CocoaPods安装和使用教程/6.png">
-<meta property="og:image" content="http://stanfordzhang.com/2016/04/12/CocoaPods安装和使用教程/4.png">
-<meta property="og:image" content="http://stanfordzhang.com/2016/04/12/CocoaPods安装和使用教程/5.png">
+<meta property="og:image" content="http://stanfordzhang.com/.com//04/12/CocoaPods安装和使用教程/1.png">
+<meta property="og:image" content="http://stanfordzhang.com/.com//04/12/CocoaPods安装和使用教程/2.png">
+<meta property="og:image" content="http://stanfordzhang.com/.com//04/12/CocoaPods安装和使用教程/3.png">
+<meta property="og:image" content="http://stanfordzhang.com/.com//04/12/CocoaPods安装和使用教程/6.png">
+<meta property="og:image" content="http://stanfordzhang.com/.com//04/12/CocoaPods安装和使用教程/4.png">
+<meta property="og:image" content="http://stanfordzhang.com/.com//04/12/CocoaPods安装和使用教程/5.png">
 <meta property="og:updated_time" content="2017-11-22T08:57:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods安装和使用教程">
 <meta name="twitter:description" content="CocoaPods是什么？ 通常在开发iOS/OSX应用时，经常使用到一些第三方开源库，比如JSONKit，AFNetWorking，OpenSSL，Boost等。这些库下载、版本更新管理相当麻烦和费时，尤其是C/C++相关库，还需要编译，编译时还有各种各样的库依赖。那有没有类似于Python中的PIP/easy_install这样的包（库）管理工具呢？ 本文将介绍一个开发iOS/OSX时经常用到">
-<meta name="twitter:image" content="http://stanfordzhang.com/2016/04/12/CocoaPods安装和使用教程/1.png">
+<meta name="twitter:image" content="http://stanfordzhang.com/.com//04/12/CocoaPods安装和使用教程/1.png">
 
 
 
@@ -182,7 +182,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
 
   
   
@@ -192,7 +192,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -305,20 +305,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/2016/04/12/CocoaPods安装和使用教程/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
       <meta itemprop="description" content="一蓑烟雨任平生">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Stanford">
     </span>
 
@@ -412,29 +412,29 @@
 <h2 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods"></a>安装CocoaPods</h2><p>安装CocoaPods，需要使用Ruby环境，通常Mac OS X已经自带Ruby。在终端下运行如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
 <p>安装失败？是的，因为默认安装源被GFW了。这里需要更改成淘宝的源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem sources --remove https://rubygems.org/ // 删除原来的</span><br><span class="line">gem sources -a https://ruby.taobao.org/    // 增加淘宝的源，这里注意淘宝已经废弃http的源，统一成了https</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem sources --remove https://rubygems.org/ // 删除原来的</span><br><span class="line">gem sources <span class="_">-a</span> https://ruby.taobao.org/    // 增加淘宝的源，这里注意淘宝已经废弃http的源，统一成了https</span><br></pre></td></tr></table></figure>
 <p>查看源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gem sources -l</span><br><span class="line"> </span><br><span class="line">*** CURRENT SOURCES ***</span><br><span class="line"> </span><br><span class="line">https://ruby.taobao.org/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gem sources <span class="_">-l</span></span><br><span class="line"> </span><br><span class="line">*** CURRENT SOURCES ***</span><br><span class="line"> </span><br><span class="line">https://ruby.taobao.org/</span><br></pre></td></tr></table></figure>
 <p>现在执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
 <p>等一会，是不是安装成功了~</p>
 <h2 id="使用CocoaPods"><a href="#使用CocoaPods" class="headerlink" title="使用CocoaPods"></a>使用CocoaPods</h2><p>首先搜索需要使用的库是否支持CocoaPods（这里以AFNetworking为例）：</p>
-<img src="/2016/04/12/CocoaPods安装和使用教程/1.png" title="pod search AFNetworking">
+<img src="/.com//04/12/CocoaPods安装和使用教程/1.png" title="pod search AFNetworking">
 <p>这里可以看到很多个带有AFNetworking关键字的库，第一个是我们要找的。</p>
 <p>接下来创建一个示例工程pod_demo，同时在工程文件pod_demo.xcodeproj同一目录下创建Podfile文本文件：</p>
-<img src="/2016/04/12/CocoaPods安装和使用教程/2.png" title="podfile">
+<img src="/.com//04/12/CocoaPods安装和使用教程/2.png" title="podfile">
 <p>并输入如下内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">platform :osx, <span class="string">'10.9'</span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.6.3'</span></span><br></pre></td></tr></table></figure>
 <p>第一行解释：</p>
 <p>因为示例工程是OSX平台的，所有platform是osx版本。如果是用于iOS，Platform是可以写成：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">platform :ios, <span class="string">'8.0'</span></span><br></pre></td></tr></table></figure>
 <p>在安装过程中会检测当前库版本是否适用于指定的系统版本，如果不适用，会报如下异常：</p>
-<img src="/2016/04/12/CocoaPods安装和使用教程/3.png" title="pod检测依赖失败"><br><br>不同的AFNetworking对应不同的系统版本【2】：<br><br><img src="/2016/04/12/CocoaPods安装和使用教程/6.png"><br><br>第二行解释：<br><blockquote><p>‘&gt; 0.1’  大于0.1的版本<br>‘&gt;= 0.1’ 大于等于0.1的版本<br>‘&lt; 0.1’  小于0.1的版本<br>‘&lt;= 0.1’  小于等于0.1的版本<br>‘~&gt; 0.1.2’ 0.1.2到0.2之间的版本，不包括0.2及更高版本<br>‘~&gt; 0.1’ 0.1到1.0之间的版本，不包括1.0及更高版本<br>‘~&gt; 0’ 0及更高版本，相当于所有版本</p>
+<img src="/.com//04/12/CocoaPods安装和使用教程/3.png" title="pod检测依赖失败"><br><br>不同的AFNetworking对应不同的系统版本【2】：<br><br><img src="/.com//04/12/CocoaPods安装和使用教程/6.png"><br><br>第二行解释：<br><blockquote><p>‘&gt; 0.1’  大于0.1的版本<br>‘&gt;= 0.1’ 大于等于0.1的版本<br>‘&lt; 0.1’  小于0.1的版本<br>‘&lt;= 0.1’  小于等于0.1的版本<br>‘~&gt; 0.1.2’ 0.1.2到0.2之间的版本，不包括0.2及更高版本<br>‘~&gt; 0.1’ 0.1到1.0之间的版本，不包括1.0及更高版本<br>‘~&gt; 0’ 0及更高版本，相当于所有版本</p>
 </blockquote>
 <p>接下来终端切换到Podfile所在目录，安装库：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod install</span><br></pre></td></tr></table></figure>
 <p>这时你会发现目录下多了几个文件（夹）：pod_demo.xcworkspace、Podfile.lock、Pods，这些都是CocoaPods生成的。目录结构如下：</p>
-<img src="/2016/04/12/CocoaPods安装和使用教程/4.png" title="安装后的目录结构"><br><br><img src="/2016/04/12/CocoaPods安装和使用教程/5.png" title="pod安装成功"><br><br>上图是安装成功界面，请注意最后绿字那一行：关闭XCode，并打开pod_demo.xcworkspace。<br><br>这时用XCode打开pod_demo.xcworkspace，在代码中就能正常使用AFNetworing库了。<br><br><strong> 注：使用CocoaPods安装库后，要打开xcworkspace而不是xcodeproj了。</strong><br><br><br>## 补充内容<br>如果已经有Podfile，需要更新新版本，使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod update</span><br></pre></td></tr></table></figure>
+<img src="/.com//04/12/CocoaPods安装和使用教程/4.png" title="安装后的目录结构"><br><br><img src="/.com//04/12/CocoaPods安装和使用教程/5.png" title="pod安装成功"><br><br>上图是安装成功界面，请注意最后绿字那一行：关闭XCode，并打开pod_demo.xcworkspace。<br><br>这时用XCode打开pod_demo.xcworkspace，在代码中就能正常使用AFNetworing库了。<br><br><strong> 注：使用CocoaPods安装库后，要打开xcworkspace而不是xcodeproj了。</strong><br><br><br>## 补充内容<br>如果已经有Podfile，需要更新新版本，使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod update</span><br></pre></td></tr></table></figure>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><p><a href="https://cocoapods.org/" target="_blank" rel="noopener">https://cocoapods.org/</a><br><a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="noopener">https://github.com/AFNetworking/AFNetworking</a></p>
 
       
@@ -534,7 +534,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">Stanford Zhang</p>
               <div class="site-description motion-element" itemprop="description">一蓑烟雨任平生</div>

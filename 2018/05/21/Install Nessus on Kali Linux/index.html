@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang>
+<html class="theme-next muse use-motion" lang="">
 <head><meta name="generator" content="Hexo 3.8.0">
   <!-- Google AdSense start -->
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -176,7 +176,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
 
   
   
@@ -186,7 +186,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -299,20 +299,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/2018/05/21/Install Nessus on Kali Linux/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
       <meta itemprop="description" content="一蓑烟雨任平生">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Stanford">
     </span>
 
@@ -404,7 +404,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/nessus/sbin/nessuscli fetch --register 0BB7-F54A-60D7-FCE7-976E</span><br></pre></td></tr></table></figure>
 <p>激活过程中会下载安装Plugins，稍作等待。</p>
 <h2 id="添加账号"><a href="#添加账号" class="headerlink" title="添加账号"></a>添加账号</h2><p>这里都使用默认配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Documents<span class="comment"># /opt/nessus/sbin/nessuscli adduser root</span></span><br><span class="line">[Mon May 21 06:42:52 2018][2752.1] _qdb_open:/opt/nessus/var/nessus/plugins-desc.db: Invalid table of contents</span><br><span class="line">Login password:</span><br><span class="line">Login password (again):</span><br><span class="line">Do you want this user to be a Nessus <span class="string">'system administrator'</span> user (can upload plugins, etc.)? (y/n) [n]: y</span><br><span class="line">User rules</span><br><span class="line">----------</span><br><span class="line">nessusd has a rules system <span class="built_in">which</span> allows you to restrict the hosts</span><br><span class="line">that root has the right to <span class="built_in">test</span>. For instance, you may want</span><br><span class="line">him to be able to scan his own host only.</span><br><span class="line"></span><br><span class="line">Please see the Nessus Command Line Reference <span class="keyword">for</span> the rules syntax</span><br><span class="line"></span><br><span class="line">Enter the rules <span class="keyword">for</span> this user, and enter a BLANK LINE once you are <span class="keyword">done</span> :</span><br><span class="line">(the user can have an empty rules <span class="built_in">set</span>)</span><br><span class="line"></span><br><span class="line">Login    : root</span><br><span class="line">Password : ***********</span><br><span class="line">This user will have <span class="string">'system administrator'</span> privileges within the Nessus server</span><br><span class="line">Is that ok? (y/n) [n]: y</span><br><span class="line">User added</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Documents<span class="comment"># /opt/nessus/sbin/nessuscli adduser root</span></span><br><span class="line">[Mon May 21 06:42:52 2018][2752.1] _qdb_open:/opt/nessus/var/nessus/plugins-desc.db: Invalid table of contents</span><br><span class="line">Login password:</span><br><span class="line">Login password (again):</span><br><span class="line">Do you want this user to be a Nessus <span class="string">'system administrator'</span> user (can upload plugins, etc.)? (y/n) [n]: y</span><br><span class="line">User rules</span><br><span class="line">----------</span><br><span class="line">nessusd has a rules system <span class="built_in">which</span> allows you to restrict the hosts</span><br><span class="line">that root has the right to test. For instance, you may want</span><br><span class="line">him to be able to scan his own host only.</span><br><span class="line"></span><br><span class="line">Please see the Nessus Command Line Reference <span class="keyword">for</span> the rules syntax</span><br><span class="line"></span><br><span class="line">Enter the rules <span class="keyword">for</span> this user, and enter a BLANK LINE once you are <span class="keyword">done</span> :</span><br><span class="line">(the user can have an empty rules <span class="built_in">set</span>)</span><br><span class="line"></span><br><span class="line">Login    : root</span><br><span class="line">Password : ***********</span><br><span class="line">This user will have <span class="string">'system administrator'</span> privileges within the Nessus server</span><br><span class="line">Is that ok? (y/n) [n]: y</span><br><span class="line">User added</span><br></pre></td></tr></table></figure>
 <h2 id="访问控制界面"><a href="#访问控制界面" class="headerlink" title="访问控制界面"></a>访问控制界面</h2><p>重启Nessus服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nessusd restart</span><br></pre></td></tr></table></figure>
 <p>打开浏览器访问，默认端口是8834。</p>
@@ -523,7 +523,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">Stanford Zhang</p>
               <div class="site-description motion-element" itemprop="description">一蓑烟雨任平生</div>
