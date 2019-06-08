@@ -106,20 +106,18 @@
 
 
 
-  <meta name="description" content="Reference https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41 htt">
-<meta name="keywords" content="macOS,iOS">
+  <meta name="description" content="概述在Flutter项目中使用protobuf，macOS上环境配置及Flutter工程配置。">
+<meta name="keywords" content="Flutter,protobuf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS&#x2F;macOS签名证书类型">
-<meta property="og:url" content="http://stanfordzhang.com/post/a8003ca5.html">
+<meta property="og:title" content="Use protobuf in Flutter">
+<meta property="og:url" content="http://stanfordzhang.com/post/642e1725.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="Reference https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41 htt">
+<meta property="og:description" content="概述在Flutter项目中使用protobuf，macOS上环境配置及Flutter工程配置。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://stanfordzhang.com/post/a8003ca5/a8003ca5/1.jpg">
-<meta property="og:updated_time" content="2019-06-07T09:21:35.498Z">
+<meta property="og:updated_time" content="2019-06-08T11:06:22.401Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS&#x2F;macOS签名证书类型">
-<meta name="twitter:description" content="Reference https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41 htt">
-<meta name="twitter:image" content="http://stanfordzhang.com/post/a8003ca5/a8003ca5/1.jpg">
+<meta name="twitter:title" content="Use protobuf in Flutter">
+<meta name="twitter:description" content="概述在Flutter项目中使用protobuf，macOS上环境配置及Flutter工程配置。">
 
 
 
@@ -127,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/post/a8003ca5">
+  <link rel="canonical" href="http://stanfordzhang.com/post/642e1725">
 
 
 
@@ -137,7 +135,7 @@
   };
 </script>
 
-  <title>iOS/macOS签名证书类型 | Stanford</title>
+  <title>Use protobuf in Flutter | Stanford</title>
   
 
 
@@ -306,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/a8003ca5.html">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/642e1725.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
@@ -323,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS/macOS签名证书类型
+          <h1 class="post-title" itemprop="name headline">Use protobuf in Flutter
 
               
             
@@ -349,24 +347,12 @@
                 
               
 
-              <time title="Created: 2016-08-24 16:38:26" itemprop="dateCreated datePublished" datetime="2016-08-24T16:38:26+08:00">2016-08-24</time>
+              <time title="Created: 2019-06-08 18:44:40 / Modified: 19:06:22" itemprop="dateCreated datePublished" datetime="2019-06-08T18:44:40+08:00">2019-06-08</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-07 17:21:35" itemprop="dateModified" datetime="2019-06-07T17:21:35+08:00">2019-06-07</time>
               
             
           </span>
@@ -400,11 +386,29 @@
       
 
       
-        <a id="more"></a>
-<img src="/post/a8003ca5/a8003ca5/1.jpg" title="Certificate types and names">
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在Flutter项目中使用protobuf，macOS上环境配置及Flutter工程配置。</p>
+<a id="more"></a>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>下载protobuf：<a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank" rel="noopener">https://github.com/protocolbuffers/protobuf/releases</a><br>这里以protoc-3.8.0-osx-x86_64.zip为例<br>或者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install protobuf</span><br></pre></td></tr></table></figure>
+<p>安装dart</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap dart-lang/dart</span><br><span class="line">brew install dart</span><br></pre></td></tr></table></figure>
+<p>dart安装好后，就有pub命令了。</p>
+<p>安装protoc_plugin</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pub global activate protoc_plugin</span><br></pre></td></tr></table></figure>
+<p>这个protoc_plugin一定要安装，protoc默认不支持dart.<br>将protoc-gen-dart添加到path<br>在~/.bash_profile或~/.zshrc添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> <span class="string">"<span class="variable">$PATH</span>:<span class="variable">$PWD</span>/.pub-cache/bin"</span></span><br></pre></td></tr></table></figure>
+<p>如果没有添加到PATH也可以在protoc参数是增加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc --dart_out=. test.proto --plugin ~/.pub-cache/bin/protoc-gen-dart</span><br></pre></td></tr></table></figure>
+<p>安装好后，就有protoc-gen-dart命令了。<br>如果没有安装以上工具，使用–dart_out编译时会报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">protoc-gen-dart: program not found or is not executable</span><br><span class="line">--dart_out: protoc-gen-dart: Plugin failed with status code 1.</span><br></pre></td></tr></table></figure>
+<p>在Flutter项目中引入protobuf库</p>
+<p>在pubspec.ymal中添加以下依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protobuf: ^0.13.12</span><br></pre></td></tr></table></figure>
+<p>在编译官方示例过程addressbook.proto过程，如果报错找不到google/protobuf/timestamp.pb.dart<br>则需要单独编译下载包里的protoc-3.8.0-osx-x86_64/include/google/protobuf/timestamp.proto</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc -I=~/Downloads/protoc-3.8.0-osx-x86_64/include/ --dart_out=. google/protobuf/timestamp.proto</span><br></pre></td></tr></table></figure>
+<p>如果缺少其他文件，可类似处理。</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41" target="_blank" rel="noopener">https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW41</a></li>
-<li><a href="http://stackoverflow.com/questions/13196291/difference-between-mac-developer-and-3rd-party-mac-developer-application" target="_blank" rel="noopener">http://stackoverflow.com/questions/13196291/difference-between-mac-developer-and-3rd-party-mac-developer-application</a></li>
+<li><a href="https://www.jianshu.com/p/aeae1274572b?from=groupmessage&amp;isappinstalled=0" target="_blank" rel="noopener">在Flutter中使用protobuf</a></li>
 </ol>
 
       
@@ -429,9 +433,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/macOS/" rel="tag"># macOS</a>
+            <a href="/tags/Flutter/" rel="tag"># Flutter</a>
           
-            <a href="/tags/iOS/" rel="tag"># iOS</a>
+            <a href="/tags/protobuf/" rel="tag"># protobuf</a>
           
         </div>
       
@@ -444,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/ab7afda6.html" rel="next" title="Kali Linux 2016.1 中科大源">
-                <i class="fa fa-chevron-left"></i> Kali Linux 2016.1 中科大源
+              <a href="/post/c5ce665c.html" rel="next" title="Tomcat内存溢出解决办法">
+                <i class="fa fa-chevron-left"></i> Tomcat内存溢出解决办法
               </a>
             
           </div>
@@ -453,10 +457,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/175d5c0d.html" rel="prev" title="Git代理设置（macOS）">
-                Git代理设置（macOS） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -608,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
