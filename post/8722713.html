@@ -106,18 +106,17 @@
 
 
 
-  <meta name="description" content="介绍Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其官方主页介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java,">
-<meta name="keywords" content="macOS">
+  <meta name="description" content="概述curl功能很强大，但这里只介绍一个比较实用的命令： 1-w, --write-out FORMAT  Use output FORMAT after completion 这个命令用于格式化输出请求结果。在测试网络连接状况、格式化输出上非常实用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac OS X快速安装Apache Thrift">
-<meta property="og:url" content="http://stanfordzhang.com/post/c2cdf3b4.html">
+<meta property="og:title" content="curl -w&#x2F;--write-out">
+<meta property="og:url" content="http://stanfordzhang.com/post/8722713.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="介绍Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其官方主页介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java,">
+<meta property="og:description" content="概述curl功能很强大，但这里只介绍一个比较实用的命令： 1-w, --write-out FORMAT  Use output FORMAT after completion 这个命令用于格式化输出请求结果。在测试网络连接状况、格式化输出上非常实用。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-07T09:21:35.495Z">
+<meta property="og:updated_time" content="2019-06-12T11:27:22.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac OS X快速安装Apache Thrift">
-<meta name="twitter:description" content="介绍Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其官方主页介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java,">
+<meta name="twitter:title" content="curl -w&#x2F;--write-out">
+<meta name="twitter:description" content="概述curl功能很强大，但这里只介绍一个比较实用的命令： 1-w, --write-out FORMAT  Use output FORMAT after completion 这个命令用于格式化输出请求结果。在测试网络连接状况、格式化输出上非常实用。">
 
 
 
@@ -125,7 +124,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/post/c2cdf3b4">
+  <link rel="canonical" href="http://stanfordzhang.com/post/8722713">
 
 
 
@@ -135,7 +134,7 @@
   };
 </script>
 
-  <title>Mac OS X快速安装Apache Thrift | Stanford</title>
+  <title>curl -w/--write-out | Stanford</title>
   
 
 
@@ -304,7 +303,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/c2cdf3b4.html">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/8722713.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
@@ -321,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mac OS X快速安装Apache Thrift
+          <h1 class="post-title" itemprop="name headline">curl -w/--write-out
 
               
             
@@ -347,24 +346,12 @@
                 
               
 
-              <time title="Created: 2016-05-26 18:55:07" itemprop="dateCreated datePublished" datetime="2016-05-26T18:55:07+08:00">2016-05-26</time>
+              <time title="Created: 2019-06-12 18:47:56 / Modified: 19:27:22" itemprop="dateCreated datePublished" datetime="2019-06-12T18:47:56+08:00">2019-06-12</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-07 17:21:35" itemprop="dateModified" datetime="2019-06-07T17:21:35+08:00">2019-06-07</time>
               
             
           </span>
@@ -398,21 +385,47 @@
       
 
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Thrift 最初由Facebook开发，而后捐献给Apache，目前已广泛应用于业界。Thrift 正如其<a href="https://thrift.apache.org/" target="_blank" rel="noopener">官方主页</a>介绍的，“是一种可扩展、跨语言的服务开发框架”。简而言之，它主要用于各个服务之间的RPC通信，其服务端和客户端可以用不同的语言来开发。只需要依照IDL（Interface Description Language）定义一次接口，Thrift工具就能自动生成 C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, and OCaml等语言的代码。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>curl功能很强大，但这里只介绍一个比较实用的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-w, --write-out FORMAT  Use output FORMAT after completion</span><br></pre></td></tr></table></figure>
+<p>这个命令用于格式化输出请求结果。在测试网络连接状况、格式化输出上非常实用。</p>
 <a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Thrift的安装还是有些繁琐的，跟着<a href="https://thrift.apache.org/docs/install/" target="_blank" rel="noopener">官方文档</a>的走就可以。如果你是Mac OS X， 这里有更方便的方法。<br><blockquote><p>brew install boost<br>brew install libevent<br>brew install thrift<br>gem install thrift – –with-cppflags=’-D_FORTIFY_SOURCE=0’</p>
-</blockquote><br>不过注意上述方法默认安装的最新版。</p>
-<h2 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h2><blockquote><p>Error: The <code>brew link</code> step did not complete successfully<br>The formula built, but is not symlinked into /usr/local<br>You can try again using `brew link thrift’</p>
-</blockquote>
-<ul>
-<li>如果报以上错误，再手动运行：brew link thrift 即可。 *</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://wuchong.me/blog/2015/10/07/thrift-induction/" target="_blank" rel="noopener">https://wuchong.me/blog/2015/10/07/thrift-induction/</a></li>
-<li><a href="https://diwakergupta.github.io/thrift-missing-guide/" target="_blank" rel="noopener">https://diwakergupta.github.io/thrift-missing-guide/</a></li>
-<li><a href="http://thrift-tutorial.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">http://thrift-tutorial.readthedocs.io/en/latest/index.html</a></li>
-<li><a href="http://www.jianshu.com/p/0f4113d6ec4b" target="_blank" rel="noopener">http://www.jianshu.com/p/0f4113d6ec4b</a></li>
+<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><p>输出格式由普通字符串和任意数量的变量组成，输出变量需要按照%{variable_name}的格式，如果需要输出%，double一下即可，即%%，同时，\n是换行，\r是回车，\t是TAB。curl会用合适的值来替代输出格式中的变量，所有可用变量如下：</p>
+<p>url_effective - 最终获取的url地址，尤其是当你指定给curl的地址存在301跳转，且通过-L继续追踪的情形。</p>
+<p>http_code - http状态码，如200成功,301转向,404未找到,500服务器错误等。(The numerical response code that was found in the last retrieved HTTP(S) or FTP(s) transfer. In 7.18.2 the alias response_code was added to show the same info.)</p>
+<p>http_connect - The numerical code that was found in the last response (from a proxy) to a curl CONNECT request. (Added in 7.12.4)</p>
+<p>time_total - 总时间，按秒计。精确到小数点后三位。 （The total time, in seconds, that the full operation lasted. The time will be displayed with millisecond resolution.）</p>
+<p>time_namelookup - DNS解析时间,从请求开始到DNS解析完毕所用时间。(The time, in seconds, it took from the start until the name resolving was completed.)</p>
+<p>time_connect - 连接时间,从开始到建立TCP连接完成所用时间,包括前边DNS解析时间，如果需要单纯的得到连接时间，用这个time_connect时间减去前边time_namelookup时间。以下同理，不再赘述。(The time, in seconds, it took from the start until the TCP connect to the remote host (or proxy) was completed.)</p>
+<p>time_appconnect - 连接建立完成时间，如SSL/SSH等建立连接或者完成三次握手时间。(The time, in seconds, it took from the start until the SSL/SSH/etc connect/handshake to the remote host was completed. (Added in 7.19.0))</p>
+<p>time_pretransfer - 从开始到准备传输的时间。(The time, in seconds, it took from the start until the file transfer was just about to begin. This includes all pre-transfer commands and negotiations that are specific to the particular protocol(s) involved.)</p>
+<p>time_redirect - 重定向时间，包括到最后一次传输前的几次重定向的DNS解析，连接，预传输，传输时间。(The time, in seconds, it took for all redirection steps include name lookup, connect, pretransfer and transfer before the final transaction was started. time_redirect shows the complete execution time for multiple redirections. (Added in 7.12.3))</p>
+<p>time_starttransfer - 开始传输时间。在发出请求之后，Web 服务器返回数据的第一个字节所用的时间(The time, in seconds, it took from the start until the first byte was just about to be transferred. This includes time_pretransfer and also the time the server needed to calculate the result.)</p>
+<p>size_download - 下载大小。(The total amount of bytes that were downloaded.)</p>
+<p>size_upload - 上传大小。(The total amount of bytes that were uploaded.)</p>
+<p>size_header - 下载的header的大小(The total amount of bytes of the downloaded headers.)</p>
+<p>size_request - 请求的大小。(The total amount of bytes that were sent in the HTTP request.)</p>
+<p>speed_download - 下载速度，单位-字节每秒。(The average download speed that curl measured for the complete download. Bytes per second.)</p>
+<p>speed_upload - 上传速度,单位-字节每秒。(The average upload speed that curl measured for the complete upload. Bytes per second.)</p>
+<p>content_type - 就是content-Type，不用多说了，这是一个访问我博客首页返回的结果示例(text/html; charset=UTF-8)；(The Content-Type of the requested document, if there was any.)</p>
+<p>num_connects - Number of new connects made in the recent transfer. (Added in 7.12.3)</p>
+<p>num_redirects - Number of redirects that were followed in the request. (Added in 7.12.3)</p>
+<p>redirect_url - When a HTTP request was made without -L to follow redirects, this variable will show the actual URL a redirect would take you to. (Added in 7.18.2)</p>
+<p>ftp_entry_path - The initial path libcurl ended up in when logging on to the remote FTP server. (Added in 7.15.4)</p>
+<p>ssl_verify_result - ssl认证结果，返回0表示认证成功。( The result of the SSL peer certificate verification that was requested. 0 means the verification was successful. (Added in 7.19.0))</p>
+<p>注意：</p>
+<ol>
+<li>若多次使用-w参数，按最后一个的格式输出。</li>
+<li>在使用上面变量的时候，注意看后面小括号中的 Added in XXX，这个表示支持该变量curl所需的最低版本，查看curl版本使用curl -V。如果版本不够，curl会提示类似下面的错误。</li>
 </ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl: unknown --write-out variable: <span class="string">'redirect_url'</span></span><br></pre></td></tr></table></figure>
+<p>curl -w举例<br>检查一批URL的HTTP状态：cat url.txt|while read line; do curl -I $line -m 5 –connect-timeout 5 -o /dev/null -s -w “$line “%{http_code}”\n”; done&gt;ok.txt</p>
+<p>取URL返回状态码：curl -s -m 10 -o /dev/null -w %{http_code} <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a></p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><blockquote>
+<ol>
+<li><a href="https://www.cnblogs.com/yum777/p/6252310.html" target="_blank" rel="noopener">curl -w,–write-out参数详解</a></li>
+<li><a href="https://www.cnblogs.com/duhuo/p/5695256.html" target="_blank" rel="noopener">Linux curl命令详解</a></li>
+</ol>
+</blockquote>
 
       
     </div>
@@ -434,12 +447,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/macOS/" rel="tag"># macOS</a>
-          
-        </div>
-      
 
       
       
@@ -449,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/1f6fd35e.html" rel="next" title="Linux/OSX 命令输入操作快捷键">
-                <i class="fa fa-chevron-left"></i> Linux/OSX 命令输入操作快捷键
+              <a href="/post/6bd6334f.html" rel="next" title="Flutter Development References">
+                <i class="fa fa-chevron-left"></i> Flutter Development References
               </a>
             
           </div>
@@ -458,10 +465,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/26d5a5c1.html" rel="prev" title="How To Set Up SSH Tunneling on a VPS">
-                How To Set Up SSH Tunneling on a VPS <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -617,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QA"><span class="nav-number">3.</span> <span class="nav-text">QA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详解"><span class="nav-number">2.</span> <span class="nav-text">详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
