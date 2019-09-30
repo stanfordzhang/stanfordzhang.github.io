@@ -106,18 +106,18 @@
 
 
 
-  <meta name="description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。">
+  <meta name="description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。 以Code Generation-&amp;gt;Runtime Library-&amp;gt;Multi-threaded De">
 <meta name="keywords" content="Windows,Visual C++ 2008,C&#x2F;C++ Runtime,CRT,mainCRTStartup">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Introduction to Visual C++ 2008 C&#x2F;C++ Runtime(CRT)">
 <meta property="og:url" content="http://stanfordzhang.com/post/e5f87e06.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。">
+<meta property="og:description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。 以Code Generation-&amp;gt;Runtime Library-&amp;gt;Multi-threaded De">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-30T10:35:14.299Z">
+<meta property="og:updated_time" content="2019-09-30T10:41:55.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Introduction to Visual C++ 2008 C&#x2F;C++ Runtime(CRT)">
-<meta name="twitter:description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。">
+<meta name="twitter:description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。 以Code Generation-&amp;gt;Runtime Library-&amp;gt;Multi-threaded De">
 
 
 
@@ -347,7 +347,7 @@
                 
               
 
-              <time title="Created: 2019-09-30 09:33:53 / Modified: 18:35:14" itemprop="dateCreated datePublished" datetime="2019-09-30T09:33:53+08:00">2019-09-30</time>
+              <time title="Created: 2019-09-30 09:33:53 / Modified: 18:41:55" itemprop="dateCreated datePublished" datetime="2019-09-30T09:33:53+08:00">2019-09-30</time>
             
 
             
@@ -387,6 +387,7 @@
 
       
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。</p>
+<p>以Code Generation-&gt;Runtime Library-&gt;Multi-threaded Debug DLL(/MDd)为例。</p>
 <a id="more"></a>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Visual C++ 2008 CRT代码路径</p>
 <blockquote>
