@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="Stanford">
 <meta property="og:description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-30T04:26:26.772Z">
+<meta property="og:updated_time" content="2019-09-30T04:39:05.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Introduction to Visual C++ 2008 C&#x2F;C++ Runtime(CRT)">
 <meta name="twitter:description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。">
@@ -347,7 +347,7 @@
                 
               
 
-              <time title="Created: 2019-09-30 09:33:53 / Modified: 12:26:26" itemprop="dateCreated datePublished" datetime="2019-09-30T09:33:53+08:00">2019-09-30</time>
+              <time title="Created: 2019-09-30 09:33:53 / Modified: 12:39:05" itemprop="dateCreated datePublished" datetime="2019-09-30T09:33:53+08:00">2019-09-30</time>
             
 
             
@@ -391,6 +391,10 @@
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Visual C++ 2008 CRT代码路径</p>
 <blockquote>
 <p>C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\crt</p>
+</blockquote>
+<p>Source Code Copy</p>
+<blockquote>
+<p><a href="https://github.com/stanfordzhang/vc9crt.git" target="_blank" rel="noopener">https://github.com/stanfordzhang/vc9crt.git</a></p>
 </blockquote>
 <h2 id="找到真正的入口函数"><a href="#找到真正的入口函数" class="headerlink" title="找到真正的入口函数"></a>找到真正的入口函数</h2><p>使用Visual Studio 2008创建Win32 Console Application，名字叫demo1。<br>测试代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> arg, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printf(<span class="string">"Hello world!\n"</span>); <span class="comment">// 只增加了这行代码</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -485,6 +489,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/post/e159c7f6.html" rel="prev" title="Introduction to C++ Global and Local Static Object's Lifecycle">
+                Introduction to C++ Global and Local Static Object's Lifecycle <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -552,7 +560,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -611,7 +619,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

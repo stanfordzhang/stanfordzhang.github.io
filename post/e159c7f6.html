@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4953767069924314",
+    enable_page_level_ads: true
+  });
+</script>
+
+  <!-- Google AdSense end -->
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="概述在开发C++项目时，经常会使用到全局对象，虽然不太推荐使用，但用的妙却有不一样的效果，需要慎用。本文详细介绍下C++中全局变量的生命周期。">
+<meta name="keywords" content="C++,Runtime,Global Object,全局变量的生命周期">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to C++ Global and Local Static Object&#39;s Lifecycle">
+<meta property="og:url" content="http://stanfordzhang.com/post/e159c7f6.html">
+<meta property="og:site_name" content="Stanford">
+<meta property="og:description" content="概述在开发C++项目时，经常会使用到全局对象，虽然不太推荐使用，但用的妙却有不一样的效果，需要慎用。本文详细介绍下C++中全局变量的生命周期。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-09-30T07:29:56.148Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Introduction to C++ Global and Local Static Object&#39;s Lifecycle">
+<meta name="twitter:description" content="概述在开发C++项目时，经常会使用到全局对象，虽然不太推荐使用，但用的妙却有不一样的效果，需要慎用。本文详细介绍下C++中全局变量的生命周期。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://stanfordzhang.com/post/e159c7f6">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Introduction to C++ Global and Local Static Object's Lifecycle | Stanford</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Stanford</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stanford's Home</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/e159c7f6.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stanford Zhang">
+      <meta itemprop="description" content="一蓑烟雨任平生">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stanford">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Introduction to C++ Global and Local Static Object's Lifecycle
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-09-30 12:29:22 / Modified: 15:29:56" itemprop="dateCreated datePublished" datetime="2019-09-30T12:29:22+08:00">2019-09-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在开发C++项目时，经常会使用到全局对象，虽然不太推荐使用，但用的妙却有不一样的效果，需要慎用。<br>本文详细介绍下C++中全局变量的生命周期。</p>
+<a id="more"></a>
+<h2 id="预备"><a href="#预备" class="headerlink" title="预备"></a>预备</h2><p>几个PE段的说明</p>
+<ol>
+<li>data段:存放在编译阶段(而非运行时)就能确定的数据,可读可写就是通常所说的静态存储区,赋了初值的全局变量和静态变量存放在这个域,常量也存放在这个区域。</li>
+<li>.rdata段：rdata是用来存放只读实始化变量的，当我们在源程序中的变量前面加了const后，编译器知道个字符串是永远不会改变的，或说是只读的，所以将其分配到.rdata段中。</li>
+<li>.bss段:定义而没有赋初值的全局变量和静态变量,放在这个区域</li>
+<li>.idata：（数据段），导入函数的代码段，存放外部函数地址。</li>
+</ol>
+<blockquote>
+<p>一般C语言的编译后执行语句都编译成机器代码，保存在.text段。<br>已初始化的全局变量和局部静态变量都保存在.data段<br>未初始化的全局变量一般放在一个叫.“bss”的段里。</p>
+</blockquote>
+<h2 id="全局变量和静态变量"><a href="#全局变量和静态变量" class="headerlink" title="全局变量和静态变量"></a>全局变量和静态变量</h2><p>在源文件中定义：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> n; <span class="comment">//定义静态全局变量 .data</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n; <span class="comment">// 全局变量 .data</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="number">0</span>; <span class="comment">// .rdata</span></span><br></pre></td></tr></table></figure>
+<p>区别：</p>
+<ol>
+<li>全局变量是不显式用static修饰的全局变量，但全局变量默认是动态的，作用域是整个工程，在一个文件内定义的全局变量，在另一个文件中，通过extern全局变量名的声明，就可以使用全局变量.</li>
+<li>全局静态变量是显式用static修饰的全局变量，作用域是声明此变量所在的文件，其他的文件即使用extern声明也不能使用。</li>
+<li>文件作用域下声明的const的常量默认为static存储类型。</li>
+</ol>
+<h2 id="认识atexit函数"><a href="#认识atexit函数" class="headerlink" title="认识atexit函数"></a>认识atexit函数</h2><p>atexit函数的声明为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int atexit( void ( __cdecl *func )( void ) );</span><br></pre></td></tr></table></figure>
+<p>参数为函数指针，返回值为整型，0表示成功，其他表示失败。当程序运行结束时，他调用atexit函数注册的所有函数。如果多次调用atexit函数，那么系统将以LIFO(last-in-first-out)的方式调用所有的注册函数。</p>
+<p>MSDN示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">举例如下（代码摘自MSDN）：</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">void fn1( void ), fn2( void ), fn3( void ), fn4( void );</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span></span>&#123;</span><br><span class="line">  atexit( fn1 );</span><br><span class="line">  atexit( fn2 );</span><br><span class="line">  atexit( fn3 );</span><br><span class="line">  atexit( fn4 );</span><br><span class="line">  <span class="built_in">printf</span>( <span class="string">"This is executed first.\n"</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>( <span class="string">"next.\n"</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fn2</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>( <span class="string">"executed "</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fn3</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>( <span class="string">"is "</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fn4</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>( <span class="string">"This "</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译、运行程序后，程序的输出为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; This is executed first.</span><br><span class="line">&gt; This is executed next.</span><br></pre></td></tr></table></figure>
+<p>注册函数的顺序为：fn1、fn2、fn3、fn4，但是调用顺序为fn4、fn3、fn2、fn1。</p>
+<h2 id="局部静态变量"><a href="#局部静态变量" class="headerlink" title="局部静态变量"></a>局部静态变量</h2><p>示例代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Dummy</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Dummy() &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Dummy\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ~Dummy() &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"~Dummy\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> Dummy dummy1; <span class="comment">// 全局静态变量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Dummy dummy2; <span class="comment">// 局部静态变量</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello world!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再看局部静态变量static Dummy dummy2;这一段的反汇编：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> Dummy dummy2;</span><br><span class="line"><span class="number">00</span>DE13FD  mov         eax,dword ptr [$S1 (<span class="number">0</span>DEA140h)]</span><br><span class="line"><span class="number">00</span>DE1402  and         eax,<span class="number">1</span></span><br><span class="line"><span class="number">00</span>DE1405  jne         main+<span class="number">79</span>h (<span class="number">0</span>DE1439h)</span><br><span class="line"><span class="number">00</span>DE1407  mov         eax,dword ptr [$S1 (<span class="number">0</span>DEA140h)]</span><br><span class="line"><span class="number">00</span>DE140C  or          eax,<span class="number">1</span></span><br><span class="line"><span class="number">00</span>DE140F  mov         dword ptr [$S1 (<span class="number">0</span>DEA140h)],eax</span><br><span class="line"><span class="number">00</span>DE1414  mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0</span></span><br><span class="line"><span class="number">00</span>DE141B  mov         ecx,<span class="function">offset <span class="title">dummy2</span> <span class="params">(<span class="number">0</span>DEA144h)</span></span></span><br><span class="line">00DE1420  call        Dummy::Dummy (0DE10C8h) // 调用构造函数</span><br><span class="line">00DE1425  push        offset `main'::`2'::`dynamic atexit destructor for 'dummy2'' (0DE66E0h)</span><br><span class="line"><span class="number">00</span>DE142A  call        @ILT+<span class="number">100</span>(_atexit) (<span class="number">0</span>DE1069h) <span class="comment">// 将dummy2的析构函数</span></span><br><span class="line"><span class="number">00</span>DE142F  add         esp,<span class="number">4</span></span><br><span class="line"><span class="number">00</span>DE1432  mov         dword ptr [ebp<span class="number">-4</span>],<span class="number">0F</span>FFFFFFFh</span><br></pre></td></tr></table></figure>
+<p>从反汇编可知，局部静态对象是在执行到对象定义的地方执行构造函数，同时将析构函数注册到main函数退出(atexit)后执行清理的队列里。<br>参考<a href="http://stanfordzhang.com/post/e5f87e06.html">Introduction to Visual C++ 2008 C/C++ Runtime(CRT)</a>中的doexit部分。</p>
+<h2 id="全局变量或全局静态变量"><a href="#全局变量或全局静态变量" class="headerlink" title="全局变量或全局静态变量"></a>全局变量或全局静态变量</h2><p>代码同上，对象dummy1。</p>
+<p>构造函数调用栈：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">demo1.exe!Dummy::Dummy()  Line <span class="number">10</span></span><br><span class="line">demo1.exe!`dynamic initializer for 'dummy1''()  Line 17 + 0x28 bytes</span><br><span class="line">msvcr90d.dll!_initterm(<span class="keyword">void</span> (<span class="keyword">void</span>)* * pfbegin=<span class="number">0x00de8208</span>, <span class="keyword">void</span> (<span class="keyword">void</span>)* * pfend=<span class="number">0x00de830c</span>)  Line <span class="number">903</span></span><br><span class="line">demo1.exe!__tmainCRTStartup()  Line <span class="number">501</span> + <span class="number">0xf</span> bytes</span><br><span class="line">demo1.exe!mainCRTStartup()  Line <span class="number">403</span></span><br><span class="line">kernel32.dll!<span class="number">752b</span>6359()</span><br><span class="line">[Frames below may be incorrect and/or missing, no symbols loaded <span class="keyword">for</span> kernel32.dll]</span><br><span class="line">ntdll.dll!<span class="number">77b</span>17b74()</span><br><span class="line">ntdll.dll!<span class="number">77b</span>17b44()</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">demo1.exe!Dummy::~Dummy()  Line <span class="number">13</span></span><br><span class="line">demo1.exe!`dynamic atexit destructor for 'dummy1''()  + 0x28 bytes</span><br><span class="line">msvcr90d.dll!doexit(<span class="keyword">int</span> code=<span class="number">0</span>, <span class="keyword">int</span> quick=<span class="number">0</span>, <span class="keyword">int</span> retcaller=<span class="number">0</span>)  Line <span class="number">591</span></span><br><span class="line">msvcr90d.dll!<span class="built_in">exit</span>(<span class="keyword">int</span> code=<span class="number">0</span>)  Line <span class="number">412</span> + <span class="number">0xd</span> bytes</span><br><span class="line">demo1.exe!__tmainCRTStartup()  Line <span class="number">599</span></span><br><span class="line">demo1.exe!mainCRTStartup()  Line <span class="number">403</span></span><br><span class="line">kernel32.dll!<span class="number">752b</span>6359()</span><br><span class="line">[Frames below may be incorrect and/or missing, no symbols loaded <span class="keyword">for</span> kernel32.dll]</span><br><span class="line">ntdll.dll!<span class="number">77b</span>17b74()</span><br><span class="line">ntdll.dll!<span class="number">77b</span>17b44()</span><br></pre></td></tr></table></figure>
+<p>参考<a href="http://stanfordzhang.com/post/e5f87e06.html">Introduction to Visual C++ 2008 C/C++ Runtime(CRT)</a><br>中的初始化和doexit部分。全局变量在_initterm中构造，在doexit中析构。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ol>
+<li><a href="http://stanfordzhang.com/post/e5f87e06.html">Introduction to Visual C++ 2008 C/C++ Runtime(CRT)</a></li>
+<li><a href="https://blog.csdn.net/peteryxk/article/details/275564" target="_blank" rel="noopener">静态对象、全局对象与程序的运行机制</a></li>
+<li><a href="https://blog.csdn.net/zzhays/article/details/8011645" target="_blank" rel="noopener">静态全局变量和全局变量的区别</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+            <a href="/tags/Runtime/" rel="tag"># Runtime</a>
+          
+            <a href="/tags/Global-Object/" rel="tag"># Global Object</a>
+          
+            <a href="/tags/全局变量的生命周期/" rel="tag"># 全局变量的生命周期</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/e5f87e06.html" rel="next" title="Introduction to Visual C++ 2008 C/C++ Runtime(CRT)">
+                <i class="fa fa-chevron-left"></i> Introduction to Visual C++ 2008 C/C++ Runtime(CRT)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Stanford Zhang</p>
+              <div class="site-description motion-element" itemprop="description">一蓑烟雨任平生</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预备"><span class="nav-number">2.</span> <span class="nav-text">预备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局变量和静态变量"><span class="nav-number">3.</span> <span class="nav-text">全局变量和静态变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#认识atexit函数"><span class="nav-number">4.</span> <span class="nav-text">认识atexit函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部静态变量"><span class="nav-number">5.</span> <span class="nav-text">局部静态变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局变量或全局静态变量"><span class="nav-number">6.</span> <span class="nav-text">全局变量或全局静态变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">7.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stanford Zhang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

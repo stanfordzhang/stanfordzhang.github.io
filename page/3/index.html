@@ -109,7 +109,7 @@
   <meta name="description" content="一蓑烟雨任平生">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Stanford">
-<meta property="og:url" content="http://stanfordzhang.com/tags/Hexo/index.html">
+<meta property="og:url" content="http://stanfordzhang.com/page/3/index.html">
 <meta property="og:site_name" content="Stanford">
 <meta property="og:description" content="一蓑烟雨任平生">
 <meta property="og:locale" content="default">
@@ -123,7 +123,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/tags/Hexo/">
+  <link rel="canonical" href="http://stanfordzhang.com/page/3/">
 
 
 
@@ -133,7 +133,7 @@
   };
 </script>
 
-  <title>Tag: Hexo | Stanford</title>
+  <title>Stanford - 一蓑烟雨任平生</title>
   
 
 
@@ -181,7 +181,8 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -262,19 +263,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -298,53 +286,186 @@
           
           <div id="content" class="content">
             
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
 
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Hexo<small>Tag</small>
-        </h1>
-      </div>
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/99172a83.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stanford Zhang">
+      <meta itemprop="description" content="一蓑烟雨任平生">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stanford">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/post/99172a83.html" class="post-title-link" itemprop="url">基于腾讯云自建Blog-WordPress+CentOS+Nginx</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-04-07 21:13:30" itemprop="dateCreated datePublished" datetime="2016-04-07T21:13:30+08:00">2016-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-07 17:21:35" itemprop="dateModified" datetime="2019-06-07T17:21:35+08:00">2019-06-07</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
 
       
         
+          
+            <h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><ol>
+<li>申请云服务器</li>
+<li>设置云服务器安装组，打开80端口。如果要访问安装在云服务器的MySQL，还要打开3306端口；</li>
+<li>参考【1】安装Nginx/MySQL/PHP。如果使用香港云数据库CDB，无法在外网登录管理；</li>
+<li>参考【2】安装WordPress；</li>
+<li>因为GWF的原因，基于WordPress的网站加载比较慢，这里推荐两个插件：<ol>
+<li>Google字体相关：Useso take over Google（重定向到360网站卫士的镜像）；</li>
+<li>Gravatar相关：WP-DuoShuo-Gravatar（重写向到多说的镜像）。</li>
+</ol>
+</li>
+<li>固定链接设置【3】。如果是使用默认固定链接，可以不设置。</li>
+<li>接下来就可以愉快的写作了。</li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
+<li>软件安装：<a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-centos-6" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-centos-6</a></li>
+<li>WordPress安装：<a href="https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-nginx-on-centos-6–2" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-nginx-on-centos-6–2</a></li>
+<li>固定链接设置：<a href="http://nginxlibrary.com/wordpress-permalinks/" target="_blank" rel="noopener">http://nginxlibrary.com/wordpress-permalinks/</a></li>
+</ol>
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
+          
         
-          <a class="post-title-link" href="/post/3a06bb38.html" itemprop="url">
-            
-              <span itemprop="name">Hexo博客添加Google AdSense</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-21T16:13:30+08:00" content="2019-05-21">
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
   
   
   
+  </article>
+
+
+    
+  </section>
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 
 
