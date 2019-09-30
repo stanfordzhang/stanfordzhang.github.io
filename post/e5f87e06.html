@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4953767069924314",
+    enable_page_level_ads: true
+  });
+</script>
+
+  <!-- Google AdSense end -->
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。">
+<meta name="keywords" content="Windows,Visual C++ 2008,C&#x2F;C++ Runtime,CRT,mainCRTStartup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to Visual C++ 2008 C&#x2F;C++ Runtime(CRT)">
+<meta property="og:url" content="http://stanfordzhang.com/post/e5f87e06.html">
+<meta property="og:site_name" content="Stanford">
+<meta property="og:description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-09-30T04:21:47.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Introduction to Visual C++ 2008 C&#x2F;C++ Runtime(CRT)">
+<meta name="twitter:description" content="概述任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://stanfordzhang.com/post/e5f87e06">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Introduction to Visual C++ 2008 C/C++ Runtime(CRT) | Stanford</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Stanford</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stanford's Home</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/e5f87e06.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stanford Zhang">
+      <meta itemprop="description" content="一蓑烟雨任平生">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stanford">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Introduction to Visual C++ 2008 C/C++ Runtime(CRT)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-09-30 09:33:53 / Modified: 12:21:47" itemprop="dateCreated datePublished" datetime="2019-09-30T09:33:53+08:00">2019-09-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>任何一个C/C++程序，它的背后都有一套庞大的代码来进行支撑其正常运行。这套代码至少包括入口函数，及其依赖的函数所构成的函数集合。当然，它还应该包括各种标准函数（如字符串，数学运算等）的实现。本文介绍VC++ 2008运行时库实现的原理，详细剖析main函数执行前后都做了什么。</p>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Visual C++ 2008 CRT代码路径</p>
+<blockquote>
+<p>C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\crt</p>
+</blockquote>
+<h2 id="找到真正的入口函数"><a href="#找到真正的入口函数" class="headerlink" title="找到真正的入口函数"></a>找到真正的入口函数</h2><p>使用Visual Studio 2008创建Win32 Console Application，名字叫demo1。<br>测试代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> arg, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printf(<span class="string">"Hello world!\n"</span>); <span class="comment">// 只增加了这行代码</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在printf那行下一个断点，可以看到调用栈如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">demo1.exe!main(int argc=1,char** argv=0x014d49e8) Line 9</span><br><span class="line">demo1.exe!__tmainCRTStartup() Line 586 + 0x19 bytes</span><br><span class="line">demo1.exe!mainCRTStartup() Line 403</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>由调用栈可以看到由mainCRTStartup()调用__tmainCRTStartup()再调用我们的入口_tmain函数。</p>
+<p>mainCRTStartup()代码在crt/src/crtexe.c(Line 374 - 403)中，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#ifdef _WINMAIN_</span><br><span class="line"></span><br><span class="line">#ifdef WPRFLAG</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">wWinMainCRTStartup</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">#<span class="keyword">else</span>  <span class="comment">/* WPRFLAG */</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">int</span> WinMainCRTStartup(</span></span></span><br><span class="line"><span class="function"><span class="params">#endif  <span class="comment">/* WPRFLAG */</span></span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">#<span class="keyword">else</span>  <span class="comment">/* _WINMAIN_ */</span></span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">#ifdef WPRFLAG</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">int</span> wmainCRTStartup(</span></span></span><br><span class="line"><span class="function"><span class="params">#<span class="keyword">else</span>  <span class="comment">/* WPRFLAG */</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">int</span> mainCRTStartup(</span></span></span><br><span class="line"><span class="function"><span class="params">#endif  <span class="comment">/* WPRFLAG */</span></span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">#endif  <span class="comment">/* _WINMAIN_ */</span></span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">void</span></span></span></span><br><span class="line"><span class="function"><span class="params">        )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * The /GS security cookie must be initialized before any exception</span></span><br><span class="line"><span class="comment">         * handling targetting the current image is registered.  No function</span></span><br><span class="line"><span class="comment">         * using exception handling can be called in the current image until</span></span><br><span class="line"><span class="comment">         * after __security_init_cookie has been called.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        __security_init_cookie();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> __tmainCRTStartup();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>mainCRTStartup()函数中在对栈溢出进行安全性检查（<strong>security_init_cookie()）后就直接调用</strong>tmainCRTStartup()。</p>
+<p>下面再看__tmainCRTStartup()的代码，在文件crt/src/crtexe.c(Line 405 - 624)中。<br>说明见中文注释。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line">__declspec(noinline)</span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">__tmainCRTStartup(</span><br><span class="line">        <span class="keyword">void</span></span><br><span class="line">        )</span><br><span class="line">&#123;</span><br><span class="line">#ifdef _WINMAIN_</span><br><span class="line">        _TUCHAR *lpszCommandLine;</span><br><span class="line">        STARTUPINFO StartupInfo;</span><br><span class="line">        BOOL inDoubleQuote=FALSE;</span><br><span class="line"></span><br><span class="line">        __try &#123;</span><br><span class="line">                        <span class="comment">/*</span></span><br><span class="line"><span class="comment">                        Note: MSDN specifically notes that GetStartupInfo returns no error, and throws unspecified SEH if it fails, so</span></span><br><span class="line"><span class="comment">                        the very general exception handler below is appropriate</span></span><br><span class="line"><span class="comment">                        */</span></span><br><span class="line">            GetStartupInfo( &amp;StartupInfo );</span><br><span class="line">        &#125; __except(EXCEPTION_EXECUTE_HANDLER) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">255</span>;</span><br><span class="line">        &#125;</span><br><span class="line">#endif  /* _WINMAIN_ */</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Guard the initialization code and the call to user's main, or</span></span><br><span class="line"><span class="comment">         * WinMain, function in a __try/__except statement.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        __try</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * There is a possiblity that the module where this object is</span></span><br><span class="line"><span class="comment">             * linked into is a mixed module. In all the cases we gurantee that</span></span><br><span class="line"><span class="comment">             * native initialization will occur before managed initialization.</span></span><br><span class="line"><span class="comment">             * Also in anycase this code should never be called when some other</span></span><br><span class="line"><span class="comment">             * code is initializing native code, that's why we exit in that case.</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * Do runtime startup initializers.</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * Note: the only possible entry we'll be executing here is for</span></span><br><span class="line"><span class="comment">             * __lconv_init, pulled in from charmax.obj only if the EXE was</span></span><br><span class="line"><span class="comment">             * compiled with -J.  All other .CRT$XI* initializers are only</span></span><br><span class="line"><span class="comment">             * run as part of the CRT itself, and so for the CRT DLL model</span></span><br><span class="line"><span class="comment">             * are not found in the EXE.  For that reason, we call _initterm,</span></span><br><span class="line"><span class="comment">             * not _initterm_e, because __lconv_init will never return failure,</span></span><br><span class="line"><span class="comment">             * and _initterm_e is not exported from the CRT DLL.</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * Note further that, when using the CRT DLL, executing the</span></span><br><span class="line"><span class="comment">             * .CRT$XI* initializers is only done for an EXE, not for a DLL</span></span><br><span class="line"><span class="comment">             * using the CRT DLL.  That is to make sure the -J setting for</span></span><br><span class="line"><span class="comment">             * the EXE is not overriden by that of any DLL.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">void</span> *lock_free=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">void</span> *fiberid=((PNT_TIB)NtCurrentTeb())-&gt;StackBase;</span><br><span class="line">            <span class="keyword">int</span> nested=FALSE;</span><br><span class="line">            <span class="keyword">while</span>((lock_free=InterlockedCompareExchangePointer((<span class="keyword">volatile</span> PVOID *)&amp;__native_startup_lock, fiberid, <span class="number">0</span>))!=<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(lock_free==fiberid)</span><br><span class="line">                &#123;</span><br><span class="line">                    nested=TRUE;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">/* some other thread is running native startup/shutdown during a cctor/domain unload.</span></span><br><span class="line"><span class="comment">                    Should only happen if this DLL was built using the Everett-compat loader lock fix in vcclrit.h</span></span><br><span class="line"><span class="comment">                */</span></span><br><span class="line">                <span class="comment">/* wait for the other thread to complete init before we return */</span></span><br><span class="line">                Sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (__native_startup_state == __initializing)</span><br><span class="line">            &#123;</span><br><span class="line">                _amsg_exit( _RT_CRT_INIT_CONFLICT);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (__native_startup_state == __uninitialized)</span><br><span class="line">            &#123;</span><br><span class="line">                __native_startup_state = __initializing;</span><br><span class="line">#ifndef _SYSCRT</span><br><span class="line">                <span class="keyword">if</span> (_initterm_e( __xi_a, __xi_z ) != <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">255</span>;</span><br><span class="line">                &#125;</span><br><span class="line">#else  /* _SYSCRT */</span><br><span class="line">                _initterm((_PVFV *)(<span class="keyword">void</span> *)__xi_a, (_PVFV *)(<span class="keyword">void</span> *)__xi_z);</span><br><span class="line">#endif  /* _SYSCRT */</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                has_cctor = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">            * do C++ constructors (initializers) specific to this EXE</span></span><br><span class="line"><span class="comment">            */</span></span><br><span class="line">            <span class="keyword">if</span> (__native_startup_state == __initializing)</span><br><span class="line">            &#123;</span><br><span class="line">                _initterm( __xc_a, __xc_z );</span><br><span class="line">                __native_startup_state = __initialized;</span><br><span class="line">            &#125;</span><br><span class="line">            _ASSERTE(__native_startup_state == __initialized);</span><br><span class="line">            <span class="keyword">if</span>(!nested)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">/* For X86, the definition of InterlockedExchangePointer wrongly causes warning C4312 */</span></span><br><span class="line">#pragma warning(push)</span><br><span class="line">#pragma warning(disable:4312)</span><br><span class="line">                InterlockedExchangePointer((<span class="keyword">volatile</span> PVOID *)&amp;__native_startup_lock, <span class="number">0</span>);</span><br><span class="line">#pragma warning(pop)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * If we have any dynamically initialized __declspec(thread)</span></span><br><span class="line"><span class="comment">             * variables, then invoke their initialization for the primary</span></span><br><span class="line"><span class="comment">             * thread used to start the process, by calling __dyn_tls_init</span></span><br><span class="line"><span class="comment">             * through a callback defined in tlsdyn.obj.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">if</span> (__dyn_tls_init_callback != NULL &amp;&amp;</span><br><span class="line">                _IsNonwritableInCurrentImage((PBYTE)&amp;__dyn_tls_init_callback))</span><br><span class="line">            &#123;</span><br><span class="line">                __dyn_tls_init_callback(NULL, DLL_THREAD_ATTACH, NULL);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* Enable buffer count checking if linking against static lib */</span></span><br><span class="line">            _CrtSetCheckCount(TRUE);</span><br><span class="line"></span><br><span class="line">#ifdef _WINMAIN_</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Skip past program name (first token in command line).</span></span><br><span class="line"><span class="comment">             * Check for and handle quoted program name.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">#ifdef WPRFLAG</span><br><span class="line">            <span class="comment">/* OS may not support "W" flavors */</span></span><br><span class="line">            <span class="keyword">if</span> (_wcmdln == NULL)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">255</span>;</span><br><span class="line">            lpszCommandLine = (wchar_t *)_wcmdln;</span><br><span class="line">#else  /* WPRFLAG */</span><br><span class="line">            lpszCommandLine = (unsigned <span class="keyword">char</span> *)_acmdln;</span><br><span class="line">#endif  /* WPRFLAG */</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (*lpszCommandLine &gt; SPACECHAR ||</span><br><span class="line">                   (*lpszCommandLine&amp;&amp;inDoubleQuote)) &#123;</span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 * Flip the count from 1 to 0 or 0 to 1 if current character</span></span><br><span class="line"><span class="comment">                 * is DOUBLEQUOTE</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">                <span class="keyword">if</span> (*lpszCommandLine==DQUOTECHAR) inDoubleQuote=!inDoubleQuote;</span><br><span class="line">#ifdef _MBCS</span><br><span class="line">                <span class="keyword">if</span> (_ismbblead(*lpszCommandLine)) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (lpszCommandLine) &#123;</span><br><span class="line">                        lpszCommandLine++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">#endif  /* _MBCS */</span><br><span class="line">                ++lpszCommandLine;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Skip past any white space preceeding the second token.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">while</span> (*lpszCommandLine &amp;&amp; (*lpszCommandLine &lt;= SPACECHAR)) &#123;</span><br><span class="line">                lpszCommandLine++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">#ifdef WPRFLAG</span><br><span class="line">            mainret = wWinMain(</span><br><span class="line">#else  /* WPRFLAG */</span><br><span class="line">            mainret = WinMain(</span><br><span class="line">#endif  /* WPRFLAG */</span><br><span class="line">                       (HINSTANCE)&amp;__ImageBase,</span><br><span class="line">                       NULL,</span><br><span class="line">                       lpszCommandLine,</span><br><span class="line">                       StartupInfo.dwFlags &amp; STARTF_USESHOWWINDOW</span><br><span class="line">                        ? StartupInfo.wShowWindow</span><br><span class="line">                        : SW_SHOWDEFAULT</span><br><span class="line">                      );</span><br><span class="line">#else  /* _WINMAIN_ */</span><br><span class="line"></span><br><span class="line">#ifdef WPRFLAG</span><br><span class="line">            __winitenv = envp;</span><br><span class="line">            mainret = wmain(argc, argv, envp);</span><br><span class="line">#else  /* WPRFLAG */</span><br><span class="line">            __initenv = envp;</span><br><span class="line">            mainret = main(argc, argv, envp);<span class="comment">// 这里是真正的main函数入口</span></span><br><span class="line">#endif  /* WPRFLAG */</span><br><span class="line"></span><br><span class="line">#endif  /* _WINMAIN_ */</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Note that if the exe is managed app, we don't really need to</span></span><br><span class="line"><span class="comment">             * call exit or _c_exit. .cctor should be able to take care of</span></span><br><span class="line"><span class="comment">             * this.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">if</span> ( !managedapp )</span><br><span class="line">                exit(mainret);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (has_cctor == <span class="number">0</span>)</span><br><span class="line">                _cexit();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        __except ( _XcptFilter(GetExceptionCode(), GetExceptionInformation()) )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Should never reach here</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line"></span><br><span class="line">            mainret = GetExceptionCode();</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Note that if the exe is managed app, we don't really need to</span></span><br><span class="line"><span class="comment">             * call exit or _c_exit. .cctor should be able to take care of</span></span><br><span class="line"><span class="comment">             * this.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">if</span> ( !managedapp )</span><br><span class="line">                _exit(mainret);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (has_cctor == <span class="number">0</span>)</span><br><span class="line">                _cexit();</span><br><span class="line">        &#125; <span class="comment">/* end of try - except */</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mainret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们在__tmainCRTStartup()中找到调用main函数的地方，由上面代码可以看到，在调用main函数之前需要做不少准备工作，接下来我们一一来分析下。</p>
+<p>注意：这里只分析Console程序相关的代码，关于类似WinMain的处理过程类似，不再赘述。</p>
+<p>提取关键代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Line <span class="number">483</span>: _initterm_e( __xi_a, __xi_z ) <span class="comment">// 这里会调用pre_c_init进行初始化</span></span><br><span class="line">Line <span class="number">501</span>: _initterm( __xc_a, __xc_z ) <span class="comment">// 这里会调用pre_cpp_init进行初始化和C++全局对象的构造函数</span></span><br><span class="line">Line <span class="number">597</span>: exit(mainret) <span class="comment">// 这里实际调用doexit()，做一些C的清理工作，同时调用全局C++对象的析构函数</span></span><br></pre></td></tr></table></figure>
+<p>pre_cpp_init()中会获取命令参数及环境变量。</p>
+<p>函数doexit()，在crt0dat.c(Line 508 - 645)中，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> __cdecl <span class="title">doexit</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">int</span> code,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">int</span> quick,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">int</span> retcaller</span></span></span><br><span class="line"><span class="function"><span class="params">        )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">#ifdef _DEBUG</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">int</span> fExit = <span class="number">0</span>;</span><br><span class="line">#endif  /* _DEBUG */</span><br><span class="line"></span><br><span class="line">#ifdef CRTDLL</span><br><span class="line">        <span class="keyword">if</span> (!retcaller &amp;&amp; check_managed_app())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">               Only if the EXE is managed then we call CorExitProcess.</span></span><br><span class="line"><span class="comment">               Native cleanup is done in .cctor of the EXE</span></span><br><span class="line"><span class="comment">               If the Exe is Native then native clean up should be done</span></span><br><span class="line"><span class="comment">               before calling (Cor)ExitProcess.</span></span><br><span class="line"><span class="comment">            */</span></span><br><span class="line">            __crtCorExitProcess(code);</span><br><span class="line">        &#125;</span><br><span class="line">#endif  /* CRTDLL */</span><br><span class="line"></span><br><span class="line">        _lockexit();        <span class="comment">/* assure only 1 thread in exit path */</span></span><br><span class="line">        __TRY</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (_C_Exit_Done != TRUE) &#123;</span><br><span class="line">            _C_Termination_Done = TRUE;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* save callable exit flag (for use by terminators) */</span></span><br><span class="line">            _exitflag = (<span class="keyword">char</span>) retcaller;  <span class="comment">/* 0 = term, !0 = callable exit */</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!quick) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 * do _onexit/atexit() terminators</span></span><br><span class="line"><span class="comment">                 * (if there are any)</span></span><br><span class="line"><span class="comment">                 *</span></span><br><span class="line"><span class="comment">                 * These terminators MUST be executed in reverse order (LIFO)!</span></span><br><span class="line"><span class="comment">                 *</span></span><br><span class="line"><span class="comment">                 * <span class="doctag">NOTE:</span></span></span><br><span class="line"><span class="comment">                 *  This code assumes that __onexitbegin points</span></span><br><span class="line"><span class="comment">                 *  to the first valid onexit() entry and that</span></span><br><span class="line"><span class="comment">                 *  __onexitend points past the last valid entry.</span></span><br><span class="line"><span class="comment">                 *  If __onexitbegin == __onexitend, the table</span></span><br><span class="line"><span class="comment">                 *  is empty and there are no routines to call.</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line"></span><br><span class="line">                _PVFV * onexitbegin = (_PVFV *)_decode_pointer(__onexitbegin);</span><br><span class="line">                <span class="keyword">if</span> (onexitbegin) &#123;</span><br><span class="line">                    _PVFV * onexitend = (_PVFV *)_decode_pointer(__onexitend);</span><br><span class="line">                    _PVFV function_to_call = NULL;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">/* save the start and end for later comparison */</span></span><br><span class="line">                    _PVFV * onexitbegin_saved = onexitbegin;</span><br><span class="line">                    _PVFV * onexitend_saved = onexitend;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        _PVFV * onexitbegin_new = NULL;</span><br><span class="line">                        _PVFV * onexitend_new = NULL;</span><br><span class="line"></span><br><span class="line">                        <span class="comment">/* find the last valid function pointer to call. */</span></span><br><span class="line">                        <span class="keyword">while</span> (--onexitend &gt;= onexitbegin &amp;&amp; *onexitend == _encoded_null())</span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="comment">/* keep going backwards. */</span></span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">if</span> (onexitend &lt; onexitbegin)</span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="comment">/* there are no more valid entries in the list, we are done. */</span></span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        <span class="comment">/* cache the function to call. */</span></span><br><span class="line">                        function_to_call = (_PVFV)_decode_pointer(*onexitend);</span><br><span class="line"></span><br><span class="line">                        <span class="comment">/* mark the function pointer as visited. */</span></span><br><span class="line">                        *onexitend = (_PVFV)_encoded_null();</span><br><span class="line"></span><br><span class="line">                        <span class="comment">/* call the function, which can eventually change __onexitbegin and __onexitend */</span></span><br><span class="line">                        (*function_to_call)();</span><br><span class="line"></span><br><span class="line">                        onexitbegin_new = (_PVFV *)_decode_pointer(__onexitbegin);</span><br><span class="line">                        onexitend_new = (_PVFV *)_decode_pointer(__onexitend);</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">if</span> ( ( onexitbegin_saved != onexitbegin_new ) || ( onexitend_saved != onexitend_new ) )</span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="comment">/* reset only if either start or end has changed */</span></span><br><span class="line">                            onexitbegin = onexitbegin_saved = onexitbegin_new;</span><br><span class="line">                            onexitend = onexitend_saved = onexitend_new;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">#ifndef CRTDLL</span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 * do pre-terminators</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">                _initterm(__xp_a, __xp_z);</span><br><span class="line">#endif  /* CRTDLL */</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">#ifndef CRTDLL</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * do terminators</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            _initterm(__xt_a, __xt_z);</span><br><span class="line">#endif  /* CRTDLL */</span><br><span class="line"></span><br><span class="line">#ifdef _DEBUG</span><br><span class="line">            <span class="comment">/* Dump all memory leaks */</span></span><br><span class="line">            <span class="keyword">if</span> (!fExit &amp;&amp; _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) &amp; _CRTDBG_LEAK_CHECK_DF)</span><br><span class="line">            &#123;</span><br><span class="line">                fExit = <span class="number">1</span>;</span><br><span class="line">#ifndef CRTDLL</span><br><span class="line">                __freeCrtMemory();</span><br><span class="line">                _CrtDumpMemoryLeaks();</span><br><span class="line">#endif  /* CRTDLL */</span><br><span class="line">            &#125;</span><br><span class="line">#endif  /* _DEBUG */</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* return to OS or to caller */</span></span><br><span class="line"></span><br><span class="line">        __FINALLY</span><br><span class="line">            <span class="keyword">if</span> (retcaller)</span><br><span class="line">                _unlockexit();      <span class="comment">/* unlock the exit code path */</span></span><br><span class="line">        __END_TRY_FINALLY</span><br><span class="line">        <span class="keyword">if</span> (retcaller)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        _C_Exit_Done = TRUE;</span><br><span class="line"></span><br><span class="line">        _unlockexit();      <span class="comment">/* unlock the exit code path */</span></span><br><span class="line"></span><br><span class="line">        __crtExitProcess(code);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>doexit()函数中Line 360 - 421是执行C++全局对象的析构函数。</p>
+<p>C的清理工作在_initterm(<strong>xp_a, </strong>xp_z)和_initterm(<strong>xt_a, </strong>xt_z)中。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>程序一开始进入mainCRTStartup，执行栈检查</li>
+<li>执行__tmainCRTStartup，进行运行前的初始化工作</li>
+<li>C环境初始化</li>
+<li>C++环境初始化，获取命令参数和环境变量，执行全局C++对象的构造函数</li>
+<li>执行main函数</li>
+<li>执行exit函数</li>
+<li>exit函数中执行C++环境清理工作和执行全局C++对象的析构函数</li>
+<li>执行C环境的清理工作</li>
+</ol>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ol>
+<li><a href="https://blog.csdn.net/u014454069/article/details/22700537" target="_blank" rel="noopener">C++全局变量构造函数的调用</a></li>
+<li><a href="https://blog.csdn.net/a893574301/article/details/80377153" target="_blank" rel="noopener">C++全局对象的构造函数以及析构函数的调用</a></li>
+<li><a href="https://www.jianshu.com/p/540e155ac0c8" target="_blank" rel="noopener">C/C++变量的生命周期</a></li>
+<li><a href="https://blog.csdn.net/yunyun1886358/article/details/5632087" target="_blank" rel="noopener">C++中变量的作用域与生命周期</a></li>
+<li><a href="https://www.cnblogs.com/yueqian-scut/p/3952263.html" target="_blank" rel="noopener">main函数执行之前都干啥了—-C/C++运行时库剖析</a></li>
+<li><a href="https://blog.csdn.net/peteryxk/article/details/275564" target="_blank" rel="noopener">静态对象、全局对象与程序的运行机制</a></li>
+<li><a href="https://blog.csdn.net/zzhays/article/details/8011645" target="_blank" rel="noopener">静态全局变量和全局变量的区别</a></li>
+<li><a href="https://docs.microsoft.com/en-us/cpp/c-runtime-library/crt-initialization?view=vs-2019" target="_blank" rel="noopener">CRT Initialization</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Windows/" rel="tag"># Windows</a>
+          
+            <a href="/tags/Visual-C-2008/" rel="tag"># Visual C++ 2008</a>
+          
+            <a href="/tags/C-C-Runtime/" rel="tag"># C/C++ Runtime</a>
+          
+            <a href="/tags/CRT/" rel="tag"># CRT</a>
+          
+            <a href="/tags/mainCRTStartup/" rel="tag"># mainCRTStartup</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/8722713.html" rel="next" title="curl -w/--write-out">
+                <i class="fa fa-chevron-left"></i> curl -w/--write-out
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Stanford Zhang</p>
+              <div class="site-description motion-element" itemprop="description">一蓑烟雨任平生</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找到真正的入口函数"><span class="nav-number">3.</span> <span class="nav-text">找到真正的入口函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">5.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stanford Zhang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
