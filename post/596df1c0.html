@@ -106,34 +106,18 @@
 
 
 
-  <meta name="description" content="在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。 本文">
-<meta name="keywords" content="macOS">
+  <meta name="description" content="概述Foundation对象就是使用Objective-C创建出来的对象（一般以NS为前缀）。Core Foundation对象主要是使用C语言创建的对象（一般以CF为前缀）。两个框架创建的对象都使用引用计数管理内存。在MRC环境下，Core Foundation框架中的retain/release分别是CFRetain/CFRelease。Core Foundation与Foundation框架">
+<meta name="keywords" content="Objective-C,Cocoa,__bridge,__bridge_retained,__bridge_transfer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac OS X上开发和使用动态链接库&#x2F;dylib&#x2F;共享库">
-<meta property="og:url" content="http://stanfordzhang.com/post/9a8573bf.html">
+<meta property="og:title" content="191001-ObjC __bridge __bridge_retained __bridge_transfer详解">
+<meta property="og:url" content="http://stanfordzhang.com/post/596df1c0.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。 本文">
+<meta property="og:description" content="概述Foundation对象就是使用Objective-C创建出来的对象（一般以NS为前缀）。Core Foundation对象主要是使用C语言创建的对象（一般以CF为前缀）。两个框架创建的对象都使用引用计数管理内存。在MRC环境下，Core Foundation框架中的retain/release分别是CFRetain/CFRelease。Core Foundation与Foundation框架">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/1.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/2.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/3.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/4.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/5.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/6.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/7.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/8.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/9.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/10.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/11.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/12.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/13.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/14.png">
-<meta property="og:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/15.png">
-<meta property="og:updated_time" content="2019-06-07T09:21:35.496Z">
+<meta property="og:updated_time" content="2019-10-01T13:07:47.794Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac OS X上开发和使用动态链接库&#x2F;dylib&#x2F;共享库">
-<meta name="twitter:description" content="在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。 本文">
-<meta name="twitter:image" content="http://stanfordzhang.com/post/9a8573bf/9a8573bf/1.png">
+<meta name="twitter:title" content="191001-ObjC __bridge __bridge_retained __bridge_transfer详解">
+<meta name="twitter:description" content="概述Foundation对象就是使用Objective-C创建出来的对象（一般以NS为前缀）。Core Foundation对象主要是使用C语言创建的对象（一般以CF为前缀）。两个框架创建的对象都使用引用计数管理内存。在MRC环境下，Core Foundation框架中的retain/release分别是CFRetain/CFRelease。Core Foundation与Foundation框架">
 
 
 
@@ -141,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/post/9a8573bf">
+  <link rel="canonical" href="http://stanfordzhang.com/post/596df1c0">
 
 
 
@@ -151,7 +135,7 @@
   };
 </script>
 
-  <title>Mac OS X上开发和使用动态链接库/dylib/共享库 | Stanford</title>
+  <title>191001-ObjC __bridge __bridge_retained __bridge_transfer详解 | Stanford</title>
   
 
 
@@ -320,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/9a8573bf.html">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/596df1c0.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
@@ -337,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mac OS X上开发和使用动态链接库/dylib/共享库
+          <h1 class="post-title" itemprop="name headline">191001-ObjC __bridge __bridge_retained __bridge_transfer详解
 
               
             
@@ -363,24 +347,12 @@
                 
               
 
-              <time title="Created: 2016-04-11 21:48:13" itemprop="dateCreated datePublished" datetime="2016-04-11T21:48:13+08:00">2016-04-11</time>
+              <time title="Created: 2019-10-01 20:26:54 / Modified: 21:07:47" itemprop="dateCreated datePublished" datetime="2019-10-01T20:26:54+08:00">2019-10-01</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-07 17:21:35" itemprop="dateModified" datetime="2019-06-07T17:21:35+08:00">2019-06-07</time>
               
             
           </span>
@@ -414,50 +386,26 @@
       
 
       
-        <p>在OS X上开发应用通常会用到dylib动态链接库，使用XCode开发及调用一个dylib还是比较容易的，通常的做法使用dlopen（类似于Windows上的LoadLibrary）加载dylib，使用dlsym（类似GetProcAddress）找到导出接口，然后调用，最后dlclose（类似FreeLibrary）之即可。这个方法和Linux上使用共享库的方式是一样的，这里就不作介绍了。</p>
-<p>本文介绍一种更加方便的方法，通过设置几个编译选项，运行时系统自动加载dylib，使用时只需要调用即可。以下是示例步骤。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Foundation对象就是使用Objective-C创建出来的对象（一般以NS为前缀）。<br>Core Foundation对象主要是使用C语言创建的对象（一般以CF为前缀）。<br>两个框架创建的对象都使用引用计数管理内存。<br>在MRC环境下，Core Foundation框架中的retain/release分别是CFRetain/CFRelease。<br>Core Foundation与Foundation框架创建出来的对象区别很小，可以在不同的框架中使用，Foundation框架的API生成并持有的对象可以用Core Foundation框架的API释放，反过来也可以。</p>
+<p>因为Core Foundation对象与Foundation对象没有区别，转换不需要额外的CPU资源，因此也被称为“免桥接”Toll - Free - Bridge。</p>
 <a id="more"></a>
-<h2 id="一、创建dylib工程"><a href="#一、创建dylib工程" class="headerlink" title="一、创建dylib工程"></a>一、创建dylib工程</h2><p>创建dylib工程dylib_demo。</p>
-<img src="/post/9a8573bf/9a8573bf/1.png" title="创建dylib">
-<h2 id="二、参数选择"><a href="#二、参数选择" class="headerlink" title="二、参数选择"></a>二、参数选择</h2><p>这里以导出C++类接口为例。</p>
-<img src="/post/9a8573bf/9a8573bf/2.png" title="参数设置">
-<h2 id="三、配置编译选项"><a href="#三、配置编译选项" class="headerlink" title="三、配置编译选项"></a>三、配置编译选项</h2><p>可以在dylib的Build Phases里看到Installataion Diectory（INSTALL_PATH）这个选项，默认是/usr/local/lib。这个意思是指可执行程序在自动加载时去哪里找这个dylib。可以使用otool进行查看（如下图）。</p>
-<p>第一行显示的就是dylib所在的路径：/usr/local/lib/libdylib_demo.dylib。这是系统目录，调用程序会去这个目录找。如果不把dylib拷贝到这个目录，程序将无法运行。发布一个程序时，还要将自用库拷贝到系统目录？这是不合理的。</p>
-<img src="/post/9a8573bf/9a8573bf/3.png" title="默认INSTALL_PATH">
-<img src="/post/9a8573bf/9a8573bf/4.png" title="otool查看">
-<p>这里将Installation Directory改成@loader_path/../Frameworks，以相对目录查找dylib。下图是otool显示。@loader_path的意思相对load这个dylib的模块所在的路径找dylib所在的目录。</p>
-<img src="/post/9a8573bf/9a8573bf/5.png" title="修改成@loader_path">
-<img src="/post/9a8573bf/9a8573bf/6.png" title="otool查看">
-<p>Installation Directory (INSTALL_PATH) 详解：</p>
-<ul>
-<li>@executable_path 表示可执行程序所在的目录. 比如 /path/foo.app/Contents/MacOS/。</li>
-<li>@loader_path 表示每一个被加载的 binary（包括App, dylib, framework等）所在的目录。</li>
-<li>@rpath 和前面两个不同, 它只是一个保存着一个或多个路径的变量。在 app中设置 Runpath Search Paths（对应了@rpath）。</li>
-</ul>
-<h2 id="四、创建调用app"><a href="#四、创建调用app" class="headerlink" title="四、创建调用app"></a>四、创建调用app</h2><p>创建名为caller_demo的app。</p>
-<img src="/post/9a8573bf/9a8573bf/7.png" title="创建app">
-<img src="/post/9a8573bf/9a8573bf/8.png" title="参数设置">
-<p>参数设置</p>
-<h2 id="五、设置链接到dylib"><a href="#五、设置链接到dylib" class="headerlink" title="五、设置链接到dylib"></a>五、设置链接到dylib</h2><p>在app的Build Phases的Link Binary With Libraries里增加刚刚创建的dylib。</p>
-<img src="/post/9a8573bf/9a8573bf/9.png" title="设置链接">
-<p>如果列表里没有点击右下角的Add Other在目录里找。</p>
-<p>也可以在Finder里拖拽dylib到Link Binary With Libraries里。</p>
-<img src="/post/9a8573bf/9a8573bf/10.png" title="设置链接">
-<h2 id="六、拷贝dylib至目标目录"><a href="#六、拷贝dylib至目标目录" class="headerlink" title="六、拷贝dylib至目标目录"></a>六、拷贝dylib至目标目录</h2><p>这里app包结构包结构里还没有这个dylib，运行时还是找不着。在Build Phases里点加号，新增Copy Files Phase，将dylib拷贝到Frameworks目录下，以便loader可以找到。</p>
-<p>这里为什么是Frameworks目录，是因为设置INSTALL_PATH为@loader_path/../Frameworks。</p>
-<p>也可以设置为其他目录，比如INSTALL_PATH为@loader_path/../dll，那Copy Files时，就要放到dll目录，如果下拉列表没有相应目录，可以下拉选Frameworks，然后在Subpath里填../dll这个相对路径，XCode会自动创建一个Frameworks同级目录dll。</p>
-<p><img src="/post/9a8573bf/9a8573bf/11.png" title="拷贝dylib"></p>
-<p><img src="/post/9a8573bf/9a8573bf/12.png" title="拷贝文件"></p>
-<p><img src="/post/9a8573bf/9a8573bf/13.png" title="包结构"></p>
-<h2 id="七、调用"><a href="#七、调用" class="headerlink" title="七、调用"></a>七、调用</h2><p>比如在AppDelegate.m文件里调用，因为是使用C++类，所以要将文件扩展名改为.mm，如果是使用标准C、ObjC接口，则不用改。</p>
-<img src="/post/9a8573bf/9a8573bf/14.png" title="修改扩展名">
-<img src="/post/9a8573bf/9a8573bf/15.png" title="调用代码">
-<h2 id="八、结语"><a href="#八、结语" class="headerlink" title="八、结语"></a>八、结语</h2><p>可以看到，以上方法使用比较方便，在开发过程中配置好XCode，一键编译。</p>
-<p>调用时可以像静态库一样使用，省时省力。</p>
-<hr>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
-<li><a href="http://www.tanhao.me/pieces/1361.html/" target="_blank" rel="noopener">http://www.tanhao.me/pieces/1361.html/</a></li>
-<li><a href="https://wincent.com/wiki/@executable_path,_@load_path_and_@rpath" target="_blank" rel="noopener">https://wincent.com/wiki/@executable_path,_@load_path_and_@rpath</a></li>
+<h2 id="bridge"><a href="#bridge" class="headerlink" title="__bridge"></a>__bridge</h2><p>CF和ObjC对象转化时只涉及对象类型不涉及对象所有权的转化</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc]init];</span><br><span class="line"><span class="keyword">void</span> *p = (__bridge <span class="keyword">void</span> *)(obj);</span><br></pre></td></tr></table></figure>
+<p>编译器会提示插入(<strong>bridge void *)强制转换，然而</strong>bridge并不是安全的，管理时不注意对象的所有者，就会因为悬垂指针而导致程序崩溃。例如下面这段代码：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> *p = <span class="number">0</span>;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc]init];</span><br><span class="line">    p = (__bridge <span class="keyword">void</span> *)(obj);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"1 == %ld"</span>, <span class="built_in">CFGetRetainCount</span>((<span class="built_in">CFTypeRef</span>)p));</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"2 == %ld"</span>, <span class="built_in">CFGetRetainCount</span>((<span class="built_in">CFTypeRef</span>)p));</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"class = %@"</span>,[(__bridge <span class="keyword">id</span>)p <span class="keyword">class</span>]);</span><br></pre></td></tr></table></figure>
+<p>因为__bridge只是简单的进行了指针转换，并没有移交持有权，作用域外obj已经释放掉了，p就相当于指向了一块已经释放的内存，因此作用域外访问p就会崩溃。</p>
+<h2 id="bridge-transfer"><a href="#bridge-transfer" class="headerlink" title="__bridge_transfer"></a>__bridge_transfer</h2><p>常用在CF对象转化成ObjC对象时，将CF对象的所有权交给OC对象，此时ARC就能自动管理该内存，作用同CFBridgingRelease()</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CFMutableArrayRef</span> cfObject = <span class="built_in">CFArrayCreateMutable</span>(kCFAllocatorDefault, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">printf(<span class="string">"retain count = %ld\n"</span>,<span class="built_in">CFGetRetainCount</span>(cfObject));</span><br><span class="line"></span><br><span class="line"><span class="keyword">id</span> obj = <span class="built_in">CFBridgingRelease</span>(cfObject);</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"><span class="comment">// id obj = (__bridge_transfer id)cfObject;</span></span><br><span class="line">printf(<span class="string">"retain count after the cast = %ld\n"</span>,<span class="built_in">CFGetRetainCount</span>(cfObject));</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">retain count = 1</span><br><span class="line">retain count after the cast = 1</span><br></pre></td></tr></table></figure>
+<p>cfObject转换成obj的时候，相当于cfObject的持有权转交给了ARC，你不用负责obj的释放了。</p>
+<h2 id="bridge-retained"><a href="#bridge-retained" class="headerlink" title="__bridge_retained"></a>__bridge_retained</h2><p>与bridge_transfer相反，常用在将ObjC对象转化成CF对象，且OC对象的所有权也交给CF对象来管理，即OC对象转化成CF对象时，涉及到对象类型和对象所有权的转化，作用同CFBridgingRetain()</p>
+<p>修改下__bridge的例子：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> *p = <span class="number">0</span>;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc]init];</span><br><span class="line">    p = (__bridge_retained <span class="keyword">void</span> *)(obj);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"1 == %ld"</span>, <span class="built_in">CFGetRetainCount</span>((<span class="built_in">CFTypeRef</span>)p));</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"2 == %ld"</span>, <span class="built_in">CFGetRetainCount</span>((<span class="built_in">CFTypeRef</span>)p));</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"class = %@"</span>,[(__bridge <span class="keyword">id</span>)p <span class="keyword">class</span>]);</span><br><span class="line"><span class="built_in">CFRelease</span>(p);</span><br><span class="line">p = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+<p>我们将上面的<strong>bridge修改为</strong>bridge_retained就能解决问题。相当于在作用域内对p执行了retain操作。obj的引用计数为2，作用域结束时obj释放，引用计数变为1，p仍然持有对象，使用完以后记得要调用CFRelease(p)释放p，ARC是不会负责。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://blog.csdn.net/junjun150013652/article/details/53506504" target="_blank" rel="noopener">理解<strong>bridge，</strong>bridge_transfer和__bridge_retained</a></li>
+<li><a href="https://www.cnblogs.com/wujie123/p/6795038.html" target="_blank" rel="noopener">iOS开发之<strong>bridge，</strong>bridge_transfer和__bridge_retained</a></li>
 </ol>
 
       
@@ -482,7 +430,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/macOS/" rel="tag"># macOS</a>
+            <a href="/tags/Objective-C/" rel="tag"># Objective-C</a>
+          
+            <a href="/tags/Cocoa/" rel="tag"># Cocoa</a>
+          
+            <a href="/tags/bridge/" rel="tag"># __bridge</a>
+          
+            <a href="/tags/bridge-retained/" rel="tag"># __bridge_retained</a>
+          
+            <a href="/tags/bridge-transfer/" rel="tag"># __bridge_transfer</a>
           
         </div>
       
@@ -495,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/99172a83.html" rel="next" title="基于腾讯云自建Blog-WordPress+CentOS+Nginx">
-                <i class="fa fa-chevron-left"></i> 基于腾讯云自建Blog-WordPress+CentOS+Nginx
+              <a href="/post/41eaffdf.html" rel="next" title="191001-ObjC __unsafe_unretained & __weak">
+                <i class="fa fa-chevron-left"></i> 191001-ObjC __unsafe_unretained & __weak
               </a>
             
           </div>
@@ -504,10 +460,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/902b1754.html" rel="prev" title="CocoaPods安装和使用教程">
-                CocoaPods安装和使用教程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -703,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、创建dylib工程"><span class="nav-number">1.</span> <span class="nav-text">一、创建dylib工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、参数选择"><span class="nav-number">2.</span> <span class="nav-text">二、参数选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、配置编译选项"><span class="nav-number">3.</span> <span class="nav-text">三、配置编译选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、创建调用app"><span class="nav-number">4.</span> <span class="nav-text">四、创建调用app</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、设置链接到dylib"><span class="nav-number">5.</span> <span class="nav-text">五、设置链接到dylib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、拷贝dylib至目标目录"><span class="nav-number">6.</span> <span class="nav-text">六、拷贝dylib至目标目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、调用"><span class="nav-number">7.</span> <span class="nav-text">七、调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、结语"><span class="nav-number">8.</span> <span class="nav-text">八、结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">9.</span> <span class="nav-text">Reference:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bridge"><span class="nav-number">2.</span> <span class="nav-text">__bridge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bridge-transfer"><span class="nav-number">3.</span> <span class="nav-text">__bridge_transfer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bridge-retained"><span class="nav-number">4.</span> <span class="nav-text">__bridge_retained</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

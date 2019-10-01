@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="Stanford">
 <meta property="og:description" content="概述日常开发中unsafe_unretained用的不多，只是在一些开源的源码中看到。 unsafe_unretained和__weak一样，表示的是对象的一种弱引用关系，唯一的区别是：  __weak修饰的对象被释放后，指向对象的指针会置空，也就是指向nil，不会产生野指针； 而__unsafe_unretained修饰的对象被释放后，指针不会置空，而是变成一个野指针，那么此时如果访问这个对象的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-01T12:24:10.442Z">
+<meta property="og:updated_time" content="2019-10-01T12:26:33.630Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="191001-ObjC __unsafe_unretained &amp; __weak">
 <meta name="twitter:description" content="概述日常开发中unsafe_unretained用的不多，只是在一些开源的源码中看到。 unsafe_unretained和__weak一样，表示的是对象的一种弱引用关系，唯一的区别是：  __weak修饰的对象被释放后，指向对象的指针会置空，也就是指向nil，不会产生野指针； 而__unsafe_unretained修饰的对象被释放后，指针不会置空，而是变成一个野指针，那么此时如果访问这个对象的">
@@ -347,7 +347,7 @@
                 
               
 
-              <time title="Created: 2019-10-01 20:16:04 / Modified: 20:24:10" itemprop="dateCreated datePublished" datetime="2019-10-01T20:16:04+08:00">2019-10-01</time>
+              <time title="Created: 2019-10-01 20:16:04 / Modified: 20:26:33" itemprop="dateCreated datePublished" datetime="2019-10-01T20:16:04+08:00">2019-10-01</time>
             
 
             
@@ -456,6 +456,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/post/596df1c0.html" rel="prev" title="191001-ObjC __bridge __bridge_retained __bridge_transfer详解">
+                191001-ObjC __bridge __bridge_retained __bridge_transfer详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -523,7 +527,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -606,7 +610,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
