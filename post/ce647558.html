@@ -106,18 +106,18 @@
 
 
 
-  <meta name="description" content="概述进程（Process）是具有一定独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的一个独立单位。程序只是一组指令的有序集合，它本身没有任何运行的含义，只是一个静态实体。而进程则不同，它是程序在某个数据集上的执行，是一个动态实体。它因创建而产生，因调度而运行，因等待资源或事件而被处于等待状态，因完成任务而被撤消，反映了一个程序在一定的数据集上运行的全部动态过程。 线程（T">
-<meta name="keywords" content="Windows,进程创建,内核">
+  <meta name="description" content="概述block 实际上就是 Objective-C 语言的闭包实现。block 配合上 dispatch_queue，可以方便地实现简单的多线程编程和异步编程block 是一个对象，可以放到NSArray等容器里。">
+<meta name="keywords" content="Objective-C,Cocoa,iOS,macOS,Block,__block">
 <meta property="og:type" content="article">
-<meta property="og:title" content="191001-Windows进程创建过程">
-<meta property="og:url" content="http://stanfordzhang.com/post/3986987d.html">
+<meta property="og:title" content="191002-iOS&#x2F;macOS中Objective-C的Block实现原理">
+<meta property="og:url" content="http://stanfordzhang.com/post/ce647558.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="概述进程（Process）是具有一定独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的一个独立单位。程序只是一组指令的有序集合，它本身没有任何运行的含义，只是一个静态实体。而进程则不同，它是程序在某个数据集上的执行，是一个动态实体。它因创建而产生，因调度而运行，因等待资源或事件而被处于等待状态，因完成任务而被撤消，反映了一个程序在一定的数据集上运行的全部动态过程。 线程（T">
+<meta property="og:description" content="概述block 实际上就是 Objective-C 语言的闭包实现。block 配合上 dispatch_queue，可以方便地实现简单的多线程编程和异步编程block 是一个对象，可以放到NSArray等容器里。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-01T12:15:49.752Z">
+<meta property="og:updated_time" content="2019-10-02T13:31:32.194Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="191001-Windows进程创建过程">
-<meta name="twitter:description" content="概述进程（Process）是具有一定独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的一个独立单位。程序只是一组指令的有序集合，它本身没有任何运行的含义，只是一个静态实体。而进程则不同，它是程序在某个数据集上的执行，是一个动态实体。它因创建而产生，因调度而运行，因等待资源或事件而被处于等待状态，因完成任务而被撤消，反映了一个程序在一定的数据集上运行的全部动态过程。 线程（T">
+<meta name="twitter:title" content="191002-iOS&#x2F;macOS中Objective-C的Block实现原理">
+<meta name="twitter:description" content="概述block 实际上就是 Objective-C 语言的闭包实现。block 配合上 dispatch_queue，可以方便地实现简单的多线程编程和异步编程block 是一个对象，可以放到NSArray等容器里。">
 
 
 
@@ -125,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/post/3986987d">
+  <link rel="canonical" href="http://stanfordzhang.com/post/ce647558">
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>191001-Windows进程创建过程 | Stanford</title>
+  <title>191002-iOS/macOS中Objective-C的Block实现原理 | Stanford</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/3986987d.html">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/ce647558.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">191001-Windows进程创建过程
+          <h1 class="post-title" itemprop="name headline">191002-iOS/macOS中Objective-C的Block实现原理
 
               
             
@@ -347,7 +347,7 @@
                 
               
 
-              <time title="Created: 2019-10-01 10:42:37 / Modified: 20:15:49" itemprop="dateCreated datePublished" datetime="2019-10-01T10:42:37+08:00">2019-10-01</time>
+              <time title="Created: 2019-10-02 20:59:40 / Modified: 21:31:32" itemprop="dateCreated datePublished" datetime="2019-10-02T20:59:40+08:00">2019-10-02</time>
             
 
             
@@ -386,63 +386,17 @@
       
 
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>进程（Process）是具有一定独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的一个独立单位。程序只是一组指令的有序集合，它本身没有任何运行的含义，只是一个静态实体。而进程则不同，它是程序在某个数据集上的执行，是一个动态实体。它因创建而产生，因调度而运行，因等待资源或事件而被处于等待状态，因完成任务而被撤消，反映了一个程序在一定的数据集上运行的全部动态过程。</p>
-<p>线程（Thread）是进程的一个实体，是CPU调度和分派的基本单位。线程不能够独立执行，必须依存在进程中，由进程提供多个线程执行控制。从内核角度讲线程是活动体对象，而进程只是一组静态的对象集，进程必须至少拥有一个活动线程才能维持运转。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>block 实际上就是 Objective-C 语言的闭包实现。<br>block 配合上 dispatch_queue，可以方便地实现简单的多线程编程和异步编程<br>block 是一个对象，可以放到NSArray等容器里。</p>
 <a id="more"></a>
-<h2 id="创建过程"><a href="#创建过程" class="headerlink" title="创建过程"></a>创建过程</h2><p>当调用创建进程的函数比如CreateProcess或者用户执行某一个程序（其实Windows下用户执行一般普通程序是由explorer.exe调用CreateProcess来完成），操作系统把这个过程分成以下步骤来完成：</p>
-<ol>
-<li>打开将要在该进程中执行的映像文件。</li>
-<li>创建Windows执行体进程对象。</li>
-<li>创建初始线程（栈、堆执行环境初始化及执行线程体对象）。</li>
-<li>通知Windows子系统新进程创建了（子系统是操作系统的一部分它是一个协助操作系统内核管理用户态/客户方的一个子系统具体的进程为Csrss.exe）。</li>
-<li>开始执行初始线程（如果创建时候指定了线程的CREATE_SUSPENDED状态则线程暂时挂起不执行）。</li>
-<li>在新进程和线程环境中完成地址空间的初始化（比如加载必须的DLL和库），然后开始到进程入口执行。</li>
-</ol>
-<p>到这里操作系统完成一个新进程的创建过程。</p>
-<h2 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h2><ol>
-<li>打开将要在该进程中执行的映像文件。<br>首先操作系统找到执行的Windows映像然后创建一个内存区对象，以便后面将它映射到新的进程地址空间中。</li>
-<li>创建Windows执行体进程对象。<br>接下来操作系统调用内部的系统函数NtCreateProcess来创建一个Windwos执行体进程对象。具体步骤是：</li>
-</ol>
-<p>(1) 建立EPROCESS</p>
-<ul>
-<li>分配并初始化EPROCESS结构块</li>
-<li>从父进程处继承得到进程的亲和性掩码</li>
-<li>分配进程的最大最小工作集（由两个参数决定PsMinimumWorkingSet和PsMaximumWorkingSet）</li>
-<li>将新进程的配额块设置为父进程配额块地址，并递增父进程配额块的引用计数</li>
-<li>继承Windows的设备名字空间</li>
-<li>将父进程进程ID保存在新进程对象的InheritedFormUniqueProcessId中</li>
-<li>创建该进程的主访问令牌</li>
-<li>初始化进程句柄表</li>
-<li>将新进程的退出状态设置为STATUS_PENDING</li>
-</ul>
-<p>(2) 创建初始的进程地址空间</p>
-<ul>
-<li>在适当的页表中创建页表项，以映射初始页面</li>
-<li>从MmresidentAvailablePage算出进程工作集大小</li>
-<li>系统空间的非换页部分和系统缓存的页表被映射到进程</li>
-</ul>
-<p>(3) 初始化内核进程块KPROCESS</p>
-<p>(4) 结束进程地址空间的创建过程</p>
-<p>(5) 建立PEB</p>
-<p>(6) 完成执行体进程对象的创建过程</p>
-<ol start="3">
-<li>创建初始线程（栈、堆执行环境初始化及执行线程体对象）。<br>这时候Windows执行体进程对象已经完全建立完成，但它还没有线程所以无法执行，接下来系统调用NtCreateThread来创建一个挂起的新线程它就是进程的主线程体。</li>
-<li>通知Windows子系统新进程创建了（子系统是操作系统的一部分它是一个协助操作系统内核管理用户态/客户方的一个子系统具体的进程为Csrss.exe）。<br>接下来操作系统通过客户态(Kernel32.dll)给Windows子系统(Csrss)发送一个新进程线程创建的数据消息，让子系统建立自己的进程线程管理块。当Csrss接收到该消息时候执行下面的处理：<br><em>复制一份该进程和线程句柄
-</em>设置进程优先级<br><em>分配Csrss进程块
-</em>把新进程的异常处理端口绑定到Csrss中，这样当该进程发生异常时，Csrss将会接收到异常消息<br><em>分配和初始化Csrss线程块
-</em>把线程插入到进程的线程列表中<br><em>把进程插入到Csrss的线程列表中
-</em>显示进程启动光标</li>
-<li>开始执行初始线程(如果创建时候指定了线程的CREATE_SUSPENDED状态则线程暂时挂起不执行)。<br>到这里进程环境已经建立完毕进程中开始创建的主线程到这里获得执行权开始执行线程</li>
-<li>在新进程和线程环境中完成地址空间的初始化（比如加载必须的DLL和库），然后开始到进程入口执行。<br>到这步实质是调用ldrInitializeThunk来初始化加载器，堆管理器NLS表TLS数组以及临界区结构，并且加载任何必须要的DLL并且用DLL_PROCESS_ATTACH功能代码来调用各DLL入口点，最后当加载器初始化例程返回到用户模式APC分发器时进程映像开始在用户模式下执行，然后它调用线程启动函数开始执行。</li>
-</ol>
-<p>到这里操作系统完成了所有的创建工作，我们写的程序就这样被操作系统调用运行起来了。</p>
+<h2 id="Apple开源代码"><a href="#Apple开源代码" class="headerlink" title="Apple开源代码"></a>Apple开源代码</h2><p>源代码地址：<a href="https://opensource.apple.com/source/libclosure/libclosure-67/" target="_blank" rel="noopener">https://opensource.apple.com/source/libclosure/libclosure-67/</a></p>
+<h2 id="相关原理"><a href="#相关原理" class="headerlink" title="相关原理"></a>相关原理</h2><p>请参考《Pro Multithreading and Memory Management for iOS and OS X with ARC》这本书的第五章。<br>此书中有详细解释。<a href="https://github.com/stanfordzhang/archives/tree/master/books" target="_blank" rel="noopener">原书下载地址</a></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://www.cnblogs.com/csyisong/archive/2010/10/22/1858115.html" target="_blank" rel="noopener">Windows操作系统下创建进程的过程</a></li>
-<li><a href="https://www.cnblogs.com/LittleHann/p/3458736.html" target="_blank" rel="noopener">windows进程/线程创建过程</a></li>
-<li><a href="https://www.jianshu.com/p/32e1487836da" target="_blank" rel="noopener">windows 进程运行过程</a></li>
-<li><a href="https://blog.csdn.net/yongchaocsdn/article/details/78178703" target="_blank" rel="noopener">关于Windows创建进程的过程</a></li>
-<li><a href="https://blog.csdn.net/zhou191954/article/details/9296029" target="_blank" rel="noopener">Windows进程创建的流程分析</a></li>
-<li><a href="https://blog.csdn.net/l15263458908/article/details/90318249" target="_blank" rel="noopener">进程的创建过程</a></li>
+<li><a href="https://blog.csdn.net/youshaoduo/article/details/87708513" target="_blank" rel="noopener">iOS 探索Objective-C中Block的实现原理</a></li>
+<li><a href="https://blog.csdn.net/jeffasd/article/details/51273554" target="_blank" rel="noopener">iOS Block底层实现原理详解</a></li>
+<li><a href="https://blog.devtang.com/2013/07/28/a-look-inside-blocks/" target="_blank" rel="noopener">谈Objective-C block的实现</a></li>
+<li><a href="https://www.zybuluo.com/MicroCai/note/51116" target="_blank" rel="noopener">block没那么难（一）：block的实现</a></li>
+<li><a href="https://www.zybuluo.com/MicroCai/note/57603" target="_blank" rel="noopener">block没那么难（二）：block和变量的内存管理</a></li>
+<li><a href="https://www.zybuluo.com/MicroCai/note/58470" target="_blank" rel="noopener">block没那么难（三）：block和对象的内存管理</a></li>
 </ol>
 
       
@@ -467,11 +421,17 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Windows/" rel="tag"># Windows</a>
+            <a href="/tags/Objective-C/" rel="tag"># Objective-C</a>
           
-            <a href="/tags/进程创建/" rel="tag"># 进程创建</a>
+            <a href="/tags/Cocoa/" rel="tag"># Cocoa</a>
           
-            <a href="/tags/内核/" rel="tag"># 内核</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/macOS/" rel="tag"># macOS</a>
+          
+            <a href="/tags/Block/" rel="tag"># Block</a>
+          
+            <a href="/tags/block/" rel="tag"># __block</a>
           
         </div>
       
@@ -484,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/22042d32.html" rel="next" title="Introduction to Linux Zombie Process">
-                <i class="fa fa-chevron-left"></i> Introduction to Linux Zombie Process
+              <a href="/post/596df1c0.html" rel="next" title="191001-ObjC __bridge __bridge_retained __bridge_transfer详解">
+                <i class="fa fa-chevron-left"></i> 191001-ObjC __bridge __bridge_retained __bridge_transfer详解
               </a>
             
           </div>
@@ -493,10 +453,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/41eaffdf.html" rel="prev" title="191001-ObjC __unsafe_unretained & __weak">
-                191001-ObjC __unsafe_unretained & __weak <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -696,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建过程"><span class="nav-number">2.</span> <span class="nav-text">创建过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细解释"><span class="nav-number">3.</span> <span class="nav-text">详细解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apple开源代码"><span class="nav-number">2.</span> <span class="nav-text">Apple开源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关原理"><span class="nav-number">3.</span> <span class="nav-text">相关原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
