@@ -106,18 +106,18 @@
 
 
 
-  <meta name="description" content="概述block 实际上就是 Objective-C 语言的闭包实现。block 配合上 dispatch_queue，可以方便地实现简单的多线程编程和异步编程block 是一个对象，可以放到NSArray等容器里。">
-<meta name="keywords" content="Objective-C,Cocoa,iOS,macOS,Block,__block">
+  <meta name="description" content="概述异常一般指的是程序运行期（Runtime）发生的非正常情况。异常一般是不可预测的，如：内存不足、打开文件失败、索引越界等，UNIX使用信号给出异常，并当发生异常时转跳到信号处理过程进行异常处理。异常都被认为是一种很优雅的处理错误的机制，异常处理的核心思想是把功能模块代码与系统中可能出现错误的处理代码分离开来，以此来达到使我们的代码组织起来更美观、逻辑上更清晰，并且同时从根本上来提高我们软件系统">
+<meta name="keywords" content="C Language,Exception">
 <meta property="og:type" content="article">
-<meta property="og:title" content="191002-iOS&#x2F;macOS中Objective-C的Block实现原理">
-<meta property="og:url" content="http://stanfordzhang.com/post/ce647558.html">
+<meta property="og:title" content="191003-C语言异常处理机制">
+<meta property="og:url" content="http://stanfordzhang.com/post/cd623382.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="概述block 实际上就是 Objective-C 语言的闭包实现。block 配合上 dispatch_queue，可以方便地实现简单的多线程编程和异步编程block 是一个对象，可以放到NSArray等容器里。">
+<meta property="og:description" content="概述异常一般指的是程序运行期（Runtime）发生的非正常情况。异常一般是不可预测的，如：内存不足、打开文件失败、索引越界等，UNIX使用信号给出异常，并当发生异常时转跳到信号处理过程进行异常处理。异常都被认为是一种很优雅的处理错误的机制，异常处理的核心思想是把功能模块代码与系统中可能出现错误的处理代码分离开来，以此来达到使我们的代码组织起来更美观、逻辑上更清晰，并且同时从根本上来提高我们软件系统">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-02T13:31:45.085Z">
+<meta property="og:updated_time" content="2019-10-03T09:37:52.189Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="191002-iOS&#x2F;macOS中Objective-C的Block实现原理">
-<meta name="twitter:description" content="概述block 实际上就是 Objective-C 语言的闭包实现。block 配合上 dispatch_queue，可以方便地实现简单的多线程编程和异步编程block 是一个对象，可以放到NSArray等容器里。">
+<meta name="twitter:title" content="191003-C语言异常处理机制">
+<meta name="twitter:description" content="概述异常一般指的是程序运行期（Runtime）发生的非正常情况。异常一般是不可预测的，如：内存不足、打开文件失败、索引越界等，UNIX使用信号给出异常，并当发生异常时转跳到信号处理过程进行异常处理。异常都被认为是一种很优雅的处理错误的机制，异常处理的核心思想是把功能模块代码与系统中可能出现错误的处理代码分离开来，以此来达到使我们的代码组织起来更美观、逻辑上更清晰，并且同时从根本上来提高我们软件系统">
 
 
 
@@ -125,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/post/ce647558">
+  <link rel="canonical" href="http://stanfordzhang.com/post/cd623382">
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>191002-iOS/macOS中Objective-C的Block实现原理 | Stanford</title>
+  <title>191003-C语言异常处理机制 | Stanford</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/ce647558.html">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/cd623382.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">191002-iOS/macOS中Objective-C的Block实现原理
+          <h1 class="post-title" itemprop="name headline">191003-C语言异常处理机制
 
               
             
@@ -347,7 +347,7 @@
                 
               
 
-              <time title="Created: 2019-10-02 20:59:40 / Modified: 21:31:45" itemprop="dateCreated datePublished" datetime="2019-10-02T20:59:40+08:00">2019-10-02</time>
+              <time title="Created: 2019-10-03 16:35:22 / Modified: 17:37:52" itemprop="dateCreated datePublished" datetime="2019-10-03T16:35:22+08:00">2019-10-03</time>
             
 
             
@@ -386,17 +386,22 @@
       
 
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>block 实际上就是 Objective-C 语言的闭包实现。<br>block 配合上 dispatch_queue，可以方便地实现简单的多线程编程和异步编程<br>block 是一个对象，可以放到NSArray等容器里。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>异常一般指的是程序运行期（Runtime）发生的非正常情况。异常一般是不可预测的，如：内存不足、打开文件失败、索引越界等，UNIX使用信号给出异常，并当发生异常时转跳到信号处理过程进行异常处理。<br>异常都被认为是一种很优雅的处理错误的机制，异常处理的核心思想是把功能模块代码与系统中可能出现错误的处理代码分离开来，以此来达到使我们的代码组织起来更美观、逻辑上更清晰，并且同时从根本上来提高我们软件系统长时间稳定运行的可靠性。</p>
 <a id="more"></a>
-<h2 id="Apple开源代码"><a href="#Apple开源代码" class="headerlink" title="Apple开源代码"></a>Apple开源代码</h2><p>源代码地址：<a href="https://opensource.apple.com/source/libclosure/libclosure-67/" target="_blank" rel="noopener">https://opensource.apple.com/source/libclosure/libclosure-67/</a></p>
-<h2 id="相关原理"><a href="#相关原理" class="headerlink" title="相关原理"></a>相关原理</h2><p>请参考《Pro Multithreading and Memory Management for iOS and OS X with ARC》这本书的第五章。<br>此书中有详细解释。<a href="https://github.com/stanfordzhang/archives/tree/master/books" target="_blank" rel="noopener">原书下载地址</a></p>
+<h2 id="C语言异常处理基础"><a href="#C语言异常处理基础" class="headerlink" title="C语言异常处理基础"></a>C语言异常处理基础</h2><p>一个结构体：jmp_buf。这个结构定义在setjmp.h头文件中，在不同平台定义有所不同，请自行查阅。该结构主要用于保存当前寄存器的值。</p>
+<p>两个函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> _<span class="function">cdecl <span class="title">longjmp</span><span class="params">(jmp_buf jmpb, <span class="keyword">int</span> retval)</span></span>;</span><br><span class="line"><span class="keyword">int</span> _<span class="function">cdecl <span class="title">setjmp</span><span class="params">(jmp_buf jmpb)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>调用简介：</p>
+<blockquote>
+<p>首先调用setjmp()初始化jmp_buf结构体，将当前CPU中的大部分影响到程序执行的寄存器的值存入jmp_buf，为longjmp()函数提供跳转。setjmp()函数初始化时，返回0。longjmp()函数被调用后，跳转到setjmp()函数执行，返回值由longjmp()的第二个参数给出。<br>在使用setjmp()初始化jmp_buf后，可以在其后程序的任意地方使用longjmp()函数跳转到setjmp()的位置，longjmp()的第一个参数便是setjmp()初始化的jmp_buf，若想跳转回刚才设置的setjmp()处，则longjmp()函数的第一个参数是setjmp()所初始化的jmp_buf这个异常，longjmp()函数的第二个参数是传给setjmp()的返回值。</p>
+</blockquote>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;setjmp.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">jmp_buf expt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter foo()\n"</span>);                <span class="comment">// Step 6</span></span><br><span class="line">    longjmp(expt,<span class="number">1</span>);    <span class="comment">// throw exception  // Step 7</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"leave foo()\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter main()\n"</span>);               <span class="comment">// Step 1</span></span><br><span class="line">    <span class="keyword">int</span> state = setjmp(expt);               <span class="comment">// Step 2; Step 8</span></span><br><span class="line">    <span class="keyword">if</span>(state == <span class="number">0</span>) &#123;    <span class="comment">// return 0 after initializing  // Step 3</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"call foo()\n"</span>);             <span class="comment">// Step 4</span></span><br><span class="line">        foo();                              <span class="comment">// Step 5</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"return from foo()\n"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;                                <span class="comment">// Step 9</span></span><br><span class="line">        <span class="keyword">switch</span>(state)&#123;                      <span class="comment">// Step 10</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:                         <span class="comment">// Step 11</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"catched!\n"</span>);       <span class="comment">// Step 12</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"leave main()\n"</span>);               <span class="comment">// Step 13</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">enter main()</span><br><span class="line">call foo()</span><br><span class="line">enter foo()</span><br><span class="line">catched!</span><br><span class="line">leave main()</span><br></pre></td></tr></table></figure>
+<p>根据注释中的Step X顺序和调用输出顺序可以很明显看出调用过程。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://blog.csdn.net/youshaoduo/article/details/87708513" target="_blank" rel="noopener">iOS 探索Objective-C中Block的实现原理</a></li>
-<li><a href="https://blog.csdn.net/jeffasd/article/details/51273554" target="_blank" rel="noopener">iOS Block底层实现原理详解</a></li>
-<li><a href="https://blog.devtang.com/2013/07/28/a-look-inside-blocks/" target="_blank" rel="noopener">谈Objective-C block的实现</a></li>
-<li><a href="https://www.zybuluo.com/MicroCai/note/51116" target="_blank" rel="noopener">block没那么难（一）：block的实现</a></li>
-<li><a href="https://www.zybuluo.com/MicroCai/note/57603" target="_blank" rel="noopener">block没那么难（二）：block和变量的内存管理</a></li>
-<li><a href="https://www.zybuluo.com/MicroCai/note/58470" target="_blank" rel="noopener">block没那么难（三）：block和对象的内存管理</a></li>
+<li><a href="https://www.cnblogs.com/sshbit/p/10360936.html" target="_blank" rel="noopener">c语言异常处理机制</a></li>
+<li><a href="https://www.jianshu.com/p/ccd2c53d1021" target="_blank" rel="noopener">c语言实现异常处理</a></li>
 </ol>
 
       
@@ -421,17 +426,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Objective-C/" rel="tag"># Objective-C</a>
+            <a href="/tags/C-Language/" rel="tag"># C Language</a>
           
-            <a href="/tags/Cocoa/" rel="tag"># Cocoa</a>
-          
-            <a href="/tags/iOS/" rel="tag"># iOS</a>
-          
-            <a href="/tags/macOS/" rel="tag"># macOS</a>
-          
-            <a href="/tags/Block/" rel="tag"># Block</a>
-          
-            <a href="/tags/block/" rel="tag"># __block</a>
+            <a href="/tags/Exception/" rel="tag"># Exception</a>
           
         </div>
       
@@ -444,8 +441,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/596df1c0.html" rel="next" title="191001-ObjC __bridge __bridge_retained __bridge_transfer详解">
-                <i class="fa fa-chevron-left"></i> 191001-ObjC __bridge __bridge_retained __bridge_transfer详解
+              <a href="/post/ce647558.html" rel="next" title="191002-iOS/macOS中Objective-C的Block实现原理">
+                <i class="fa fa-chevron-left"></i> 191002-iOS/macOS中Objective-C的Block实现原理
               </a>
             
           </div>
@@ -453,10 +450,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/cd623382.html" rel="prev" title="191003-C语言异常处理机制">
-                191003-C语言异常处理机制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -660,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apple开源代码"><span class="nav-number">2.</span> <span class="nav-text">Apple开源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关原理"><span class="nav-number">3.</span> <span class="nav-text">相关原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言异常处理基础"><span class="nav-number">2.</span> <span class="nav-text">C语言异常处理基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">3.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
