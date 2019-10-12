@@ -106,18 +106,17 @@
 
 
 
-  <meta name="description" content="概述Foundation对象就是使用Objective-C创建出来的对象（一般以NS为前缀）。Core Foundation对象主要是使用C语言创建的对象（一般以CF为前缀）。两个框架创建的对象都使用引用计数管理内存。在MRC环境下，Core Foundation框架中的retain/release分别是CFRetain/CFRelease。Core Foundation与Foundation框架">
-<meta name="keywords" content="Objective-C,Cocoa,__bridge,__bridge_retained,__bridge_transfer">
+  <meta name="description" content="概述将一个只包含字母和空格的英文句子中的单词位置反转。比如：A cat has nine liveslives nine has cat A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="191001-ObjC __bridge __bridge_retained __bridge_transfer详解">
-<meta property="og:url" content="http://stanfordzhang.com/post/596df1c0.html">
+<meta property="og:title" content="191012-算法-C-将句子里的单词位置反转">
+<meta property="og:url" content="http://stanfordzhang.com/post/7da00770.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="概述Foundation对象就是使用Objective-C创建出来的对象（一般以NS为前缀）。Core Foundation对象主要是使用C语言创建的对象（一般以CF为前缀）。两个框架创建的对象都使用引用计数管理内存。在MRC环境下，Core Foundation框架中的retain/release分别是CFRetain/CFRelease。Core Foundation与Foundation框架">
+<meta property="og:description" content="概述将一个只包含字母和空格的英文句子中的单词位置反转。比如：A cat has nine liveslives nine has cat A">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-02T13:05:55.836Z">
+<meta property="og:updated_time" content="2019-10-12T09:01:04.665Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="191001-ObjC __bridge __bridge_retained __bridge_transfer详解">
-<meta name="twitter:description" content="概述Foundation对象就是使用Objective-C创建出来的对象（一般以NS为前缀）。Core Foundation对象主要是使用C语言创建的对象（一般以CF为前缀）。两个框架创建的对象都使用引用计数管理内存。在MRC环境下，Core Foundation框架中的retain/release分别是CFRetain/CFRelease。Core Foundation与Foundation框架">
+<meta name="twitter:title" content="191012-算法-C-将句子里的单词位置反转">
+<meta name="twitter:description" content="概述将一个只包含字母和空格的英文句子中的单词位置反转。比如：A cat has nine liveslives nine has cat A">
 
 
 
@@ -125,7 +124,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/post/596df1c0">
+  <link rel="canonical" href="http://stanfordzhang.com/post/7da00770">
 
 
 
@@ -135,7 +134,7 @@
   };
 </script>
 
-  <title>191001-ObjC __bridge __bridge_retained __bridge_transfer详解 | Stanford</title>
+  <title>191012-算法-C-将句子里的单词位置反转 | Stanford</title>
   
 
 
@@ -304,7 +303,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/596df1c0.html">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/7da00770.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
@@ -321,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">191001-ObjC __bridge __bridge_retained __bridge_transfer详解
+          <h1 class="post-title" itemprop="name headline">191012-算法-C-将句子里的单词位置反转
 
               
             
@@ -347,24 +346,12 @@
                 
               
 
-              <time title="Created: 2019-10-01 20:26:54" itemprop="dateCreated datePublished" datetime="2019-10-01T20:26:54+08:00">2019-10-01</time>
+              <time title="Created: 2019-10-12 16:58:38 / Modified: 17:01:04" itemprop="dateCreated datePublished" datetime="2019-10-12T16:58:38+08:00">2019-10-12</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-10-02 21:05:55" itemprop="dateModified" datetime="2019-10-02T21:05:55+08:00">2019-10-02</time>
               
             
           </span>
@@ -398,27 +385,9 @@
       
 
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Foundation对象就是使用Objective-C创建出来的对象（一般以NS为前缀）。<br>Core Foundation对象主要是使用C语言创建的对象（一般以CF为前缀）。<br>两个框架创建的对象都使用引用计数管理内存。<br>在MRC环境下，Core Foundation框架中的retain/release分别是CFRetain/CFRelease。<br>Core Foundation与Foundation框架创建出来的对象区别很小，可以在不同的框架中使用，Foundation框架的API生成并持有的对象可以用Core Foundation框架的API释放，反过来也可以。</p>
-<p>因为Core Foundation对象与Foundation对象没有区别，转换不需要额外的CPU资源，因此也被称为：Toll Free Bridge。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>将一个只包含字母和空格的英文句子中的单词位置反转。<br>比如：<br>A cat has nine lives<br>lives nine has cat A</p>
 <a id="more"></a>
-<h2 id="bridge"><a href="#bridge" class="headerlink" title="__bridge"></a>__bridge</h2><p>CF和ObjC对象转化时只涉及对象类型不涉及对象所有权的转化</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc]init];</span><br><span class="line"><span class="keyword">void</span> *p = (__bridge <span class="keyword">void</span> *)(obj);</span><br></pre></td></tr></table></figure>
-<p>编译器会提示插入(<strong>bridge void *)强制转换，然而</strong>bridge并不是安全的，管理时不注意对象的所有者，就会因为悬垂指针而导致程序崩溃。例如下面这段代码：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> *p = <span class="number">0</span>;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc]init];</span><br><span class="line">    p = (__bridge <span class="keyword">void</span> *)(obj);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"1 == %ld"</span>, <span class="built_in">CFGetRetainCount</span>((<span class="built_in">CFTypeRef</span>)p));</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"2 == %ld"</span>, <span class="built_in">CFGetRetainCount</span>((<span class="built_in">CFTypeRef</span>)p));</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"class = %@"</span>,[(__bridge <span class="keyword">id</span>)p <span class="keyword">class</span>]);</span><br></pre></td></tr></table></figure>
-<p>因为__bridge只是简单的进行了指针转换，并没有移交持有权，作用域外obj已经释放掉了，p就相当于指向了一块已经释放的内存，因此作用域外访问p就会崩溃。</p>
-<h2 id="bridge-transfer"><a href="#bridge-transfer" class="headerlink" title="__bridge_transfer"></a>__bridge_transfer</h2><p>常用在CF对象转化成ObjC对象时，将CF对象的所有权交给OC对象，此时ARC就能自动管理该内存，作用同CFBridgingRelease()</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CFMutableArrayRef</span> cfObject = <span class="built_in">CFArrayCreateMutable</span>(kCFAllocatorDefault, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">printf(<span class="string">"retain count = %ld\n"</span>,<span class="built_in">CFGetRetainCount</span>(cfObject));</span><br><span class="line"></span><br><span class="line"><span class="keyword">id</span> obj = <span class="built_in">CFBridgingRelease</span>(cfObject);</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"><span class="comment">// id obj = (__bridge_transfer id)cfObject;</span></span><br><span class="line">printf(<span class="string">"retain count after the cast = %ld\n"</span>,<span class="built_in">CFGetRetainCount</span>(cfObject));</span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">retain count = 1</span><br><span class="line">retain count after the cast = 1</span><br></pre></td></tr></table></figure>
-<p>cfObject转换成obj的时候，相当于cfObject的持有权转交给了ARC，你不用负责obj的释放了。</p>
-<h2 id="bridge-retained"><a href="#bridge-retained" class="headerlink" title="__bridge_retained"></a>__bridge_retained</h2><p>与bridge_transfer相反，常用在将ObjC对象转化成CF对象，且OC对象的所有权也交给CF对象来管理，即OC对象转化成CF对象时，涉及到对象类型和对象所有权的转化，作用同CFBridgingRetain()</p>
-<p>修改下__bridge的例子：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> *p = <span class="number">0</span>;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc]init];</span><br><span class="line">    p = (__bridge_retained <span class="keyword">void</span> *)(obj);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"1 == %ld"</span>, <span class="built_in">CFGetRetainCount</span>((<span class="built_in">CFTypeRef</span>)p));</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"2 == %ld"</span>, <span class="built_in">CFGetRetainCount</span>((<span class="built_in">CFTypeRef</span>)p));</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"class = %@"</span>,[(__bridge <span class="keyword">id</span>)p <span class="keyword">class</span>]);</span><br><span class="line"><span class="built_in">CFRelease</span>(p);</span><br><span class="line">p = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
-<p>我们将上面的<strong>bridge修改为</strong>bridge_retained就能解决问题。相当于在作用域内对p执行了retain操作。obj的引用计数为2，作用域结束时obj释放，引用计数变为1，p仍然持有对象，使用完以后记得要调用CFRelease(p)释放p，ARC是不会负责。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://blog.csdn.net/junjun150013652/article/details/53506504" target="_blank" rel="noopener">理解<strong>bridge，</strong>bridge_transfer和__bridge_retained</a></li>
-<li><a href="https://www.cnblogs.com/wujie123/p/6795038.html" target="_blank" rel="noopener">iOS开发之<strong>bridge，</strong>bridge_transfer和__bridge_retained</a></li>
-</ol>
+<h2 id="C语言实现"><a href="#C语言实现" class="headerlink" title="C语言实现"></a>C语言实现</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse_string</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">size_t</span> begin, <span class="keyword">size_t</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> tmp = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="keyword">while</span> (end &gt; begin) &#123;</span><br><span class="line">        tmp = s[begin];</span><br><span class="line">        s[begin] = s[end];</span><br><span class="line">        s[end] = tmp;</span><br><span class="line">        ++ begin;</span><br><span class="line">        -- end;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse_sentence</span><span class="params">(<span class="keyword">char</span> *s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> begin = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">size_t</span> end = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">size_t</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">size_t</span> len = <span class="built_in">strlen</span>(s);</span><br><span class="line">    reverse_string(s, <span class="number">0</span>, len - <span class="number">1</span>);              <span class="comment">// 先全部翻转</span></span><br><span class="line">    <span class="keyword">while</span>(i &lt; <span class="built_in">strlen</span>(s)) &#123;                      <span class="comment">// 而后分个翻转</span></span><br><span class="line">        <span class="keyword">while</span>(s[i] == <span class="string">' '</span> &amp;&amp; i &lt; <span class="built_in">strlen</span>(s)) &#123;</span><br><span class="line">            ++ i;</span><br><span class="line">        &#125;</span><br><span class="line">        begin = i;</span><br><span class="line">        <span class="keyword">while</span>(s[i] != <span class="string">' '</span> &amp;&amp; i &lt; <span class="built_in">strlen</span>(s)) &#123;</span><br><span class="line">            ++ i;</span><br><span class="line">        &#125;</span><br><span class="line">        end = i - <span class="number">1</span>;</span><br><span class="line">        reverse_string(s, begin, end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">64</span>] = <span class="string">"A cat has nine lives"</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, s);</span><br><span class="line">    reverse_sentence(s);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, s);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -440,20 +409,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Objective-C/" rel="tag"># Objective-C</a>
-          
-            <a href="/tags/Cocoa/" rel="tag"># Cocoa</a>
-          
-            <a href="/tags/bridge/" rel="tag"># __bridge</a>
-          
-            <a href="/tags/bridge-retained/" rel="tag"># __bridge_retained</a>
-          
-            <a href="/tags/bridge-transfer/" rel="tag"># __bridge_transfer</a>
-          
-        </div>
-      
 
       
       
@@ -463,8 +418,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/41eaffdf.html" rel="next" title="191001-ObjC __unsafe_unretained & __weak">
-                <i class="fa fa-chevron-left"></i> 191001-ObjC __unsafe_unretained & __weak
+              <a href="/post/cd623382.html" rel="next" title="191003-C语言异常处理机制">
+                <i class="fa fa-chevron-left"></i> 191003-C语言异常处理机制
               </a>
             
           </div>
@@ -472,10 +427,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/ce647558.html" rel="prev" title="191002-iOS/macOS中Objective-C的Block实现原理">
-                191002-iOS/macOS中Objective-C的Block实现原理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -679,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bridge"><span class="nav-number">2.</span> <span class="nav-text">__bridge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bridge-transfer"><span class="nav-number">3.</span> <span class="nav-text">__bridge_transfer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bridge-retained"><span class="nav-number">4.</span> <span class="nav-text">__bridge_retained</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言实现"><span class="nav-number">2.</span> <span class="nav-text">C语言实现</span></a></li></ol></div>
             
 
           </div>
