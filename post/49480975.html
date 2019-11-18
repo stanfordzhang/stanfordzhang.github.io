@@ -106,16 +106,18 @@
 
 
 
-  <meta name="description" content="一蓑烟雨任平生">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Stanford">
-<meta property="og:url" content="http://stanfordzhang.com/tags/block/index.html">
+  <meta name="description" content="概述Ubuntu 16.04 32-Bit安装checksec。">
+<meta name="keywords" content="pwn,checksec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="191118-Ubuntu 16.04安装checksec工具">
+<meta property="og:url" content="http://stanfordzhang.com/post/49480975.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="一蓑烟雨任平生">
+<meta property="og:description" content="概述Ubuntu 16.04 32-Bit安装checksec。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-11-18T07:54:28.712Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Stanford">
-<meta name="twitter:description" content="一蓑烟雨任平生">
+<meta name="twitter:title" content="191118-Ubuntu 16.04安装checksec工具">
+<meta name="twitter:description" content="概述Ubuntu 16.04 32-Bit安装checksec。">
 
 
 
@@ -123,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/tags/block/">
+  <link rel="canonical" href="http://stanfordzhang.com/post/49480975">
 
 
 
@@ -133,7 +135,7 @@
   };
 </script>
 
-  <title>Tag: __block | Stanford</title>
+  <title>191118-Ubuntu 16.04安装checksec工具 | Stanford</title>
   
 
 
@@ -181,7 +183,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -262,19 +264,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -299,57 +288,182 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>__block<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/49480975.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stanford Zhang">
+      <meta itemprop="description" content="一蓑烟雨任平生">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stanford">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/post/ce647558.html" itemprop="url">
-            
-              <span itemprop="name">191002-iOS/macOS中Objective-C的Block实现原理</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">191118-Ubuntu 16.04安装checksec工具
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-02T20:59:40+08:00" content="2019-10-02">
-          10-02
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-11-18 15:42:25 / Modified: 15:54:28" itemprop="dateCreated datePublished" datetime="2019-11-18T15:42:25+08:00">2019-11-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Ubuntu 16.04 32-Bit安装checksec。</p>
+<a id="more"></a>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/slimm609/checksec.sh.git</span><br><span class="line"><span class="built_in">cd</span> checksec.sh</span><br><span class="line">sudo ln –sf checksec /usr/bin/checksec</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://bbs.pediy.com/thread-248682.htm" target="_blank" rel="noopener">Linux PWN从入门到熟练</a></li>
+<li><a href="https://www.cnblogs.com/lineuman/p/6775989.html" target="_blank" rel="noopener">checksec未完待续~</a></li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pwn/" rel="tag"># pwn</a>
+          
+            <a href="/tags/checksec/" rel="tag"># checksec</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/7da00770.html" rel="next" title="191012-算法-C-将句子里的单词位置反转">
+                <i class="fa fa-chevron-left"></i> 191012-算法-C-将句子里的单词位置反转
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -369,8 +483,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -514,6 +637,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装步骤"><span class="nav-number">2.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -641,6 +781,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -656,6 +800,8 @@
 
   
 
+
+  
 
 
   
