@@ -106,18 +106,18 @@
 
 
 
-  <meta name="description" content="Dart编程语言中文网 发布Android版APP Flutter】修改图标、应用名称、包名等 Flutter实战 Flutter中文网 FLUTTER WEB环境变量搭建及开发 flutter-desktop-embedding">
-<meta name="keywords" content="Flutter,Dart,Android">
+  <meta name="description" content="概述Windows Dll/代码注入在病毒、木马、游戏外挂、安全软件等场景中应用很广泛。">
+<meta name="keywords" content="Windows,Inject DLL,Inject Code">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flutter Development References">
-<meta property="og:url" content="http://stanfordzhang.com/post/6bd6334f.html">
+<meta property="og:title" content="191226-Windows Inject Dll">
+<meta property="og:url" content="http://stanfordzhang.com/post/7e4acaa9.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="Dart编程语言中文网 发布Android版APP Flutter】修改图标、应用名称、包名等 Flutter实战 Flutter中文网 FLUTTER WEB环境变量搭建及开发 flutter-desktop-embedding">
+<meta property="og:description" content="概述Windows Dll/代码注入在病毒、木马、游戏外挂、安全软件等场景中应用很广泛。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-11T10:46:13.384Z">
+<meta property="og:updated_time" content="2019-12-26T07:45:52.914Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flutter Development References">
-<meta name="twitter:description" content="Dart编程语言中文网 发布Android版APP Flutter】修改图标、应用名称、包名等 Flutter实战 Flutter中文网 FLUTTER WEB环境变量搭建及开发 flutter-desktop-embedding">
+<meta name="twitter:title" content="191226-Windows Inject Dll">
+<meta name="twitter:description" content="概述Windows Dll/代码注入在病毒、木马、游戏外挂、安全软件等场景中应用很广泛。">
 
 
 
@@ -125,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/post/6bd6334f">
+  <link rel="canonical" href="http://stanfordzhang.com/post/7e4acaa9">
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>Flutter Development References | Stanford</title>
+  <title>191226-Windows Inject Dll | Stanford</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/6bd6334f.html">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/7e4acaa9.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stanford Zhang">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Flutter Development References
+          <h1 class="post-title" itemprop="name headline">191226-Windows Inject Dll
 
               
             
@@ -347,24 +347,12 @@
                 
               
 
-              <time title="Created: 2019-06-09 15:34:36" itemprop="dateCreated datePublished" datetime="2019-06-09T15:34:36+08:00">2019-06-09</time>
+              <time title="Created: 2019-12-26 15:40:46 / Modified: 15:45:52" itemprop="dateCreated datePublished" datetime="2019-12-26T15:40:46+08:00">2019-12-26</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-11 18:46:13" itemprop="dateModified" datetime="2019-06-11T18:46:13+08:00">2019-06-11</time>
               
             
           </span>
@@ -398,15 +386,25 @@
       
 
       
-        <ul>
-<li><a href="http://dart.goodev.org/" target="_blank" rel="noopener">Dart编程语言中文网</a></li>
-<li><a href="https://flutterchina.club/android-release/" target="_blank" rel="noopener">发布Android版APP</a></li>
-<li><a href="https://www.jianshu.com/p/8488b334926d" target="_blank" rel="noopener">Flutter】修改图标、应用名称、包名等</a></li>
-<li><a href="https://book.flutterchina.club/" target="_blank" rel="noopener">Flutter实战</a></li>
-<li><a href="https://flutterchina.club/" target="_blank" rel="noopener">Flutter中文网</a></li>
-<li><a href="https://www.cnblogs.com/xinzaimengzai/p/10951423.html" target="_blank" rel="noopener">FLUTTER WEB环境变量搭建及开发</a></li>
-<li><a href="https://github.com/google/flutter-desktop-embedding/tree/master/example" target="_blank" rel="noopener">flutter-desktop-embedding</a></li>
-</ul>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Windows Dll/代码注入在病毒、木马、游戏外挂、安全软件等场景中应用很广泛。</p>
+<a id="more"></a>
+<h2 id="Dll注入方法"><a href="#Dll注入方法" class="headerlink" title="Dll注入方法"></a>Dll注入方法</h2><p>1.修改注册表<br>　　修改HKEY_LOCAL_MACHINE/Software/Microsoft/WindowsNT/CurrentVersion/Windows/AppInit_DLLs的键值，改为待注入DLL的路径，这样一来，程序运行后只要加载了user32.dll，都会加载我们写入的DLL。</p>
+<p>2.全局消息钩子注入<br>　　Windows应用程序是基于消息驱动的，任何线程只要注册窗口类都会有一个消息队列用于接收用户输入的消息和系统消息。为了拦截消息，Windows提出了钩子的概念。钩子（Hook）是Windows消息处理机制中的一个监视点，钩子提供一个回调函数。当在某个程序中安装钩子后，它将监视该程序的消息，在指定消息还没到达窗口之前钩子程序先捕获这个消息。这样就有机会对此消息进行过滤，或者对Windows消息实现监控。 消息钩子分为局部钩子和全局钩子。局部钩子是指仅拦截某一个进程的消息，全局钩子将拦截系统中所有进程的消息。</p>
+<p>　　该技术需要我们写一个简单的加载该DLL的程序，使其调用DLL的钩子函数，该函数会下一个全局消息钩子，强迫所有发生该消息的进程加载该DLL，这样就实现了DLL注入。</p>
+<p>3.手工修改导入表<br>　　该方法需要我们熟悉PE结构，找到导入表位置在其后面添加一个新节，写入待注入的DLL，并将该DLL的导出函数的一些信息写到正确的位置，若导出函数过多将花费很多时间在手工修改上，并且可能出现空间不足写入的情况。</p>
+<p>4.远程线程注入DLL<br>　　通过利用2000/XP等系统所有进程加载Kernel32.dll的模块基址一致的特点，先使用OpenProcess函数打开远程进程的句柄，再用VirtualAllocEx和WriteProcessMemory将待注入DLL路径写入目标进程，找到LoadLibraryW的地址，最后用CreateRemoteThread使目标进程调用LoadLibraryW加载DLL，参数为写入的DLL路径。</p>
+<p>5.APC注入<br>　　APC注入的原理是利用当线程被唤醒时APC中的注册函数会被执行的机制，并以此去执行我们的DLL加载代码，进而完成DLL注入的目的。利用QueueUserAPC()可以向APC队列投入Loadlibrary函数指针完成注入，其实这种方法配合CreateProcess使用注入最为简单，先挂起打开线程，再QueueUserAPC()，再恢复线程，完成注入。</p>
+<p>6.DLL劫持<br>　　自己实现应用程序的某个DLL，完成其导出函数，并将其放于应用程序目录下，当程序打开并加载DLL时会优先加载该目录下的DLL，原来的DLL若在该目录下降其移走即可。</p>
+<p>7.输入法注入<br>　　利用输入法在工作时需要向进程中加载Ime文件（其实就是个Dll）,我们构造自己的Ime文件，在Ime文件注入对方进程的时候加载我们自己的DLL完成注入</p>
+<p>8.内核驱动注入</p>
+<h2 id="代码注入方法"><a href="#代码注入方法" class="headerlink" title="代码注入方法"></a>代码注入方法</h2><p>　　对于病毒来讲，虽然远程注入DLL相对隐蔽，但是因为在被注入进程中多了个DLL模块，所以也没有做到完全隐蔽，而且也很容易将病毒清除。所以对于那些更高级的病毒则使用了更加隐蔽，更加难以清除的方法：远程代码注入。这是指，在远程进程中开辟足够大的内存空间，然后将要执行的代码直接写过去，最后使用远程线程的方法运行注入代码。这样做可以使其他进程执行病毒代码，而又不会在对方进程中产生新的模块，从而使病毒能够更隐蔽地运行。</p>
+<p>1.手工修改执行起始地址<br>　　使用二进制编辑工具打开目标程序，找到合适的地方写入二进制代码，将程序执行起始地址(AddressOfEntryPoint)改为注入代码处，在执行完后跳到源地址。</p>
+<p>2.挂起线程注入<br>　　OpenThread–&gt;SuspendThread–&gt;申请内存–&gt;写入代码–&gt;GetThreadContext–&gt;获取EIP–&gt;修改EIP–&gt;SetThreadContext–&gt;ResumeThread。</p>
+<p>3.挂起进程注入<br>　　  CreateProcess注入方法之一，CREATE_SUSPENDED以挂起的方式打开进程，后面方法与挂起线程注入相似。</p>
+<p>4.调试器注入<br>　　CreateProcess注入方法之二，DEBUG_ONLY_THIS_PROCESS以调试的方法打开进程，利用CREATE_PROCESS_DEBUG_EVENT，向目标程序中写入我们的ShellCode完成相应功能，并且我们的ShellCode中写入以CC断点，代码执行指令时触发EXCEPTION_DEBUG_EVENT事件，在EXCEPTION_DEBUG_EVENT的处理函数中回到原来的执行流程。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://bbs.pediy.com/thread-217722.htm" target="_blank" rel="noopener">Ring3注入总结及编程实现【有码】</a></li>
+</ol>
 
       
     </div>
@@ -430,11 +428,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Flutter/" rel="tag"># Flutter</a>
+            <a href="/tags/Windows/" rel="tag"># Windows</a>
           
-            <a href="/tags/Dart/" rel="tag"># Dart</a>
+            <a href="/tags/Inject-DLL/" rel="tag"># Inject DLL</a>
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
+            <a href="/tags/Inject-Code/" rel="tag"># Inject Code</a>
           
         </div>
       
@@ -447,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/642e1725.html" rel="next" title="Use protobuf in Flutter">
-                <i class="fa fa-chevron-left"></i> Use protobuf in Flutter
+              <a href="/post/28e99b3c.html" rel="next" title="191226-Session Isolation in Windows">
+                <i class="fa fa-chevron-left"></i> 191226-Session Isolation in Windows
               </a>
             
           </div>
@@ -456,10 +454,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/8722713.html" rel="prev" title="curl -w/--write-out">
-                curl -w/--write-out <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -503,8 +497,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -657,6 +660,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dll注入方法"><span class="nav-number">2.</span> <span class="nav-text">Dll注入方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码注入方法"><span class="nav-number">3.</span> <span class="nav-text">代码注入方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
