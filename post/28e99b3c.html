@@ -106,16 +106,18 @@
 
 
 
-  <meta name="description" content="一蓑烟雨任平生">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Stanford">
-<meta property="og:url" content="http://stanfordzhang.com/tags/Cocoa/index.html">
+  <meta name="description" content="概述深入理解Windows会话隔离机制。2006年，微软发布了Vista系统和引入了一些新安全特性。其中一个重要的变化就是Session 0隔离机制，这是对Vista及后续版本服务加强的一部分。">
+<meta name="keywords" content="Session 0,Session Isolation,Session隔离">
+<meta property="og:type" content="article">
+<meta property="og:title" content="191226-Session Isolation in Windows">
+<meta property="og:url" content="http://stanfordzhang.com/post/28e99b3c.html">
 <meta property="og:site_name" content="Stanford">
-<meta property="og:description" content="一蓑烟雨任平生">
+<meta property="og:description" content="概述深入理解Windows会话隔离机制。2006年，微软发布了Vista系统和引入了一些新安全特性。其中一个重要的变化就是Session 0隔离机制，这是对Vista及后续版本服务加强的一部分。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-12-26T05:46:27.945Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Stanford">
-<meta name="twitter:description" content="一蓑烟雨任平生">
+<meta name="twitter:title" content="191226-Session Isolation in Windows">
+<meta name="twitter:description" content="概述深入理解Windows会话隔离机制。2006年，微软发布了Vista系统和引入了一些新安全特性。其中一个重要的变化就是Session 0隔离机制，这是对Vista及后续版本服务加强的一部分。">
 
 
 
@@ -123,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://stanfordzhang.com/tags/Cocoa/">
+  <link rel="canonical" href="http://stanfordzhang.com/post/28e99b3c">
 
 
 
@@ -133,7 +135,7 @@
   };
 </script>
 
-  <title>Tag: Cocoa | Stanford</title>
+  <title>191226-Session Isolation in Windows | Stanford</title>
   
 
 
@@ -181,7 +183,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -262,19 +264,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -299,109 +288,210 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Cocoa<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stanfordzhang.com/post/28e99b3c.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stanford Zhang">
+      <meta itemprop="description" content="一蓑烟雨任平生">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stanford">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/post/ce647558.html" itemprop="url">
-            
-              <span itemprop="name">191002-iOS/macOS中Objective-C的Block实现原理</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">191226-Session Isolation in Windows
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-02T20:59:40+08:00" content="2019-10-02">
-          10-02
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-12-26 10:29:17 / Modified: 13:46:27" itemprop="dateCreated datePublished" datetime="2019-12-26T10:29:17+08:00">2019-12-26</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/post/596df1c0.html" itemprop="url">
-            
-              <span itemprop="name">191001-ObjC __bridge __bridge_retained __bridge_transfer详解</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-01T20:26:54+08:00" content="2019-10-01">
-          10-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/post/41eaffdf.html" itemprop="url">
-            
-              <span itemprop="name">191001-ObjC __unsafe_unretained & __weak</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-01T20:16:04+08:00" content="2019-10-01">
-          10-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>深入理解Windows会话隔离机制。<br>2006年，微软发布了Vista系统和引入了一些新安全特性。其中一个重要的变化就是Session 0隔离机制，这是对Vista及后续版本服务加强的一部分。</p>
+<a id="more"></a>
+<h2 id="Windows-Service"><a href="#Windows-Service" class="headerlink" title="Windows Service"></a>Windows Service</h2><p>Windows服务的特点：</p>
+<ul>
+<li>计算机启动时自动启动</li>
+<li>可以被停止或重启</li>
+<li>无论有没有用户登录，都会在后台运行</li>
+<li>可以在用户账号环境里操作</li>
+</ul>
+<h2 id="Session-0-隔离"><a href="#Session-0-隔离" class="headerlink" title="Session 0 隔离"></a>Session 0 隔离</h2><p>第一个用户登录到Windows都会被放到一个单独的Session中。系统启动的时候，Session 0被创建，并且其他的Session在需要的时候被创建。服务总是运行在Session 0。然后，在Windows XP和早期Windows版本中，Session 0可以运行用户程序。如果Windows XP中启用了Fast User Switching，Session 0被分配给第一个登录的用户，用户运行的程序都在Session 0。第2个用户被分配到Session 1，其他以此类推。</p>
+<p>当在同一个Session里运行服务和应用时，会出现几个安全问题。例如，如果病毒没有以服务的方式安装且运行在高权限账户，可以在用户系统造成大的破坏。</p>
+<p>从Vista开始，微软在Session 0引入了两个重要的变化来减缓这些问题：</p>
+<ul>
+<li>Session 0被从服务和非交互用户程序里单独拿出来。登录到系统的用户和它们的应用必须运行在Session 1或更高的Session上。</li>
+<li>Session 0不支持用户界面。运行在Session 0的进程不能访问图形硬件，因此用户界面不能直接显示在显示器上。</li>
+</ul>
+<h2 id="Session-0隔离带来的潜在问题"><a href="#Session-0隔离带来的潜在问题" class="headerlink" title="Session 0隔离带来的潜在问题"></a>Session 0隔离带来的潜在问题</h2><p>在这些变更下，Session如何与服务及基于服务的驱动交互，现在来Review下那些可能影响应用和驱动的潜在影响。</p>
+<p>如果驱动是被服务加载的或进程运行在Session 0, 一些驱动将被这些变更影响，涉及到的驱动包括：</p>
+<ul>
+<li>Spooler服务加载的打印机驱动</li>
+<li>使用User-Mode Driver Framework (UMDF)授权的驱动，因为Session 0里的进程管理这些驱动</li>
+</ul>
+<p>假如用户运行在Session 0，被这些新特性影响的应用程序类型包括所有服务和服务管理的驱动；这些不能在Vista及以后版本中运行。受影响的应用程序分类所下：</p>
+<ul>
+<li>Session 0里的服务创建了UI。用户是看不到用户界面的，比如对话框，在Session 0里创建，但不能在Session 0里运行，因此不能提供服务需要的输入。服务看着像功能失效了，但事实上它是在等用户的响应。但是服务可以使用WTSSendMessage函数来解决这个问题。使用这个函数，服务可以用户桌面创建一个简单的Message Box，用来给用户通知或提供简单的响应。</li>
+<li>想要和应用程序通过Windows Message通信（SendMessage &amp; PostMessage）的服务。当应用程序正在不同的Session或Message Queue里运行时，服务的消息永远不会到达。这也会使用应用程序通过Windows消息和服务通信。微软推荐使用诸如RPC或Named Pipe等Client/Server机制在服务和应用程序之间通讯。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://www.2brightsparks.com/resources/articles/understanding-windows-sessions.pdf" target="_blank" rel="noopener">Understanding Session in Windows</a></li>
+<li><a href="http://download.microsoft.com/download/8/C/D/8CD015BB-081B-49C5-A506-9C9B570B8DD2/SessionIsolation.pptx" target="_blank" rel="noopener">Session Isolation</a></li>
+<li><a href="https://www.cnblogs.com/gnielee/archive/2010/04/07/session0-isolation-part1.html" target="_blank" rel="noopener">穿透Session 0 隔离（一）</a></li>
+<li><a href="http://www.voidcn.com/article/p-azrjwwfc-bgr.html" target="_blank" rel="noopener">Windows 服务的Session 0 隔离机制</a></li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Session-0/" rel="tag"># Session 0</a>
+          
+            <a href="/tags/Session-Isolation/" rel="tag"># Session Isolation</a>
+          
+            <a href="/tags/Session隔离/" rel="tag"># Session隔离</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/49480975.html" rel="next" title="191118-Ubuntu 16.04安装checksec工具">
+                <i class="fa fa-chevron-left"></i> 191118-Ubuntu 16.04安装checksec工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -421,8 +511,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -572,6 +671,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Service"><span class="nav-number">2.</span> <span class="nav-text">Windows Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session-0-隔离"><span class="nav-number">3.</span> <span class="nav-text">Session 0 隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session-0隔离带来的潜在问题"><span class="nav-number">4.</span> <span class="nav-text">Session 0隔离带来的潜在问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -699,6 +815,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -714,6 +834,8 @@
 
   
 
+
+  
 
 
   
